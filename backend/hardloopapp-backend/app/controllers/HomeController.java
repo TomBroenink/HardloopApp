@@ -27,7 +27,7 @@ public class HomeController extends Controller {
     }
 
     public Result index() {
-        return ok(index.render(""));
+        return ok(index.render());
     }
     
     @SuppressWarnings("deprecation")
@@ -41,4 +41,5 @@ public class HomeController extends Controller {
             });
         });
     }
+
 }

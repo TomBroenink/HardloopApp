@@ -10,7 +10,7 @@
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
 	        webSocket.onmessage = function(event){
 	        	var response = JSON.parse(event.data);
-	        	var responseAction = response.ResponseAction;
+	        	var responseAction = response.responseAction;
 	        	if(responseAction === "getAllMonitors"){
 	        		updateMonitors(response);
 	        	}
