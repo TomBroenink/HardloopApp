@@ -1,5 +1,14 @@
 package controllers;
 
+import javax.inject.Inject;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import akka.stream.javadsl.Flow;
+import models.WebSocketRequestHandler;
+import play.db.Database;
 import play.mvc.*;
 
 import views.html.*;
@@ -9,15 +18,27 @@ import views.html.*;
  * to the application's home page.
  */
 public class HomeController extends Controller {
+	
+	private Database db;
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
-    public Result index() {
-        return ok(index.render("Your new application is ready."));
+    @Inject
+    public HomeController(Database db) {
+        this.db = db;
     }
 
+    public Result index() {
+        return ok(index.render());
+    }
+    
+    @SuppressWarnings("deprecation")
+	public LegacyWebSocket<String> ws() {
+        return WebSocket.whenReady((in, out) -> {
+            in.onMessage(message -> {
+            	System.out.println(message);
+            	String response = WebSocketRequestHandler.handleRequest(message, db);
+            	System.out.println(response);
+            	out.write(response);
+            });
+        });
+    }
 }
