@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mockuser</title>
+</head>
+<body>
+  <div id="serverres"></div>
+  <script>
+			var webSocket = new WebSocket("ws://localhost:9000/ws");
+            webSocket.onmessage = function(event){
+              var response = JSON.parse(event.data);
+              var responseAction = response.responseAction;
+              if(responseAction === "registerMonitor"){
+                updateServerResponse(response);
+              }
+            };
+            webSocket.onopen = function(event){
+              saveMonitor();
+            };
+
+            function saveMonitor(){
+              webSocket.send('{"requestAction": "createMonitor", ' +
+                              '"person": {' +
+                                        '"firstName": "Henderikus",' +
+                                        '"lastName": "Harms",' +
+                                        '"phoneNumber": "0612415268",' +
+                                        '"username": "harmsh",' +
+                                        '"password": "secret"' +
+                                '}' +
+                              '}');
+            }
+
+            function updateServerResponse(response){
+              document.getElementById("serverres").innerHTML = JSON.stringify(response.Message);
+            }
+  </script>
+</body>
+</html>

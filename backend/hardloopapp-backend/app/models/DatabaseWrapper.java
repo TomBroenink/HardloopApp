@@ -1,9 +1,6 @@
 package models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
+import java.sql.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,7 +8,7 @@ import play.db.*;
 
 class DatabaseWrapper{
 
-	private Database db;
+	protected Database db;
 	
     public DatabaseWrapper(Database db) {
         this.db = db;
@@ -25,7 +22,7 @@ class DatabaseWrapper{
 		return executeQuery("select * from monitors join personaldata on monitors.id = personaldata.id");
 	}
     
-    private void executeInsert(String sql, String[] values, String errorMessage) throws Exception{
+    protected void executeInsert(String sql, String[] values, String errorMessage) throws Exception{
 		Connection conn = null;
 		try{
 			conn = db.getConnection();
@@ -40,7 +37,7 @@ class DatabaseWrapper{
 			closeConnection(conn);
 		}
 	}
-	
+
 	private JSONArray executeQuery(String sql) throws Exception{
 		Connection conn = null;
 		try{

@@ -3,6 +3,7 @@
 # ~~~~
 
 GET     /                           controllers.HomeController.index
+GET     /mockuser                   controllers.HomeController.mockUser
 GET     /ws                         controllers.HomeController.ws
 
 # Map static resources from the /public folder to the /assets URL path

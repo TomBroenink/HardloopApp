@@ -24,6 +24,11 @@ public class WebSocketRequestHandler {
 			if(requestAction.equals("getAllMonitors")){
 				JSONArray monitors = dbWrapper.getAllMonitors();
 				response.put("monitors", monitors);
+			}else if(requestAction.equals("createMonitor")){
+				MonitorDataseWrapper wrapper = new MonitorDataseWrapper(db);
+				wrapper.insertMonitor((JSONObject)args.get("person"));
+				response.put("status", 200);
+				response.put("message", "Monitor has been stored without problems");
 			}
 			else{
 				throw new Exception("Invalid RequestAction.");
