@@ -45,10 +45,20 @@ angular
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/overview.html'
 			})
+			.state('mijngegevens', {
+				url: '/mijngegevens',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/mijngegevens.html'
+			})
 			.state('reports', {
 				url: '/reports',
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/reports.html'
+			})
+			.state('register', {
+				url: '/register',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/register.html'
 			})
 			.state('404', {
 				url: '/404',
