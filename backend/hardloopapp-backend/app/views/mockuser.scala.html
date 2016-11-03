@@ -11,7 +11,7 @@
             webSocket.onmessage = function(event){
               var response = JSON.parse(event.data);
               var responseAction = response.responseAction;
-              if(responseAction === "registerMonitor"){
+              if(responseAction === "createMonitor"){
                 updateServerResponse(response);
               }
             };
@@ -32,7 +32,7 @@
             }
 
             function updateServerResponse(response){
-              document.getElementById("serverres").innerHTML = JSON.stringify(response.Message);
+              document.getElementById("serverres").innerHTML = JSON.stringify(response);
             }
   </script>
 </body>
