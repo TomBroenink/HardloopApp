@@ -41,6 +41,18 @@ class DatabaseWrapper{
 		executeUpdate(sql, "Could not assign client to monitor.");
 	}
     
+    public void createRunSchema(String name, String description) throws Exception{
+		String[] values = {name, description};
+		String sql = addValues("insert into runschemas values(0,", values);
+		executeUpdate(sql, "Could not create run schema.");
+	}
+    
+    public void assignRunSchemaToClient(String clientId, String runSchemaId) throws Exception{
+		String[] values = {clientId, runSchemaId};
+		String sql = addValues("insert into clients_runschemas values(", values);
+		executeUpdate(sql, "Could not assign run schema to client.");
+	}
+    
     private void executeUpdate(String sql, String errorMessage) throws Exception{
 		Connection conn = null;
 		try{
