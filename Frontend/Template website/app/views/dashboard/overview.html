@@ -1,10 +1,31 @@
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <div>
 	<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Routes</a>
-	<h2>Hoofdpagina <small>Hardloopapp</small></h2>
+	<h2>Hoofdpagina <small>{{ $state.title }}</small></h2>
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Welkom!</h1>
-			Op deze website kun je gegevens van clienten bekijken of wijzigen, en routes aanmaken of wijzigen.<br /><br />
+
+		<h1>Overview</h1>
+
+			<div class="panel-group" id="test">
+			    <div class="panel panel-default">
+				    <div class="panel-heading">
+				        <h4 class="panel-title">
+				          <a href="javascript:;" data-toggle="collapse" data-target="#collapse1">Collapsible panel</a>
+				        </h4>
+				      	</div>
+
+					    <div id="collapse1" class="panel-collapse collapse in">
+					    <div class="panel-body">
+
+					        Panel Body
+
+					    </div>
+				    </div>
+			   	</div>
+			</div>
 		</div>
 	</div>
 </div>
