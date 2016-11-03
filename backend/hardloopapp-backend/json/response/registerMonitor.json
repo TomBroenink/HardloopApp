@@ -1,0 +1,6 @@
+{
+	"responseAction": "registerMonitor",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>"
+}

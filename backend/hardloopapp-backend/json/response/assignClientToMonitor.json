@@ -1,0 +1,6 @@
+{
+	"responseAction": "assignClientToMonitor",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>"
+}

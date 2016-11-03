@@ -15,5 +15,8 @@ libraryDependencies ++= Seq(
   "org.jasypt" % "jasypt" % "1.9.2"
 )
 
+fork in run := true
+
+fork in run := true
 
 fork in run := true

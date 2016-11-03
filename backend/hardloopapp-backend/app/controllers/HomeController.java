@@ -38,10 +38,7 @@ public class HomeController extends Controller {
 	public LegacyWebSocket<String> ws() {
         return WebSocket.whenReady((in, out) -> {
             in.onMessage(message -> {
-            	System.out.println(message);
-            	String response = WebSocketRequestHandler.handleRequest(message, db);
-            	System.out.println(response);
-            	out.write(response);
+            	out.write(WebSocketRequestHandler.handleRequest(message, db));
             });
         });
     }
