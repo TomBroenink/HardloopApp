@@ -1,0 +1,17 @@
+{
+	"responseAction": "getAllClients",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"clients":
+	[
+		{
+			"id": "",
+			"personalData_id": "",
+			"firstName":"",
+			"lastName":"",
+			"phoneNumber":"",
+			"username":""
+		}
+	]
+}

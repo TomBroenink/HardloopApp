@@ -1,0 +1,6 @@
+{
+	"requestAction": "assignClientToMonitor",
+	"monitorId": "",
+	"clientId": "",
+	"monitorNumber": "<optional>"
+}

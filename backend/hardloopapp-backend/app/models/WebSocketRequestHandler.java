@@ -19,19 +19,36 @@ public class WebSocketRequestHandler {
 			if(requestAction == null){
 				throw new Exception("Invalid RequestAction.");
 			}
-			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":1,\"responseStatusDescription\":\"Succes\"}");
+			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"1\",\"responseStatusDescription\":\"Succes\"}");
 			DatabaseWrapper dbWrapper = new DatabaseWrapper(db);
-			if(requestAction.equals("getAllMonitors")){
-				JSONArray monitors = dbWrapper.getAllMonitors();
-				response.put("monitors", monitors);
-			}
-			else{
-				throw new Exception("Invalid RequestAction.");
+			switch(requestAction){
+				case "getAllMonitors":
+					JSONArray monitors = dbWrapper.getAllMonitors();
+					response.put("monitors", monitors);
+					break;
+				case "getAllClients":
+					JSONArray clients = dbWrapper.getAllClients();
+					response.put("clients", clients);
+					break;
+				case "registerMonitor":
+					dbWrapper.registerMonitor((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password"), (String) args.get("accessLevel"));
+					break;
+				case "registerClient":
+					dbWrapper.registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password"));
+					break;
+				case "removeUser":
+					dbWrapper.removeUser((String) args.get("personalDataId"));
+					break;
+				case "assignClientToMonitor":
+					dbWrapper.assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
+					break;
+				default:
+					throw new Exception("Invalid RequestAction.");
 			}
     	}
     	catch(Exception e){
     		e.printStackTrace();
-    		return "{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":0,\"responseStatusDescription\":\"Failure\",\"errorDescription\":\"" + e.getMessage() + "\"}";
+    		return "{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"0\",\"responseStatusDescription\":\"Failure\",\"errorDescription\":\"" + e.getMessage() + "\"}";
     	}
         return response.toJSONString();
 	}

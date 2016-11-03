@@ -1,0 +1,18 @@
+{
+	"responseAction": "getAllMonitors",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"monitors":
+	[
+		{
+			"id": "",
+			"personalData_id": "",
+			"accessLevel":"",
+			"firstName":"",
+			"lastName":"",
+			"phoneNumber":"",
+			"username":""
+		}
+	]
+}
