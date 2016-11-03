@@ -23,19 +23,21 @@ angular.module('yapp')
 			return alert('Password is leeg!');
 		}
 		userObject = {email : email, password : password};
-		console.log(userObject);
 		
 		// Stuur userObject met AJAX call naar server
-		// if responsecode = OK {
-		// $location.path('/dashboard');
-		// } else {
-		//	alert('username of password incorrect');
-		// }
+		// Server stuurt een responseCode en eventueel JSON object terug
+		// Lees responseCode uit header uit
+		// Als responseCode 200 is dan stuurt de server een JSON object terug met de gegevens van de gebruiker
+		// Stringify dit object en sla deze string op in localStorage
+		// Elders in de app kan de string uit localStorage gehaald worden en geparsed worden om gebruikt te kunnen worden.
+		
 		if (db.responseCode == 200) {
 			// Sla hier de naam en accesslevel in sessionStorage op
 			if (email == db.email) {
-				if (password == db.password) {
+				if (password === db.password) {
 					alert('Succesvol ingelogd!');
+					localStorage.setItem('username', db.email);
+					localStorage.setItem('accessLevel', 1);
 					$location.path('/dashboard');
 					return false;
 				}
@@ -45,12 +47,5 @@ angular.module('yapp')
 		} else {
 			alert('Fout bij inloggen');
 		}
-		
-		
-		
-		//console.log (email + ', ' + password)
-		//$location.path('/dashboard');
-		//return false;
     }
-
   });
