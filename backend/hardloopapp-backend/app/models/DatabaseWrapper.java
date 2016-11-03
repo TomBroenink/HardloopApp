@@ -24,13 +24,6 @@ class DatabaseWrapper{
 		return executeQuery("select clients.id, personalData_id, firstName, lastName, phoneNumber, username from clients join personaldata on clients.personalData_id = personaldata.id");
 	}
     
-    public void registerMonitor(String firstName, String lastName, String phoneNumber, String username, String password, String accessLevel) throws Exception{
-		String[] values = {firstName, lastName, phoneNumber, username, password};
-		String sql = addValues("insert into personaldata values(0,", values);
-		sql += "insert into monitors values(0, last_insert_id(), '" + accessLevel + "');";
-		executeUpdate(sql, "Could not register monitor.");
-	}
-    
     public void registerClient(String firstName, String lastName, String phoneNumber, String username, String password) throws Exception{
 		String[] values = {firstName, lastName, phoneNumber, username, password};
 		String sql = addValues("insert into personaldata values(0,", values);
