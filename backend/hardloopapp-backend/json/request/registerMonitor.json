@@ -1,0 +1,9 @@
+{
+	"requestAction": "registerMonitor",
+	"firstName": "",
+	"lastName": "",
+	"phoneNumber": "",
+	"username": "",
+	"password": "",
+	"accessLevel": ""
+}

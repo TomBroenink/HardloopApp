@@ -1,0 +1,8 @@
+{
+	"requestAction": "registerClient",
+	"firstName": "",
+	"lastName": "",
+	"phoneNumber": "",
+	"username": "",
+	"password": ""
+}
