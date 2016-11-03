@@ -38,7 +38,7 @@ class DatabaseWrapper{
 		}
 	}
 
-	private JSONArray executeQuery(String sql) throws Exception{
+	protected JSONArray executeQuery(String sql) throws Exception{
 		Connection conn = null;
 		try{
 		    conn = db.getConnection();

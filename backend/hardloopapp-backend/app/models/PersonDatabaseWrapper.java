@@ -1,7 +1,9 @@
 package models;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.db.Database;
+import sun.security.util.Password;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,6 +48,17 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
         }finally {
             con.close();
         }
+    }
+
+    public JSONArray validateLogin(String username, String password) throws Exception{
+        final String query = "SELECT p.id, p.firstName, p.lastName, p.username, p.password, m.accessLevel" +
+                        "FROM personaldata p, monitors m" +
+                        "WHERE m.personalData_id = p.id" +
+                        "AND username = " + username + "";
+
+        JSONArray user = super.executeQuery(query);
+        return user;
+
     }
 
     /**
