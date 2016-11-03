@@ -30,9 +30,6 @@ public class WebSocketRequestHandler {
 					JSONArray clients = dbWrapper.getAllClients();
 					response.put("clients", clients);
 					break;
-				case "registerMonitor":
-					dbWrapper.registerMonitor((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password"), (String) args.get("accessLevel"));
-					break;
 				case "registerClient":
 					dbWrapper.registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password"));
 					break;
@@ -41,6 +38,12 @@ public class WebSocketRequestHandler {
 					break;
 				case "assignClientToMonitor":
 					dbWrapper.assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
+					break;
+				case "createRunSchema":
+					dbWrapper.createRunSchema((String) args.get("name"), (String) args.get("description"));
+					break;
+				case "assignRunSchemaToClient":
+					dbWrapper.assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
