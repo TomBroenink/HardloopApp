@@ -1,6 +1,5 @@
 package models;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -10,6 +9,7 @@ public class WebSocketRequestHandler {
 	
 	private static JSONParser parser = new JSONParser();
 	
+	@SuppressWarnings("unchecked")
 	public static String handleRequest(String message, Database db){
 		JSONObject response = null;
     	String requestAction = null;
@@ -24,15 +24,13 @@ public class WebSocketRequestHandler {
 
 			switch(requestAction){
 				case "getAllMonitors":
-					JSONArray monitors = dbWrapper.getAllMonitors();
-					response.put("monitors", monitors);
+					response.put("monitors", dbWrapper.getAllMonitors());
 					break;
 				case "getAllClients":
-					JSONArray clients = dbWrapper.getAllClients();
-					response.put("clients", clients);
+					response.put("clients", dbWrapper.getAllClients());
 					break;
 				case "registerClient":
-					dbWrapper.registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password"));
+					response.put("clientId", dbWrapper.registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")));
 					break;
 				case "removeUser":
 					dbWrapper.removeUser((String) args.get("personalDataId"));
@@ -41,7 +39,7 @@ public class WebSocketRequestHandler {
 					dbWrapper.assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
 					break;
 				case "createRunSchema":
-					dbWrapper.createRunSchema((String) args.get("name"), (String) args.get("description"));
+					response.put("runSchemaId", dbWrapper.createRunSchema((String) args.get("name"), (String) args.get("description")));
 					break;
 				case "assignRunSchemaToClient":
 					dbWrapper.assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
@@ -51,6 +49,12 @@ public class WebSocketRequestHandler {
 					wrapper.insertMonitor((JSONObject)args.get("person"));
 					response.put("status", 200);
 					response.put("message", "Monitor has been stored without problems");
+					break;
+				case "assignRunToRunSchema":
+					dbWrapper.assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
+					break;
+				case "createRun":
+					response.put("runId", dbWrapper.createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("routeId")));
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

@@ -2,5 +2,6 @@
 	"responseAction": "registerClient",
 	"responseStatusCode":"<1 || 0>",
 	"responseStatusDescription":"<Succes || Failure>",
-	"errorDescription":"<Exception message>"
+	"errorDescription":"<Exception message>",
+	"clientId": ""
 }
