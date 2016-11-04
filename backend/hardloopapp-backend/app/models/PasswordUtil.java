@@ -39,7 +39,7 @@ public class PasswordUtil {
      * @return true when valid, false when invalid
      */
     public boolean validatePassword(String inputPassword, String encryptedPassword){
-        Boolean validPassword = false;
+        boolean validPassword = false;
 
         if(encryptor.checkPassword(inputPassword, encryptedPassword)){
             validPassword = true;

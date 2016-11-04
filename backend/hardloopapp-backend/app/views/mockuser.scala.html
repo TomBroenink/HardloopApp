@@ -11,7 +11,7 @@
             webSocket.onmessage = function(event){
               var response = JSON.parse(event.data);
               var responseAction = response.responseAction;
-              if(responseAction === "createMonitor"){
+              if(responseAction === "registerMonitor"){
                 updateServerResponse(response);
               }
             };
@@ -20,7 +20,7 @@
             };
 
             function saveMonitor(){
-              webSocket.send('{"requestAction": "createMonitor", ' +
+              webSocket.send('{"requestAction": "registerMonitor", ' +
                               '"person": {' +
                                         '"firstName": "Henderikus",' +
                                         '"lastName": "Harms",' +

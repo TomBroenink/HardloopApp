@@ -28,8 +28,8 @@ public class PasswordUtilTest extends TestCase {
 
     @Test
     public void testValidatePasswordFalse() throws Exception {
-        assertFalse(passwordUtil.validatePassword("fout", this.encryptedPassword));
-        assertTrue(passwordUtil.validatePassword("secret", this.encryptedPassword));
+        assertFalse(passwordUtil.validatePassword("fout", "a65UoYldaXjBAJr+ArIhiusHXf+yG1PAhZeQ4BXwWjnhOuRH/EK3S37uHhQ9wwFp"));
+        assertTrue(passwordUtil.validatePassword("secret", "a65UoYldaXjBAJr+ArIhiusHXf+yG1PAhZeQ4BXwWjnhOuRH/EK3S37uHhQ9wwFp"));
     }
 
 }

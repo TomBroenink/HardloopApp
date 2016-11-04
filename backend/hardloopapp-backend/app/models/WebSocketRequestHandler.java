@@ -21,19 +21,7 @@ public class WebSocketRequestHandler {
 			}
 			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"1\",\"responseStatusDescription\":\"Succes\"}");
 			DatabaseWrapper dbWrapper = new DatabaseWrapper(db);
-<<<<<<< HEAD
-			if(requestAction.equals("getAllMonitors")){
-				JSONArray monitors = dbWrapper.getAllMonitors();
-				response.put("monitors", monitors);
-			}else if(requestAction.equals("createMonitor")){
-				MonitorDataseWrapper wrapper = new MonitorDataseWrapper(db);
-				wrapper.insertMonitor((JSONObject)args.get("person"));
-				response.put("status", 200);
-				response.put("message", "Monitor has been stored without problems");
-			}
-			else{
-				throw new Exception("Invalid RequestAction.");
-=======
+
 			switch(requestAction){
 				case "getAllMonitors":
 					JSONArray monitors = dbWrapper.getAllMonitors();
@@ -58,9 +46,14 @@ public class WebSocketRequestHandler {
 				case "assignRunSchemaToClient":
 					dbWrapper.assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
+				case "registerMonitor":
+					MonitorDataseWrapper wrapper = new MonitorDataseWrapper(db);
+					wrapper.insertMonitor((JSONObject)args.get("person"));
+					response.put("status", 200);
+					response.put("message", "Monitor has been stored without problems");
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
->>>>>>> 0a4c4be3a436be3118f98bf7533b512e6dda1c12
 			}
     	}
     	catch(Exception e){

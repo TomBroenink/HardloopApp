@@ -1,9 +1,7 @@
 package models;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.db.Database;
-import sun.security.util.Password;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,15 +48,30 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
         }
     }
 
-    public JSONArray validateLogin(String username, String password) throws Exception{
-        final String query = "SELECT p.id, p.firstName, p.lastName, p.username, p.password, m.accessLevel" +
-                        "FROM personaldata p, monitors m" +
-                        "WHERE m.personalData_id = p.id" +
+    /**
+     * Validate username and passwords. Password is validated by using PasswordUtil class
+     * When password or username is incorrect an exception is thrown
+     * @param username
+     * @param password
+     * @return JSONObject user
+     * @throws Exception
+     */
+    public JSONObject validateLogin(String username, String password) throws Exception{
+        final String query = "SELECT p.id, p.firstName, p.lastName, p.username, p.password, m.accessLevel " +
+                        "FROM personaldata p, monitors m " +
+                        "WHERE m.personalData_id = p.id " +
                         "AND username = " + username + "";
 
-        JSONArray user = super.executeQuery(query);
-        return user;
+        JSONObject user = (JSONObject) super.executeQuery(query).get(0);
 
+        final PasswordUtil passwordUtil = PasswordUtil.getInstance();
+
+        if(!user.isEmpty() && passwordUtil.validatePassword(password, user.get("password").toString())){
+            user.remove("password");
+            return user;
+        }else{
+            throw new Exception("Invalid username or password");
+        }
     }
 
     /**
