@@ -12,6 +12,9 @@
 		<button type="button" onclick="removeUser();">Remove user</button>
 		<button type="button" onclick="assignClientToMonitor();">Assign client to monitor</button>
 		<button type="button" onclick="createRunSchema();">Create run schema</button>
+		<button type="button" onclick="assignRunSchemaToClient();">Assign run schema to client</button>
+		<button type="button" onclick="assignRunToRunSchema();">Assign run to run schema</button>
+		<button type="button" onclick="createRun();">Create run</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -39,11 +42,11 @@
 	        }
 	        
 	        function removeUser(){
-	        	webSocket.send('{"requestAction": "removeUser", "personalDataId": "13"}');
+	        	webSocket.send('{"requestAction": "removeUser", "personalDataId": "16"}');
 	        }
 	        
 	        function assignClientToMonitor(){
-	        	webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "7","clientId": "6", "monitorNumber": "1"}');
+	        	webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "8","clientId": "7", "monitorNumber": "1"}');
 	        }
 	        
 	        function createRunSchema(){
@@ -51,7 +54,15 @@
 	        }
 	        
 	        function assignRunSchemaToClient(){
-	        	webSocket.send('{"requestAction": "assignRunSchemaToClient","clientId": "7","runSchemaId": "6"}');
+	        	webSocket.send('{"requestAction": "assignRunSchemaToClient","clientId": "7","runSchemaId": "15"}');
+	        }
+	        
+	        function assignRunToRunSchema(){
+	        	webSocket.send('{"requestAction": "assignRunToRunSchema","runSchemaId": "15","runId": "1","day": "2","time": "15:00:00"}');
+	        }
+	        
+	        function createRun(){
+	        	webSocket.send('{"requestAction": "createRun","name": "run1","description": "run run run","routeId": "1"}');
 	        }
 		</script>
 	</body>

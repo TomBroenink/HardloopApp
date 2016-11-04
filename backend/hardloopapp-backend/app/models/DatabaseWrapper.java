@@ -3,6 +3,7 @@ package models;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,11 +25,18 @@ class DatabaseWrapper{
 		return executeQuery("select clients.id, personalData_id, firstName, lastName, phoneNumber, username from clients join personaldata on clients.personalData_id = personaldata.id");
 	}
     
-    public void registerClient(String firstName, String lastName, String phoneNumber, String username, String password) throws Exception{
+    public int registerClient(String firstName, String lastName, String phoneNumber, String username, String password) throws Exception{
 		String[] values = {firstName, lastName, phoneNumber, username, password};
 		String sql = addValues("insert into personaldata values(0,", values);
 		sql += "insert into clients values(0, last_insert_id());";
-		executeUpdate(sql, "Could not register client.");
+		return executeInsertReturnId(sql, "Could not register client.");
+	}
+    
+    public int registerMonitor(String firstName, String lastName, String phoneNumber, String username, String password, String accessLevel) throws Exception{
+		String[] values = {firstName, lastName, phoneNumber, username, password};
+		String sql = addValues("insert into personaldata values(0,", values);
+		sql += "insert into monitors values(0, last_insert_id(), '" + accessLevel + "');";
+		return executeInsertReturnId(sql, "Could not register monitor.");
 	}
     
     public void removeUser(String personalDataId) throws Exception{
@@ -41,16 +49,61 @@ class DatabaseWrapper{
 		executeUpdate(sql, "Could not assign client to monitor.");
 	}
     
-    public void createRunSchema(String name, String description) throws Exception{
+    public int createRunSchema(String name, String description) throws Exception{
 		String[] values = {name, description};
 		String sql = addValues("insert into runschemas values(0,", values);
-		executeUpdate(sql, "Could not create run schema.");
+		return executeInsertReturnId(sql, "Could not create run schema.");
 	}
     
     public void assignRunSchemaToClient(String clientId, String runSchemaId) throws Exception{
 		String[] values = {clientId, runSchemaId};
 		String sql = addValues("insert into clients_runschemas values(", values);
 		executeUpdate(sql, "Could not assign run schema to client.");
+	}
+    
+    public void assignRunToRunSchema(String runSchemaId, String runId, String day, String time) throws Exception{
+		String[] values = {runSchemaId, runId, day, time};
+		String sql = addValues("insert into runschemas_runs values(", values);
+		executeUpdate(sql, "Could not assign run to run schema.");
+	}
+    
+    public int createRun(String name, String description, String routeId) throws Exception{
+		String[] values = {name, description, routeId};
+		String sql = addValues("insert into runs values(0,", values);
+		return executeInsertReturnId(sql, "Could not create run.");
+	}
+    
+    public void createRoute(String distance, String[][] coordinates) throws Exception{
+    	
+	}
+    
+    private int executeInsertReturnId(String sql, String errorMessage) throws Exception{
+		Connection conn = null;
+		try{
+			conn = db.getConnection();
+			Statement statement = conn.createStatement();
+			boolean results = statement.execute(sql + " select last_insert_id() as id;");
+			int count = 0;
+			int id = 0;
+			while(results || count != -1){
+				if(results){
+					ResultSet rs = statement.getResultSet();
+					rs.next();
+			        id = rs.getInt("id");
+			    }
+				else{
+					count = statement.getUpdateCount();
+					if(count == 0){
+						throw new Exception(errorMessage);
+					}
+			    }
+			    results = statement.getMoreResults();
+			}
+			return id;
+		}
+		finally{
+			closeConnection(conn);
+		}
 	}
     
     private void executeUpdate(String sql, String errorMessage) throws Exception{
