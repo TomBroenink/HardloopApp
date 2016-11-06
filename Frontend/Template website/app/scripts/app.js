@@ -45,6 +45,16 @@ angular
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/overview.html'
 			})
+			.state('mydetails', {
+				url: '/mydetails',
+				parent: 'reports', // dit nog aanpassen
+				templateUrl: 'views/dashboard/mydetails.html'
+			})
+			.state('myclients', {
+				url: '/myclients',
+				parent: 'reports', // dit nog aanpassen
+				templateUrl: 'views/dashboard/myclients.html'
+			})
 			.state('reports', {
 				url: '/reports',
 				parent: 'dashboard',
