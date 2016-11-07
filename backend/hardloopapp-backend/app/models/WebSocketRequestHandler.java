@@ -1,6 +1,5 @@
 package models;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -22,6 +21,7 @@ public class WebSocketRequestHandler {
 			}
 			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"1\",\"responseStatusDescription\":\"Succes\"}");
 			DatabaseWrapper dbWrapper = new DatabaseWrapper(db);
+
 			switch(requestAction){
 				case "getAllMonitors":
 					response.put("monitors", dbWrapper.getAllMonitors());
@@ -31,9 +31,6 @@ public class WebSocketRequestHandler {
 					break;
 				case "registerClient":
 					response.put("clientId", dbWrapper.registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")));
-					break;
-				case "registerMonitor":
-					response.put("monitorId", dbWrapper.registerMonitor((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password"), (String) args.get("accessLevel")));
 					break;
 				case "removeUser":
 					dbWrapper.removeUser((String) args.get("personalDataId"));
@@ -46,6 +43,12 @@ public class WebSocketRequestHandler {
 					break;
 				case "assignRunSchemaToClient":
 					dbWrapper.assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
+					break;
+				case "registerMonitor":
+					MonitorDataseWrapper wrapper = new MonitorDataseWrapper(db);
+					wrapper.insertMonitor((JSONObject)args.get("person"));
+					response.put("status", 200);
+					response.put("message", "Monitor has been stored without problems");
 					break;
 				case "assignRunToRunSchema":
 					dbWrapper.assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));

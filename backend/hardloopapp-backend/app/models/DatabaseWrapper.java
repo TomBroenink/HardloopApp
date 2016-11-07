@@ -5,13 +5,14 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.db.*;
 
 class DatabaseWrapper{
 
-	private Database db;
+	protected Database db;
 	
     public DatabaseWrapper(Database db) {
         this.db = db;
