@@ -20,6 +20,7 @@ public class WebSocketRequestHandler {
 				throw new Exception("Invalid RequestAction.");
 			}
 			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"1\",\"responseStatusDescription\":\"Succes\"}");
+			DatabaseWrapperFactory factory = new DatabaseWrapperFactory(db);
 			DatabaseWrapper dbWrapper = new DatabaseWrapper(db);
 
 			switch(requestAction){
@@ -55,6 +56,8 @@ public class WebSocketRequestHandler {
 					break;
 				case "createRun":
 					response.put("runId", dbWrapper.createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("routeId")));
+					break;
+				case "createEmpyProfile":
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
