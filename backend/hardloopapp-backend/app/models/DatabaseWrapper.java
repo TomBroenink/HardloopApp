@@ -123,6 +123,10 @@ class DatabaseWrapper{
 		}
 	}
     
+    private int executeInsertReturnId(String sql, String errorMessage) throws Exception{
+    	return executeInsertReturnId(sql, errorMessage, db.getConnection(), true, true, true);
+    }
+    
     private int executeInsertReturnId(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
 		ResultSet rs = null;
 		Statement statement = null;
@@ -155,6 +159,10 @@ class DatabaseWrapper{
 			}
 		}
 	}
+    
+    private void executeUpdate(String sql, String errorMessage) throws Exception{
+    	executeUpdate(sql, errorMessage, db.getConnection(), true, true, true);
+    }
     
     private void executeUpdate(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
     	Statement statement = null;
