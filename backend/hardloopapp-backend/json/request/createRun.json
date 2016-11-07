@@ -2,5 +2,10 @@
 	"requestAction": "createRun",
 	"name": "",
 	"description": "",
-	"routeId": ""
+	"distance": "",
+	"route":[
+		["lat", "long"],
+		["lat", "long"],
+		["lat", "long"]
+	]
 }
