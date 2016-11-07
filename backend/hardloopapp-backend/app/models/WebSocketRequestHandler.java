@@ -55,7 +55,7 @@ public class WebSocketRequestHandler {
 					dbWrapper.assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
 					break;
 				case "createRun":
-					response.put("runId", dbWrapper.createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("routeId")));
+					response.put("runId", dbWrapper.createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("distance"), (JSONArray) args.get("route")));
 					break;
 				case "createEmpyProfile":
 					break;
