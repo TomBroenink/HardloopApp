@@ -18,11 +18,24 @@ abstract class DatabaseWrapper{
         this.db = db;
     }
 
+	protected void executeInsert(String sql, String errorMessage) throws Exception{
+		executeInsertReturnId(sql, errorMessage, false);
+	}
+
     protected int executeInsertReturnId(String sql, String errorMessage) throws Exception{
     	return executeInsertReturnId(sql, errorMessage, db.getConnection(), true, true, true);
     }
-    
-    protected int executeInsertReturnId(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
+
+	protected int executeInsertReturnId(String sql, String errorMessage, boolean returnid) throws Exception{
+		return executeInsertReturnId(sql, errorMessage, db.getConnection(), true, true, true, returnid);
+	}
+
+	protected int executeInsertReturnId(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
+		return executeInsertReturnId(sql, errorMessage, conn, autoCommit, closeConnection, commit, true);
+	}
+
+
+    protected int executeInsertReturnId(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit, boolean returnId) throws Exception{
 		ResultSet rs = null;
 		Statement statement = null;
     	try{
@@ -31,9 +44,12 @@ abstract class DatabaseWrapper{
 			if(statement.executeUpdate(sql) == 0){
 				throw new Exception("Update count == 0.");
 			}
-			rs = statement.executeQuery("select last_insert_id() as id;");
-			rs.next();
-			int id = rs.getInt("id");
+			int id = 0;
+			if(returnId){
+				rs = statement.executeQuery("select last_insert_id() as id;");
+				rs.next();
+				id = rs.getInt("id");
+			}
 			if(!autoCommit && commit){
 				conn.commit();
 			}
@@ -182,4 +198,5 @@ abstract class DatabaseWrapper{
 			}
 		}
 	}
+
 }

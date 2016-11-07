@@ -1,0 +1,11 @@
+{
+  "requestAction": "setCareProfileProperties",
+  "careProfileId": "",
+  "careProperties": [{
+    "carePropertyId": 3,
+    "applies": 0
+  }, {
+    "carePropertyId": 5,
+    "applies": 1
+  }]
+}

@@ -13,15 +13,18 @@ public class DatabaseWrapperFactory {
         this.db = db;
     }
 
-    public DatabaseWrapper getWrapper(String type) throws Exception{
-        DatabaseWrapper wrapper = null;
+    public Wrapper getWrapper(String type) throws Exception{
         switch(type){
+            case "person":
+                return new PersonDatabaseWrapper(db);
+            case "monitor":
+                return new MonitorDatabaseWrapper(db);
             case "careProfile":
-                wrapper = new CareProfileWrapper(db);
-                break;
+                return new CareProfileWrapper(db);
+            case "careProperty":
+                return new CarePropertyDatabaseWrapper(db);
             default:
                 throw new Exception("Invalid wrapper type");
         }
-        return wrapper;
     }
 }

@@ -1,0 +1,7 @@
+{
+  "requestAction": "deleteCareProfile",
+  "careProperty": {
+    "name": "",
+    "description": ""
+  }
+}
