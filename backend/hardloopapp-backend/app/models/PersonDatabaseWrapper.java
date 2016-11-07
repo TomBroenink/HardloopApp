@@ -94,6 +94,6 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
     }
     
     public void removeUser(String personalDataId) throws Exception{
-		executeUpdate("delete from personaldata where id = " + personalDataId, "No user found to remove.");
+		executeUpdate("delete from personaldata where id = " + personalDataId, "User could not be removed.");
 	}
 }
