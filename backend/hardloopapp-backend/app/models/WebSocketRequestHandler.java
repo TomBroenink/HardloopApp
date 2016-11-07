@@ -1,5 +1,6 @@
 package models;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -20,41 +21,39 @@ public class WebSocketRequestHandler {
 				throw new Exception("Invalid RequestAction.");
 			}
 			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"1\",\"responseStatusDescription\":\"Succes\"}");
-			DatabaseWrapper dbWrapper = new DatabaseWrapper(db);
-
 			switch(requestAction){
 				case "getAllMonitors":
-					response.put("monitors", dbWrapper.getAllMonitors());
+					response.put("monitors", new MonitorDatabaseWrapper(db).getAllMonitors());
 					break;
 				case "getAllClients":
-					response.put("clients", dbWrapper.getAllClients());
+					response.put("clients", new ClientDatabaseWrapper(db).getAllClients());
 					break;
 				case "registerClient":
-					response.put("clientId", dbWrapper.registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")));
+					response.put("clientId", new ClientDatabaseWrapper(db).registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")));
 					break;
 				case "removeUser":
-					dbWrapper.removeUser((String) args.get("personalDataId"));
+					new PersonDatabaseWrapper(db).removeUser((String) args.get("personalDataId"));
 					break;
 				case "assignClientToMonitor":
-					dbWrapper.assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
+					new MonitorDatabaseWrapper(db).assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
 					break;
 				case "createRunSchema":
-					response.put("runSchemaId", dbWrapper.createRunSchema((String) args.get("name"), (String) args.get("description")));
+					response.put("runSchemaId", new RunSchemaDatabaseWrapper(db).createRunSchema((String) args.get("name"), (String) args.get("description")));
 					break;
 				case "assignRunSchemaToClient":
-					dbWrapper.assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
+					new ClientDatabaseWrapper(db).assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
 				case "registerMonitor":
-					MonitorDataseWrapper wrapper = new MonitorDataseWrapper(db);
+					MonitorDatabaseWrapper wrapper = new MonitorDatabaseWrapper(db);
 					wrapper.insertMonitor((JSONObject)args.get("person"));
 					response.put("status", 200);
 					response.put("message", "Monitor has been stored without problems");
 					break;
 				case "assignRunToRunSchema":
-					dbWrapper.assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
+					new RunSchemaDatabaseWrapper(db).assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
 					break;
 				case "createRun":
-					response.put("runId", dbWrapper.createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("distance"), (JSONArray) args.get("route")));
+					response.put("runId", new RunDatabaseWrapper(db).createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("distance"), (JSONArray) args.get("route")));
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

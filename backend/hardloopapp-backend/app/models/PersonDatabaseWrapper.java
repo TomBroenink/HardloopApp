@@ -62,7 +62,7 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
                         "WHERE m.personalData_id = p.id " +
                         "AND username = " + username + "";
 
-        JSONObject user = (JSONObject) super.executeQuery(query).get(0);
+        JSONObject user = (JSONObject) super.executeQuery(query, "Invalid username or password").get(0);
 
         final PasswordUtil passwordUtil = PasswordUtil.getInstance();
 
@@ -92,4 +92,8 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
         }
         return id;
     }
+    
+    public void removeUser(String personalDataId) throws Exception{
+		executeUpdate("delete from personaldata where id = " + personalDataId, "No user found to remove.");
+	}
 }
