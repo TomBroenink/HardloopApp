@@ -123,7 +123,7 @@ class DatabaseWrapper{
 		}
 	}
     
-    private int executeInsertReturnId(String sql, String errorMessage) throws Exception{
+    protected int executeInsertReturnId(String sql, String errorMessage) throws Exception{
     	return executeInsertReturnId(sql, errorMessage, db.getConnection(), true, true, true);
     }
     
@@ -236,7 +236,7 @@ class DatabaseWrapper{
 		return columnNames;
 	}
 	
-	private String addValues(String sql, String[] args){
+	protected String addValues(String sql, String[] args){
 		for(int i = 0; i < args.length; i++){
 			String arg = args[i];
 			if(arg == null || arg.isEmpty()){

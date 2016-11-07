@@ -12,8 +12,10 @@ public class CareProfileWrapper extends DatabaseWrapper {
         super(db);
     }
 
-    public int create(JSONObject careProfile){
-        String query;
-        return 0;
+    public int create(JSONObject careProfile) throws Exception{
+        String[] values = {careProfile.get("name").toString()};
+        String query = addValues("INSERT INTO care_profiles VALUES(0,", values);
+        int id = executeInsertReturnId(query, "Failed to save CareProfile!");
+        return id;
     }
 }
