@@ -31,4 +31,14 @@ public class ClientDatabaseWrapper extends DatabaseWrapper{
 	public void deleteRunSchemaFromClient(String clientId, String runSchemaId) throws Exception{
 		executeUpdate("delete from clients_runschemas where runSchemas_id = '" + runSchemaId + "' and clients_id = '" + clientId + "'", "Failed to delete run schema from client.");
 	}
+	
+	public JSONArray getAchievementsForClient(String clientId) throws Exception{
+    	String sql = "select id, `name`, description, `condition` from clients_achievements join achievements on clients_achievements.achievements_id = achievements.id where clients_id = '" + clientId + "'";
+		return super.executeQuery(sql, "Failed to retrieve achievements for client.");
+	}
+	
+	public JSONArray getRunSchemasForClient(String clientId) throws Exception{
+    	String sql = "select id, `name`, description from clients_runschemas join runschemas on clients_runschemas.runSchemas_id = runschemas.id where clients_id = '" + clientId + "'";
+		return super.executeQuery(sql, "Failed to retrieve run schemas for client.");
+	}
 }

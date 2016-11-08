@@ -1,0 +1,15 @@
+{
+	"responseAction": "getAchievementsForClient",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"achievements":
+	[
+		{
+			"id": "",
+			"name": "",
+			"description":"",
+			"condition":""
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"responseAction": "getRunSchemasForClient",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"runSchemas":
+	[
+		{
+			"id": "",
+			"name": "",
+			"description":""
+		}
+	]
+}

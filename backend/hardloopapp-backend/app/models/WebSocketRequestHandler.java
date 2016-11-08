@@ -61,6 +61,15 @@ public class WebSocketRequestHandler {
 				case "deleteRunSchemaFromClient":
 					new ClientDatabaseWrapper(db).deleteRunSchemaFromClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
+				case "getClientsForMonitor":
+					response.put("clients", new MonitorDatabaseWrapper(db).getClientsForMonitor((String) args.get("monitorId")));
+					break;
+				case "getAchievementsForClient":
+					response.put("achievements", new ClientDatabaseWrapper(db).getAchievementsForClient((String) args.get("clientId")));
+					break;
+				case "getRunSchemasForClient":
+					response.put("runSchemas", new ClientDatabaseWrapper(db).getRunSchemasForClient((String) args.get("clientId")));
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}

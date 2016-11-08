@@ -48,7 +48,7 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper {
 
     public JSONArray getAllMonitors() throws Exception{
     	String sql = "select monitors.id, personalData_id, accessLevel, firstName, lastName, phoneNumber, username from monitors join personaldata on monitors.personalData_id = personaldata.id";
-		return super.executeQuery(sql, "Could not retrieve monitors.");
+		return super.executeQuery(sql, "Failed to retrieve monitors.");
 	}
     
     public int registerMonitor(String firstName, String lastName, String phoneNumber, String username, String password, String accessLevel) throws Exception{
@@ -62,5 +62,10 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper {
 		String[] values = {monitorId, clientId, monitorNumber};
 		String sql = super.addValues("insert into monitors_clients values(", values);
 		super.executeUpdate(sql, "Failed to assign client to monitor.");
+	}
+    
+    public JSONArray getClientsForMonitor(String monitorId) throws Exception{
+    	String sql = "select clients.id, personalData_id, firstName, lastName, phoneNumber, username from monitors_clients join clients on monitors_clients.clients_id = clients.id join personaldata on clients.personalData_id = personaldata.id where monitors_id = '" + monitorId + "'";
+		return super.executeQuery(sql, "Failed to retrieve clients for monitor.");
 	}
 }
