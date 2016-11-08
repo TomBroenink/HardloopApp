@@ -55,12 +55,12 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper {
 		String[] values = {firstName, lastName, phoneNumber, username, password};
 		String sql = super.addValues("insert into personaldata values(0,", values);
 		sql += "; insert into monitors values(0, last_insert_id(), '" + accessLevel + "');";
-		return super.executeInsertReturnId(sql, "Could not register monitor.", db.getConnection(), false, true, true);
+		return super.executeInsertReturnId(sql, "Failed to register monitor.", db.getConnection(), false, true, true);
 	}
     
     public void assignClientToMonitor(String monitorId, String clientId, String monitorNumber) throws Exception{
 		String[] values = {monitorId, clientId, monitorNumber};
 		String sql = super.addValues("insert into monitors_clients values(", values);
-		super.executeUpdate(sql, "Could not assign client to monitor.");
+		super.executeUpdate(sql, "Failed to assign client to monitor.");
 	}
 }

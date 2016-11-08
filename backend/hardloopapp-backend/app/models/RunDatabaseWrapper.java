@@ -25,7 +25,7 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
     	catch(Exception e){
     		conn.rollback();
     		e.printStackTrace();
-    		throw new Exception("Could not create run.");
+    		throw new Exception("Failed to create run.");
     	}
     	finally{
 			closeConnection(conn);
@@ -34,7 +34,7 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 	
 	private int createRoute(Connection conn, String distance) throws Exception{
 		String sql = addValues("insert into routes values(0,", new String[]{distance}) + ";";
-		return executeInsertReturnId(sql, "Could not create route.", conn, false, false, false);
+		return executeInsertReturnId(sql, "Failed to create route.", conn, false, false, false);
 	}
 	
 	private void createCoordinates(Connection conn, JSONArray route) throws Exception{
@@ -49,7 +49,7 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 				sql += ", (0,";
 			}
 		}
-		executeUpdate(sql + ";", "Could not create coordinates.", conn, false, false, false);
+		executeUpdate(sql + ";", "Failed to create coordinates.", conn, false, false, false);
 	}
 	
 	private void insertCoordinatesForRoute(Connection conn, int startId, int endId, int routeId) throws Exception{
@@ -60,11 +60,11 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 				sql += ", (";
 			}
 		}
-		executeUpdate(sql + ";", "Could not create coordinates for route.", conn, false, false, false);
+		executeUpdate(sql + ";", "Failed to create coordinates for route.", conn, false, false, false);
 	}
 	
 	private int createRun(Connection conn, String name, String description, int routeId) throws Exception{
 		String sql = addValues("insert into runs values(0,", new String[]{name, description, String.valueOf(routeId)}) + ";";
-		return executeInsertReturnId(sql, "Could not create run.", conn, false, false, true);
+		return executeInsertReturnId(sql, "Failed to create run.", conn, false, false, true);
 	}
 }

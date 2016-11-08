@@ -93,7 +93,7 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
         return id;
     }
     
-    public void removeUser(String personalDataId) throws Exception{
-		executeUpdate("delete from personaldata where id = " + personalDataId, "User could not be removed.");
+    public void deleteUser(String personalDataId) throws Exception{
+		executeUpdate("delete from personaldata where id = '" + personalDataId + "'", "Failed to delete user.");
 	}
 }
