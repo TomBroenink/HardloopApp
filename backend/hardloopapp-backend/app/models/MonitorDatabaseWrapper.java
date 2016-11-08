@@ -11,7 +11,7 @@ import java.sql.Statement;
 /**
  * Created by Henderikus on 2-11-2016.
  */
-public class MonitorDatabaseWrapper extends PersonDatabaseWrapper {
+public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wrapper{
 
     private final int ACCESSLEVEL = 2;
 
@@ -24,9 +24,9 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper {
      * @param monitor
      * @throws Exception
      */
-    public void insertMonitor(JSONObject monitor) throws Exception{
+    public int create(JSONObject monitor) throws Exception{
         final String query = "INSERT INTO monitors (personalData_id, accessLevel) VALUES (?, ?) " ;
-        int personalDataId = super.insertPerson(monitor);
+        int personalDataId = super.create(monitor);
         Connection con = null;
 
         if(personalDataId != 0){
@@ -35,9 +35,9 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper {
 
                 final PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, personalDataId);
-                stmt.setInt(2, ACCESSLEVEL);
+                stmt.setInt(2, Integer.parseInt(monitor.get("accessLevel").toString()));
 
-                super.insertRow(stmt);
+                return super.insertRow(stmt);
             }finally {
                 con.close();
             }

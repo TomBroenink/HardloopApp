@@ -20,6 +20,12 @@
 		<button type="button" onclick="getClientsForMonitor();">Get clients for monitor</button>
 		<button type="button" onclick="getAchievementsForClient();">Get achievements for client</button>
 		<button type="button" onclick="getRunSchemasForClient();">Get run schemas for client</button>
+		<button type="button" onclick="createProfile()">Create Profile</button>
+		<button type="button" onclick="createProperty()">Create Property</button>
+		<button type="button" onclick="setProperties()">Set Properties</button>
+		<button type="button" onclick="getProfileWithProperties()">Get Profile with Properties</button>
+		<button type="button" onclick="getAllProfilesWithProperties()">Get All Profiles with Properties</button>
+		<button type="button" onclick="getAllCareProperties()">Get All Care Properties</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -39,7 +45,7 @@
 	        }
 	        
 	        function registerMonitor(){
-	        	webSocket.send('{"requestAction": "registerMonitor","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomMonitor","password": "tom","accessLevel": "1"}');
+	        	webSocket.send('{"requestAction": "registerMonitor","person": {"firstName": "Henderikus","lastName": "Harms","phoneNumber": "0636437443","username": "HarmsH","password": "secret","accessLevel": "1"}}');
 	        }
 	        
 	        function registerClient(){
@@ -89,6 +95,25 @@
 	        function getRunSchemasForClient(){
 	        	webSocket.send('{"requestAction": "getRunSchemasForClient","clientId": "7"}');
 	        }
+	        
+	        function createProfile(){
+	        	webSocket.send('{"requestAction": "createEmptyCareProfile", "careProfile": {"name": "profile1"}}');
+			}
+			function createProperty(){
+				webSocket.send('{"requestAction": "createCareProperty", "careProperty": {"name": "Analfabeet", "description": "Client kan niet lezen"}}');
+			}
+			function setProperties(){
+				webSocket.send('{"requestAction": "setCareProfileProperties", "careProfileId": "4","careProperties": [{"carePropertyId": 3, "applies": 1}, {"carePropertyId": 1, "applies": 0}]}');
+			}
+			function getProfileWithProperties(){
+				webSocket.send('{"requestAction": "getCareProfileWithProperties", "careProfileId": "3"}');
+			}
+			function getAllProfilesWithProperties(){
+				webSocket.send('{"requestAction": "getAllProfilesWithProperties"}');
+			}
+			function getAllCareProperties(){
+				webSocket.send('{"requestAction": "getAllCareProperties"}');
+			}
 		</script>
 	</body>
 </html>

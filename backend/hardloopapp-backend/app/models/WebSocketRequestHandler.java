@@ -21,6 +21,7 @@ public class WebSocketRequestHandler {
 				throw new Exception("Invalid RequestAction.");
 			}
 			response = (JSONObject) parser.parse("{\"responseAction\": \"" + requestAction + "\",\"responseStatusCode\":\"1\",\"responseStatusDescription\":\"Succes\"}");
+			DatabaseWrapperFactory factory = new DatabaseWrapperFactory(db);
 			switch(requestAction){
 				case "getAllMonitors":
 					response.put("monitors", new MonitorDatabaseWrapper(db).getAllMonitors());
@@ -44,16 +45,25 @@ public class WebSocketRequestHandler {
 					new ClientDatabaseWrapper(db).assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
 				case "registerMonitor":
-					MonitorDatabaseWrapper wrapper = new MonitorDatabaseWrapper(db);
-					wrapper.insertMonitor((JSONObject)args.get("person"));
-					response.put("status", 200);
-					response.put("message", "Monitor has been stored without problems");
+					response.put("monitorId", factory.getWrapper("monitor").create((JSONObject)args.get("person")));
 					break;
 				case "assignRunToRunSchema":
 					new RunSchemaDatabaseWrapper(db).assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
 					break;
 				case "createRun":
 					response.put("runId", new RunDatabaseWrapper(db).createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("distance"), (JSONArray) args.get("route")));
+					break;
+				case "createEmptyCareProfile":
+					response.put("profileId", factory.getWrapper("careProfile").create((JSONObject) args.get("careProfile")));
+					break;
+				case "createCareProperty":
+					response.put("careProperty", factory.getWrapper("careProperty").create((JSONObject) args.get("careProperty")));
+					break;
+				case "setCareProfileProperties":
+					((CareProfileWrapper)factory.getWrapper("careProfile")).addPropertiesToProfile(Integer.parseInt(args.get("careProfileId").toString()), (JSONArray) args.get("careProperties"));
+                    break;
+				case "getCareProfileWithProperties":
+					response.put("careProfile", ((CareProfileWrapper)factory.getWrapper("careProfile")).getProfileWithProperties(Integer.parseInt(args.get("careProfileId").toString())));
 					break;
 				case "deleteRunFromRunSchema":
 					new RunSchemaDatabaseWrapper(db).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));
@@ -69,6 +79,12 @@ public class WebSocketRequestHandler {
 					break;
 				case "getRunSchemasForClient":
 					response.put("runSchemas", new ClientDatabaseWrapper(db).getRunSchemasForClient((String) args.get("clientId")));
+					break;
+				case "getAllProfilesWithProperties":
+					response.put("careProfiles",((CareProfileWrapper)factory.getWrapper("careProfile")).getAllProfilesWithProperties());
+					break;
+				case "getAllCareProperties":
+					response.put("careProperties", ((CarePropertyDatabaseWrapper) factory.getWrapper("careProperty")).getAll());
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

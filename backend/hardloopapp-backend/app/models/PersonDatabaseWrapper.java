@@ -11,11 +11,12 @@ import java.sql.Statement;
 /**
  * Created by Henderikus on 2-11-2016.
  */
-public class PersonDatabaseWrapper extends DatabaseWrapper{
+public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
 
     public PersonDatabaseWrapper(Database db) {
         super(db);
     }
+
 
     /**
      * insert personal data using prepared statement
@@ -23,7 +24,7 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
      * @return int 0 or id inserted row
      * @throws Exception
      */
-    protected int insertPerson(JSONObject person) throws Exception{
+    public int create(JSONObject person) throws Exception{
         System.out.println("jsonObject: " + person);
 
         final String query = "INSERT INTO personaldata (firstName, lastName, phoneNumber, username, password)"+
@@ -46,6 +47,11 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
         }finally {
             con.close();
         }
+    }
+
+    @Override
+    public void delete(int id) throws Exception {
+        executeUpdate("delete from personaldata where id = '" + id + "'", "Failed to delete user.");
     }
 
     /**
@@ -92,8 +98,10 @@ public class PersonDatabaseWrapper extends DatabaseWrapper{
         }
         return id;
     }
-    
+
+    @Deprecated
     public void deleteUser(String personalDataId) throws Exception{
-		executeUpdate("delete from personaldata where id = '" + personalDataId + "'", "Failed to delete user.");
+		this.delete(Integer.parseInt(personalDataId));
 	}
+
 }

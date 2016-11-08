@@ -1,0 +1,6 @@
+{
+  "requestAction": "createEmptyCareProfile",
+  "careProfile": {
+    "name": ""
+  }
+}
