@@ -8,4 +8,6 @@ import org.json.simple.JSONObject;
 public interface Wrapper {
 
     int create(JSONObject o) throws Exception;
+
+    void delete(int id) throws Exception;
 }

@@ -63,4 +63,5 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wra
 		String sql = super.addValues("insert into monitors_clients values(", values);
 		super.executeUpdate(sql, "Failed to assign client to monitor.");
 	}
+
 }

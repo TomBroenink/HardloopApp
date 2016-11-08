@@ -49,6 +49,11 @@ public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
         }
     }
 
+    @Override
+    public void delete(int id) throws Exception {
+        executeUpdate("delete from personaldata where id = '" + id + "'", "Failed to delete user.");
+    }
+
     /**
      * Validate username and passwords. Password is validated by using PasswordUtil class
      * When password or username is incorrect an exception is thrown
@@ -93,9 +98,10 @@ public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
         }
         return id;
     }
-    
+
+    @Deprecated
     public void deleteUser(String personalDataId) throws Exception{
-		executeUpdate("delete from personaldata where id = '" + personalDataId + "'", "Failed to delete user.");
+		this.delete(Integer.parseInt(personalDataId));
 	}
 
 }

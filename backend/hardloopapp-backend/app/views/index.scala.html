@@ -88,10 +88,10 @@
 				webSocket.send('{"requestAction": "createCareProperty", "careProperty": {"name": "Analfabeet", "description": "Client kan niet lezen"}}');
 			}
 			function setProperties(){
-				webSocket.send('{"requestAction": "setCareProfileProperties", "careProfileId": "2","careProperties": [{"carePropertyId": 3, "applies": 1}, {"carePropertyId": 1, "applies": 0}]}');
+				webSocket.send('{"requestAction": "setCareProfileProperties", "careProfileId": "4","careProperties": [{"carePropertyId": 3, "applies": 1}, {"carePropertyId": 1, "applies": 0}]}');
 			}
 			function getProfileWithProperties(){
-				webSocket.send('{"requestAction": "getCareProfileWithProperties", "careProfileId": "2"}');
+				webSocket.send('{"requestAction": "getCareProfileWithProperties", "careProfileId": "3"}');
 			}
 			function getAllProfilesWithProperties(){
 				webSocket.send('{"requestAction": "getAllProfilesWithProperties"}');

@@ -25,6 +25,11 @@ public class CareProfileWrapper extends DatabaseWrapper implements Wrapper {
         return executeInsertReturnId(query, "Failed to save CareProfile!");
     }
 
+    @Override
+    public void delete(int id) throws Exception{
+        super.executeUpdate("DELETE FROM care_profiles where id = " + id, "Failed to delete profile! It could still be in use.");
+    }
+
     /**
      * add given properties to careProfile
      * @param careProfileId
@@ -86,7 +91,11 @@ public class CareProfileWrapper extends DatabaseWrapper implements Wrapper {
 
         JSONArray result = super.executeQuery(query, "The given CareProfile with id " + profileId + " could not be found!");
 
-        return this.buildProfileWithPropertiesObject(result);
+        if(result.isEmpty()){
+            throw new Exception("CareProfile with id: " + profileId + " does not exist!");
+        }else{
+            return this.buildProfileWithPropertiesObject(result);
+        }
     }
 
     /**
