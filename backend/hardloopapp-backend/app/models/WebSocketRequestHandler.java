@@ -32,8 +32,8 @@ public class WebSocketRequestHandler {
 				case "registerClient":
 					response.put("clientId", new ClientDatabaseWrapper(db).registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")));
 					break;
-				case "removeUser":
-					new PersonDatabaseWrapper(db).removeUser((String) args.get("personalDataId"));
+				case "deleteUser":
+					new PersonDatabaseWrapper(db).deleteUser((String) args.get("personalDataId"));
 					break;
 				case "assignClientToMonitor":
 					new MonitorDatabaseWrapper(db).assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
@@ -61,6 +61,12 @@ public class WebSocketRequestHandler {
 					break;
 				case "setCareProfileProperties":
 					((CareProfileWrapper)factory.getWrapper("careProfile")).addPropertiesToProfile(Integer.parseInt(args.get("").toString()), (JSONArray) args.get("careProperties"));
+                    break;
+				case "deleteRunFromRunSchema":
+					new RunSchemaDatabaseWrapper(db).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));
+					break;
+				case "deleteRunSchemaFromClient":
+					new ClientDatabaseWrapper(db).deleteRunSchemaFromClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

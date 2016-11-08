@@ -94,8 +94,8 @@ public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
         return id;
     }
     
-    public void removeUser(String personalDataId) throws Exception{
-		executeUpdate("delete from personaldata where id = " + personalDataId, "No user found to remove.");
+    public void deleteUser(String personalDataId) throws Exception{
+		executeUpdate("delete from personaldata where id = '" + personalDataId + "'", "Failed to delete user.");
 	}
 
 }

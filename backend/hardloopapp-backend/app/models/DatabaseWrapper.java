@@ -166,6 +166,23 @@ abstract class DatabaseWrapper{
 		return sql;
 	}
 	
+	protected int[] getInsertIdRange(Connection conn) throws Exception{
+		ResultSet rs = null;
+		Statement statement = null;
+		try{
+			statement = conn.createStatement();
+			rs = statement.executeQuery("select last_insert_id() as startId, row_count() as insertCount;");
+			rs.next();
+			int startId = rs.getInt("startId");
+			int endId = startId + rs.getInt("insertCount") - 1;
+			return new int[]{startId, endId};
+		}
+		finally {
+			closeResultSet(rs);
+    		closeStatement(statement);
+		}
+	}
+	
 	protected void closeConnection(Connection conn){
 		if(conn != null){
 			try{
