@@ -60,7 +60,7 @@ public class WebSocketRequestHandler {
 					response.put("careProperty", factory.getWrapper("careProperty").create((JSONObject) args.get("careProperty")));
 					break;
 				case "setCareProfileProperties":
-					((CareProfileWrapper)factory.getWrapper("careProfile")).addPropertiesToProfile(Integer.parseInt(args.get("").toString()), (JSONArray) args.get("careProperties"));
+					((CareProfileWrapper)factory.getWrapper("careProfile")).addPropertiesToProfile(Integer.parseInt(args.get("careProfileId").toString()), (JSONArray) args.get("careProperties"));
                     break;
 				case "deleteRunFromRunSchema":
 					new RunSchemaDatabaseWrapper(db).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));

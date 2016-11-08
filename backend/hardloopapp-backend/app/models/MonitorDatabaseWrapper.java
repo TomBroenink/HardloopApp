@@ -35,7 +35,7 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wra
 
                 final PreparedStatement stmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 stmt.setInt(1, personalDataId);
-                stmt.setInt(2, ACCESSLEVEL);
+                stmt.setInt(2, Integer.parseInt(monitor.get("accessLevel").toString()));
 
                 return super.insertRow(stmt);
             }finally {

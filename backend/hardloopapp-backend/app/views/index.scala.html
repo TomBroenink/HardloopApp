@@ -17,6 +17,9 @@
 		<button type="button" onclick="createRun();">Create run</button>
 		<button type="button" onclick="deleteRunFromRunSchema();">Delete run from run schema</button>
 		<button type="button" onclick="deleteRunSchemaFromClient();">Delete run schema from client</button>
+		<button type="button" onclick="createProfile()">Create Profile</button>
+		<button type="button" onclick="createProperty()">Create Property</button>
+		<button type="button" onclick="setProperties()">Set Properties</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -36,7 +39,7 @@
 	        }
 	        
 	        function registerMonitor(){
-	        	webSocket.send('{"requestAction": "registerMonitor","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomMonitor","password": "tom","accessLevel": "1"}');
+	        	webSocket.send('{"requestAction": "registerMonitor","person": {"firstName": "Henderikus","lastName": "Harms","phoneNumber": "0636437443","username": "HarmsH","password": "secret","accessLevel": "1"}}');
 	        }
 	        
 	        function registerClient(){
@@ -74,6 +77,15 @@
 	        function deleteRunSchemaFromClient(){
 	        	webSocket.send('{"requestAction": "deleteRunSchemaFromClient","runSchemaId": "15","clientId": "7"}');
 	        }
+	        function createProfile(){
+	        	webSocket.send('{"requestAction": "createEmptyCareProfile", "careProfile": {"name": "profile1"}}');
+			}
+			function createProperty(){
+				webSocket.send('{"requestAction": "createCareProperty", "careProperty": {"name": "Analfabeet", "description": "Client kan niet lezen"}}');
+			}
+			function setProperties(){
+				webSocket.send('{"requestAction": "setCareProfileProperties", "careProfileId": "2","careProperties": [{"carePropertyId": 3, "applies": 1}, {"carePropertyId": 1, "applies": 0}]}');
+			}
 		</script>
 	</body>
 </html>
