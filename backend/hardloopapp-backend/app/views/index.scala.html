@@ -17,6 +17,9 @@
 		<button type="button" onclick="createRun();">Create run</button>
 		<button type="button" onclick="deleteRunFromRunSchema();">Delete run from run schema</button>
 		<button type="button" onclick="deleteRunSchemaFromClient();">Delete run schema from client</button>
+		<button type="button" onclick="getClientsForMonitor();">Get clients for monitor</button>
+		<button type="button" onclick="getAchievementsForClient();">Get achievements for client</button>
+		<button type="button" onclick="getRunSchemasForClient();">Get run schemas for client</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -73,6 +76,18 @@
 	        
 	        function deleteRunSchemaFromClient(){
 	        	webSocket.send('{"requestAction": "deleteRunSchemaFromClient","runSchemaId": "15","clientId": "7"}');
+	        }
+	        
+	        function getClientsForMonitor(){
+	        	webSocket.send('{"requestAction": "getClientsForMonitor","monitorId": "10"}');
+	        }
+	        
+	        function getAchievementsForClient(){
+	        	webSocket.send('{"requestAction": "getAchievementsForClient","clientId": "7"}');
+	        }
+	        
+	        function getRunSchemasForClient(){
+	        	webSocket.send('{"requestAction": "getRunSchemasForClient","clientId": "7"}');
 	        }
 		</script>
 	</body>
