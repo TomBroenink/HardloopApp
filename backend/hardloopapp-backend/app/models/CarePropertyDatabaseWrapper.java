@@ -1,5 +1,6 @@
 package models;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.db.Database;
 
@@ -16,5 +17,10 @@ public class CarePropertyDatabaseWrapper extends DatabaseWrapper implements Wrap
         final String[] values = {careProperty.get("name").toString(), careProperty.get("description").toString()};
         final String query = addValues("INSERT INTO care_properties VALUES(0,", values);
         return super.executeInsertReturnId(query, "Something went wrong while saving care property! Please try again later.");
+    }
+
+    public JSONArray getAll() throws Exception{
+        String query = "SELECT * FROM care_properties";
+        return super.executeQuery(query, "Something went wrong!");
     }
 }

@@ -62,11 +62,20 @@ public class WebSocketRequestHandler {
 				case "setCareProfileProperties":
 					((CareProfileWrapper)factory.getWrapper("careProfile")).addPropertiesToProfile(Integer.parseInt(args.get("careProfileId").toString()), (JSONArray) args.get("careProperties"));
                     break;
+				case "getCareProfileWithProperties":
+					response.put("careProfile", ((CareProfileWrapper)factory.getWrapper("careProfile")).getProfileWithProperties(Integer.parseInt(args.get("careProfileId").toString())));
+					break;
 				case "deleteRunFromRunSchema":
 					new RunSchemaDatabaseWrapper(db).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));
 					break;
 				case "deleteRunSchemaFromClient":
 					new ClientDatabaseWrapper(db).deleteRunSchemaFromClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
+					break;
+				case "getAllProfilesWithProperties":
+					response.put("careProfiles",((CareProfileWrapper)factory.getWrapper("careProfile")).getAllProfilesWithProperties());
+					break;
+				case "getAllCareProperties":
+					response.put("careProperties", ((CarePropertyDatabaseWrapper) factory.getWrapper("careProperty")).getAll());
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

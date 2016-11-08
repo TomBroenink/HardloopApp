@@ -20,6 +20,10 @@
 		<button type="button" onclick="createProfile()">Create Profile</button>
 		<button type="button" onclick="createProperty()">Create Property</button>
 		<button type="button" onclick="setProperties()">Set Properties</button>
+		<button type="button" onclick="getProfileWithProperties()">Get Profile with Properties</button>
+		<button type="button" onclick="getAllProfilesWithProperties()">Get All Profiles with Properties</button>
+		<button type="button" onclick="getAllCareProperties()">Get All Care Properties</button>
+
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -85,6 +89,15 @@
 			}
 			function setProperties(){
 				webSocket.send('{"requestAction": "setCareProfileProperties", "careProfileId": "2","careProperties": [{"carePropertyId": 3, "applies": 1}, {"carePropertyId": 1, "applies": 0}]}');
+			}
+			function getProfileWithProperties(){
+				webSocket.send('{"requestAction": "getCareProfileWithProperties", "careProfileId": "2"}');
+			}
+			function getAllProfilesWithProperties(){
+				webSocket.send('{"requestAction": "getAllProfilesWithProperties"}');
+			}
+			function getAllCareProperties(){
+				webSocket.send('{"requestAction": "getAllCareProperties"}');
 			}
 		</script>
 	</body>
