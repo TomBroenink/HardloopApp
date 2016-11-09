@@ -60,8 +60,7 @@ angular
 			.state('reports', {
 				url: '/reports',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/reports.html',
-				controller: 'MyDetailsCtrl'
+				templateUrl: 'views/dashboard/reports.html'
 			})
 			.state('404', {
 				url: '/404',

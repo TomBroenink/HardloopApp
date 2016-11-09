@@ -9,5 +9,6 @@
  */
 angular.module('yapp')
 	.controller('MyDetailsCtrl', function($scope, $location) {
-		console.log('test');
+		var db = {rij1: 'Dit is rij 1'};
+		$scope.message = db.rij1;
 	});
