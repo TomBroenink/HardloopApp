@@ -33,7 +33,7 @@ angular.module('yapp')
 		
 		if (db.responseCode == 200) {
 			// Sla hier de naam en accesslevel in sessionStorage op
-			if (email == db.email) {
+			if (email === db.email) {
 				if (password === db.password) {
 					alert('Succesvol ingelogd!');
 					localStorage.setItem('username', db.email);

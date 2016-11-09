@@ -48,17 +48,20 @@ angular
 			.state('mydetails', {
 				url: '/mydetails',
 				parent: 'reports', // dit nog aanpassen
-				templateUrl: 'views/dashboard/mydetails.html'
+				templateUrl: 'views/dashboard/mydetails.html',
+				controller: 'MyDetailsCtrl'
 			})
 			.state('myclients', {
 				url: '/myclients',
 				parent: 'reports', // dit nog aanpassen
-				templateUrl: 'views/dashboard/myclients.html'
+				templateUrl: 'views/dashboard/myclients.html',
+				controller: 'MyDetailsCtrl'
 			})
 			.state('reports', {
 				url: '/reports',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/reports.html'
+				templateUrl: 'views/dashboard/reports.html',
+				controller: 'MyDetailsCtrl'
 			})
 			.state('404', {
 				url: '/404',
