@@ -57,6 +57,12 @@ angular
 				templateUrl: 'views/dashboard/myclients.html',
 				controller: 'MyDetailsCtrl'
 			})
+			.state('client', {
+				url: '/client',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/client.html',
+				controller: 'ClientCtrl'
+			})
 			.state('reports', {
 				url: '/reports',
 				parent: 'dashboard',
