@@ -53,9 +53,9 @@ angular
 			})
 			.state('myclients', {
 				url: '/myclients',
-				parent: 'reports',
+				parent: 'dashboard',
 				templateUrl: 'views/dashboard/myclients.html',
-				controller: 'MyDetailsCtrl'
+				controller: 'MyClientsCtrl'
 			})
 			.state('client', {
 				url: '/:client',
