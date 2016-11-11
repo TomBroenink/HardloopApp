@@ -71,7 +71,9 @@ angular
 			.state('register', {
 				url: '/register',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/register.html'
+				templateUrl: 'views/dashboard/register.html',
+				controller: 'RegisterCtrl'
+
 			})
 			.state('404', {
 				url: '/404',
