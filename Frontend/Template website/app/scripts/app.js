@@ -58,8 +58,8 @@ angular
 				controller: 'MyDetailsCtrl'
 			})
 			.state('client', {
-				url: '/client',
-				parent: 'dashboard',
+				url: '/:client',
+				parent: 'myclients',
 				templateUrl: 'views/dashboard/client.html',
 				controller: 'ClientCtrl'
 			})
