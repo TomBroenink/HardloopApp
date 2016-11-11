@@ -8,7 +8,7 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('ClientCtrl', function($scope, $routeParams) {
-		var client = $routeParams.client;
-		console.log($location);
+	.controller('ClientCtrl', function($scope, $stateParams) {
+		$scope.client = $stateParams.client;
+		$scope.accessLevel = localStorage.getItem('accessLevel');
 	});

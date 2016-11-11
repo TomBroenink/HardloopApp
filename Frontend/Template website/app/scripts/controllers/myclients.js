@@ -8,7 +8,10 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('MyClientsCtrl', function($scope, $location, $routeParams) {
-		console.log($routeParams);
-		$scope.client1 = 'TomBroenink';
+	.controller('MyClientsCtrl', function($scope, $location) {
+		$scope.db = [
+			{'username': 'TomBroenink'},
+			{'username': 'test'},
+			{'username': 'Hennie' }
+		];
 	});

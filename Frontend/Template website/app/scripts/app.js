@@ -11,7 +11,7 @@
 angular
 	.module('yapp', [
 		'ui.router',
-		'ngAnimate'
+		'ngAnimate',
 	])
 	.config(function($stateProvider, $urlRouterProvider) {
 		var userLoggedIn;
@@ -58,8 +58,8 @@ angular
 				controller: 'MyClientsCtrl'
 			})
 			.state('client', {
-				url: '/:client',
-				parent: 'myclients',
+				url: '/clients/:client',
+				parent: 'dashboard',
 				templateUrl: 'views/dashboard/client.html',
 				controller: 'ClientCtrl'
 			})

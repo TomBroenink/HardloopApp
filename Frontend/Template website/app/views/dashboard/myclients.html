@@ -9,6 +9,10 @@
 	<!--<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Routes</a>-->
 	<h2>Mijn clienten<small></small></h2>
 	<div class="jumbotron">
-		<a ui-sref="{{client1}}">{{client1}}</a><br/><br/>
+		<ul>
+			<li ng-repeat="clients in db">
+				<a ui-sref="client({client: clients.username})">{{clients.username}}</a>
+			</li>
+		</ul>
 	</div>
 </div>
