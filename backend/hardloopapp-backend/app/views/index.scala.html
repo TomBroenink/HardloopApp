@@ -49,11 +49,11 @@
 	        }
 	        
 	        function registerClient(){
-	        	webSocket.send('{"requestAction": "registerClient","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomClient","password": "tom"}');
+	        	webSocket.send('{"requestAction": "registerClient","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomClient","password": "tom", "careProfileId": "1"}');
 	        }
 	        
 	        function removeUser(){
-	        	webSocket.send('{"requestAction": "removeUser", "personalDataId": "16"}');
+	        	webSocket.send('{"requestAction": "deleteUser", "personalDataId": "6"}');
 	        }
 	        
 	        function assignClientToMonitor(){

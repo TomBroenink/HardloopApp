@@ -15,8 +15,6 @@ public class DatabaseWrapperFactory {
 
     public DatabaseWrapper getWrapper(String type) throws Exception{
         switch(type){
-            case "person":
-                return new PersonDatabaseWrapper(db);
             case "monitor":
                 return new MonitorDatabaseWrapper(db);
             case "careProfile":

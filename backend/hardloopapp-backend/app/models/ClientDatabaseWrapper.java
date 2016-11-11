@@ -15,7 +15,7 @@ public class ClientDatabaseWrapper extends PersonDatabaseWrapper{
 	public int create(JSONObject args) throws Exception{
 		String[] values = {(String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")};
 		String sql = super.addValues("insert into personaldata values(0,", values);
-		sql += "; insert into clients values(0, last_insert_id());";
+		sql += "; insert into clients values(0, last_insert_id(), '" + args.get("careProfileId") + "');";
 		return super.executeInsertReturnId(sql, "Failed to register client.", db.getConnection(), false, true, true);
 	}
 	

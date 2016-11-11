@@ -33,7 +33,7 @@ public class WebSocketRequestHandler {
 					response.put("clientId", factory.getWrapper("client").create(args));
 					break;
 				case "deleteUser":
-					factory.getWrapper("person").delete(Integer.parseInt((String) args.get("personalDataId")));
+					factory.getWrapper("monitor").delete(Integer.parseInt((String) args.get("personalDataId")));
 					break;
 				case "assignClientToMonitor":
 					((MonitorDatabaseWrapper) factory.getWrapper("monitor")).assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));

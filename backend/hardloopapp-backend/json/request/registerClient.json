@@ -4,5 +4,6 @@
 	"lastName": "",
 	"phoneNumber": "",
 	"username": "",
-	"password": ""
+	"password": "",
+	"careProfileId": ""
 }
