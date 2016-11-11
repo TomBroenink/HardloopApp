@@ -45,10 +45,23 @@ angular
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/overview.html'
 			})
-			.state('mijngegevens', {
-				url: '/mijngegevens',
-				parent: 'dashboard',
-				templateUrl: 'views/dashboard/mijngegevens.html'
+			.state('mydetails', {
+				url: '/mydetails',
+				parent: 'dashboard', 
+				templateUrl: 'views/dashboard/mydetails.html',
+				controller: 'MyDetailsCtrl'
+			})
+			.state('myclients', {
+				url: '/myclients',
+				parent: 'reports',
+				templateUrl: 'views/dashboard/myclients.html',
+				controller: 'MyDetailsCtrl'
+			})
+			.state('client', {
+				url: '/:client',
+				parent: 'myclients',
+				templateUrl: 'views/dashboard/client.html',
+				controller: 'ClientCtrl'
 			})
 			.state('reports', {
 				url: '/reports',
@@ -58,7 +71,9 @@ angular
 			.state('register', {
 				url: '/register',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/register.html'
+				templateUrl: 'views/dashboard/register.html',
+				controller: 'RegisterCtrl'
+
 			})
 			.state('404', {
 				url: '/404',

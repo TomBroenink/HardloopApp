@@ -9,45 +9,50 @@
 	<h2>[Registreer patient-knop] [Registreer begeleider-knop] [Registreer locatiemanager-knop]<small></small></h2>
 	<div class="jumbotron">
 		
+				<h2>Patientgegevens</h2>
+				<br>
+				<h2>{{ firstName }}</h2>
 		<div class="btn-group" data-toggle="buttons">
 		  	<label class="btn btn-primary active">
-		    	<input type="radio" name="profiel" id="profiel1" autocomplete="off" checked> Profiel 1
+		    	<input type="button" name="profiel1" id="profiel1" ng-click="fillProfile1()"> Profiel 1
 		  	</label>
 		  	<label class="btn btn-primary">
-		    	<input type="radio" name="profiel" id="profiel2" autocomplete="off"> Profiel 2
+		    	<input type="button" name="profiel2" id="profiel2" ng-click="fillProfile2()"> Profiel 2
 		  	</label>
 		  	<label class="btn btn-primary">
-		    	<input type="radio" name="profiel" id="profiel3" autocomplete="off"> Profiel 3
+		    	<input type="button" name="profiel3" id="profiel3" ng-click="fillProfile3()"> Profiel 3
 		  	</label>
 		</div>
 		<br>
-		<br>
-		<h2>Patientgegevens</h2>
 		<br>
 		  	<div class="maxwidthcontainer">
 				<form>
 				  	<div class="form-group">
 				    	<label for="firstname">Voornaam</label>
-				    	<input type="text" class="form-control" id="firstname" placeholder="Voornaam">
+				    	<input type="text" class="form-control" ng-model="firstName" placeholder="Voornaam">
 				  	</div>
 				  	<div class="form-group">
 					    <label for="lastname">Achternaam</label>
-					    <input type="text" class="form-control" id="lastname" placeholder="Achternaam">
+					    <input type="text" class="form-control" ng-model="lastName" placeholder="Achternaam">
 				  	</div>
 				  	<div class="form-group">
 					    <label for="phoneNumber">Telefoonnummer</label>
-					    <input type="text" class="form-control" id="phoneNumber" placeholder="Telefoonnummer">
+					    <input type="text" class="form-control" ng-model="phoneNumber" placeholder="Telefoonnummer">
 				  	</div>
 				  	<div class="form-group">
 					    <label for="username">Username</label>
-					    <input type="text" class="form-control" id="username" placeholder="Username">
+					    <input type="text" class="form-control" ng-model="userName" placeholder="Username">
 				  	</div>
 				  	<div class="form-group">
 					    <label for="password">Wachtwoord</label>
-					    <input type="text" class="form-control" id="password" placeholder="Wachtwoord">
+					    <input type="text" class="form-control" ng-model="passWord" placeholder="Wachtwoord">
+				  	</div>
+				  	<div class="form-group">
+					    <label for="profile">Profiel</label>
+					    <input type="textarea" class="form-control" ng-model="profile" value="hallo">
 				  	</div>
 				  	<br>
-				  	<button type="submit" class="btn btn-danger">Toevoegen</button>
+				  	<button class="btn btn-danger" ng-click="submit()">Toevoegen</button>
 				</form>
 			</div>
 		
