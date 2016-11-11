@@ -13,7 +13,7 @@ public class DatabaseWrapperFactory {
         this.db = db;
     }
 
-    public Wrapper getWrapper(String type) throws Exception{
+    public DatabaseWrapper getWrapper(String type) throws Exception{
         switch(type){
             case "person":
                 return new PersonDatabaseWrapper(db);
@@ -23,6 +23,12 @@ public class DatabaseWrapperFactory {
                 return new CareProfileWrapper(db);
             case "careProperty":
                 return new CarePropertyDatabaseWrapper(db);
+            case "client":
+                return new ClientDatabaseWrapper(db);
+            case "run":
+                return new RunDatabaseWrapper(db);
+            case "runSchema":
+                return new RunSchemaDatabaseWrapper(db);
             default:
                 throw new Exception("Invalid wrapper type");
         }

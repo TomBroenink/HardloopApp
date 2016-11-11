@@ -7,7 +7,7 @@ import play.db.Database;
 /**
  * Created by hbh13 on 7-11-2016.
  */
-public class CareProfileWrapper extends DatabaseWrapper implements Wrapper {
+public class CareProfileWrapper extends DatabaseWrapper{
 
     public CareProfileWrapper(Database db) {
         super(db);
@@ -19,6 +19,7 @@ public class CareProfileWrapper extends DatabaseWrapper implements Wrapper {
      * @return int created row id
      * @throws Exception
      */
+    @Override
     public int create(JSONObject careProfile) throws Exception{
         final String[] values = {careProfile.get("name").toString()};
         final String query = addValues("INSERT INTO care_profiles VALUES(0,", values);
@@ -28,6 +29,28 @@ public class CareProfileWrapper extends DatabaseWrapper implements Wrapper {
     @Override
     public void delete(int id) throws Exception{
         super.executeUpdate("DELETE FROM care_profiles where id = " + id, "Failed to delete profile! It could still be in use.");
+    }
+    
+    /**
+     * method for fetching all profiles with their properties from the db
+     * @return JSONArray profiles with properties
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public JSONArray getAll() throws Exception {
+        String query = "SELECT id FROM care_profiles";
+
+        final JSONArray returnValue = new JSONArray();
+
+        JSONArray result = super.executeQuery(query, "Something went wrong!");
+
+        for(Object o : result){
+            JSONObject pr = (JSONObject) o;
+            returnValue.add(this.getProfileWithProperties(Integer.parseInt(pr.get("id").toString())));
+        }
+
+        return returnValue;
     }
 
     /**
@@ -47,33 +70,11 @@ public class CareProfileWrapper extends DatabaseWrapper implements Wrapper {
                 String[] values = {Integer.toString(careProfileId), propertyId, property.get("applies").toString()};
                 String query = addValues("INSERT INTO care_profile_properties VALUES(", values);
 
-                super.executeInsert(query, "Property with id: " + propertyId + " could not be stored!" );
+                super.executeUpdate(query, "Property with id: " + propertyId + " could not be stored!" );
             }else{
                 throw new Exception("Care profile: "+ careProfileId +"  already contains the property with id " + propertyId +"!");
             }
         }
-    }
-
-    /**
-     * method for fetching all profiles with their properties from the db
-     * @return JSONArray profiles with properties
-     * @throws Exception
-     */
-    @SuppressWarnings("unchecked")
-    public JSONArray getAllProfilesWithProperties() throws Exception {
-        String query = "SELECT id FROM care_profiles";
-
-        final JSONArray returnValue = new JSONArray();
-
-        JSONArray result = super.executeQuery(query, "Something went wrong!");
-
-        for(Object o : result){
-            JSONObject pr = (JSONObject) o;
-            returnValue.add(this.getProfileWithProperties(Integer.parseInt(pr.get("id").toString())));
-        }
-
-        return returnValue;
-
     }
 
     /**

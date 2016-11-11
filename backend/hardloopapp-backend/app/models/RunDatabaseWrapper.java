@@ -3,6 +3,7 @@ package models;
 import java.sql.Connection;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import play.db.Database;
 
@@ -12,15 +13,16 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 		super(db);
 	}
 
-	public int createRun(String name, String description, String distance, JSONArray route) throws Exception{
+	@Override
+	public int create(JSONObject args) throws Exception{
     	Connection conn = null;
     	try{
     		conn = db.getConnection();
-    		int routeId = createRoute(conn, distance);
-    		createCoordinates(conn, route);
+    		int routeId = createRoute(conn, (String) args.get("distance"));
+    		createCoordinates(conn, (JSONArray) args.get("route"));
     		int[] insertIdRange = super.getInsertIdRange(conn);
     		insertCoordinatesForRoute(conn, insertIdRange[0], insertIdRange[1], routeId);
-    		return createRun(conn, name, description, routeId);
+    		return createRun(conn, (String) args.get("name"), (String) args.get("description"), routeId);
 		}
     	catch(Exception e){
     		conn.rollback();
@@ -30,6 +32,16 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
     	finally{
 			closeConnection(conn);
 		}
+	}
+	
+	@Override
+	public void delete(int id) throws Exception{
+		throw new Exception("Method not implemented.");
+	}
+	
+	@Override
+	public JSONArray getAll() throws Exception{
+		throw new Exception("Method not implemented.");
 	}
 	
 	private int createRoute(Connection conn, String distance) throws Exception{

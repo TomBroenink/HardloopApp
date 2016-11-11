@@ -11,9 +11,7 @@ import java.sql.Statement;
 /**
  * Created by Henderikus on 2-11-2016.
  */
-public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wrapper{
-
-    private final int ACCESSLEVEL = 2;
+public class MonitorDatabaseWrapper extends PersonDatabaseWrapper{
 
     public MonitorDatabaseWrapper(Database db) {
         super(db);
@@ -24,9 +22,10 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wra
      * @param monitor
      * @throws Exception
      */
+    @Override
     public int create(JSONObject monitor) throws Exception{
         final String query = "INSERT INTO monitors (personalData_id, accessLevel) VALUES (?, ?) " ;
-        int personalDataId = super.create(monitor);
+        int personalDataId = super.createPerson(monitor);
         Connection con = null;
 
         if(personalDataId != 0){
@@ -46,16 +45,10 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wra
         }
     }
 
-    public JSONArray getAllMonitors() throws Exception{
+    @Override
+    public JSONArray getAll() throws Exception{
     	String sql = "select monitors.id, personalData_id, accessLevel, firstName, lastName, phoneNumber, username from monitors join personaldata on monitors.personalData_id = personaldata.id";
 		return super.executeQuery(sql, "Failed to retrieve monitors.");
-	}
-    
-    public int registerMonitor(String firstName, String lastName, String phoneNumber, String username, String password, String accessLevel) throws Exception{
-		String[] values = {firstName, lastName, phoneNumber, username, password};
-		String sql = super.addValues("insert into personaldata values(0,", values);
-		sql += "; insert into monitors values(0, last_insert_id(), '" + accessLevel + "');";
-		return super.executeInsertReturnId(sql, "Failed to register monitor.", db.getConnection(), false, true, true);
 	}
     
     public void assignClientToMonitor(String monitorId, String clientId, String monitorNumber) throws Exception{
@@ -68,4 +61,30 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper implements Wra
     	String sql = "select clients.id, personalData_id, firstName, lastName, phoneNumber, username from monitors_clients join clients on monitors_clients.clients_id = clients.id join personaldata on clients.personalData_id = personaldata.id where monitors_id = '" + monitorId + "'";
 		return super.executeQuery(sql, "Failed to retrieve clients for monitor.");
 	}
+    
+    /**
+     * Validate username and passwords. Password is validated by using PasswordUtil class
+     * When password or username is incorrect an exception is thrown
+     * @param username
+     * @param password
+     * @return JSONObject user
+     * @throws Exception
+     */
+    public JSONObject validateLogin(String username, String password) throws Exception{
+        final String query = "SELECT p.id, p.firstName, p.lastName, p.username, p.password, m.accessLevel " +
+                        "FROM personaldata p, monitors m " +
+                        "WHERE m.personalData_id = p.id " +
+                        "AND username = " + username + "";
+
+        JSONObject user = (JSONObject) super.executeQuery(query, "Invalid username or password").get(0);
+
+        final PasswordUtil passwordUtil = PasswordUtil.getInstance();
+
+        if(!user.isEmpty() && passwordUtil.validatePassword(password, user.get("password").toString())){
+            user.remove("password");
+            return user;
+        }else{
+            throw new Exception("Invalid username or password");
+        }
+    }
 }

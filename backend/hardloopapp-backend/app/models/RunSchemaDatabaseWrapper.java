@@ -1,5 +1,8 @@
 package models;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import play.db.Database;
 
 public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
@@ -8,10 +11,21 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 		super(db);
 	}
 	
-	public int createRunSchema(String name, String description) throws Exception{
-		String[] values = {name, description};
+	@Override
+	public int create(JSONObject args) throws Exception{
+		String[] values = {(String) args.get("name"), (String) args.get("description")};
 		String sql = super.addValues("insert into runschemas values(0,", values);
 		return super.executeInsertReturnId(sql, "Failed to create run schema.");
+	}
+	
+	@Override
+	public void delete(int id) throws Exception{
+		throw new Exception("Method not implemented.");
+	}
+	
+	@Override
+	public JSONArray getAll() throws Exception{
+		throw new Exception("Method not implemented.");
 	}
 	
 	public void assignRunToRunSchema(String runSchemaId, String runId, String day, String time) throws Exception{

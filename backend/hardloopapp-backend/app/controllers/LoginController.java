@@ -1,7 +1,8 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.PersonDatabaseWrapper;
+
+import models.MonitorDatabaseWrapper;
 import org.json.simple.JSONObject;
 import play.db.Database;
 import play.mvc.BodyParser;
@@ -28,7 +29,7 @@ public class LoginController extends Controller {
         final JsonNode json = request().body().asJson();
         Result result;
 
-        final PersonDatabaseWrapper wrapper = new PersonDatabaseWrapper(db);
+        final MonitorDatabaseWrapper wrapper = new MonitorDatabaseWrapper(db);
 
         try{
             JSONObject user = wrapper.validateLogin(json.get("username").toString(), json.get("password").asText());

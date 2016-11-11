@@ -1,5 +1,6 @@
 package models;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.db.Database;
 
@@ -11,12 +12,22 @@ import java.sql.Statement;
 /**
  * Created by Henderikus on 2-11-2016.
  */
-public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
+abstract class PersonDatabaseWrapper extends DatabaseWrapper{
 
     public PersonDatabaseWrapper(Database db) {
         super(db);
     }
-
+    
+    @Override
+    abstract int create(JSONObject args) throws Exception;
+    
+    @Override
+    public void delete(int id) throws Exception {
+        executeUpdate("delete from personaldata where id = '" + id + "'", "Failed to delete user.");
+    }
+    
+    @Override
+    abstract JSONArray getAll() throws Exception;
 
     /**
      * insert personal data using prepared statement
@@ -24,7 +35,7 @@ public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
      * @return int 0 or id inserted row
      * @throws Exception
      */
-    public int create(JSONObject person) throws Exception{
+    protected int createPerson(JSONObject person) throws Exception{
         System.out.println("jsonObject: " + person);
 
         final String query = "INSERT INTO personaldata (firstName, lastName, phoneNumber, username, password)"+
@@ -49,37 +60,6 @@ public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
         }
     }
 
-    @Override
-    public void delete(int id) throws Exception {
-        executeUpdate("delete from personaldata where id = '" + id + "'", "Failed to delete user.");
-    }
-
-    /**
-     * Validate username and passwords. Password is validated by using PasswordUtil class
-     * When password or username is incorrect an exception is thrown
-     * @param username
-     * @param password
-     * @return JSONObject user
-     * @throws Exception
-     */
-    public JSONObject validateLogin(String username, String password) throws Exception{
-        final String query = "SELECT p.id, p.firstName, p.lastName, p.username, p.password, m.accessLevel " +
-                        "FROM personaldata p, monitors m " +
-                        "WHERE m.personalData_id = p.id " +
-                        "AND username = " + username + "";
-
-        JSONObject user = (JSONObject) super.executeQuery(query, "Invalid username or password").get(0);
-
-        final PasswordUtil passwordUtil = PasswordUtil.getInstance();
-
-        if(!user.isEmpty() && passwordUtil.validatePassword(password, user.get("password").toString())){
-            user.remove("password");
-            return user;
-        }else{
-            throw new Exception("Invalid username or password");
-        }
-    }
-
     /**
      * execute preparedStatement and retun id
      * written for insert personaldata
@@ -98,10 +78,4 @@ public class PersonDatabaseWrapper extends DatabaseWrapper implements Wrapper{
         }
         return id;
     }
-
-    @Deprecated
-    public void deleteUser(String personalDataId) throws Exception{
-		this.delete(Integer.parseInt(personalDataId));
-	}
-
 }

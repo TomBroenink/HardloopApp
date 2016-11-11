@@ -24,34 +24,34 @@ public class WebSocketRequestHandler {
 			DatabaseWrapperFactory factory = new DatabaseWrapperFactory(db);
 			switch(requestAction){
 				case "getAllMonitors":
-					response.put("monitors", new MonitorDatabaseWrapper(db).getAllMonitors());
+					response.put("monitors", factory.getWrapper("monitor").getAll());
 					break;
 				case "getAllClients":
-					response.put("clients", new ClientDatabaseWrapper(db).getAllClients());
+					response.put("clients", factory.getWrapper("client").getAll());
 					break;
 				case "registerClient":
-					response.put("clientId", new ClientDatabaseWrapper(db).registerClient((String) args.get("firstName"), (String) args.get("lastName"), (String) args.get("phoneNumber"), (String) args.get("username"), (String) args.get("password")));
+					response.put("clientId", factory.getWrapper("client").create(args));
 					break;
 				case "deleteUser":
-					new PersonDatabaseWrapper(db).deleteUser((String) args.get("personalDataId"));
+					factory.getWrapper("person").delete(Integer.parseInt((String) args.get("personalDataId")));
 					break;
 				case "assignClientToMonitor":
-					new MonitorDatabaseWrapper(db).assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
+					((MonitorDatabaseWrapper) factory.getWrapper("monitor")).assignClientToMonitor((String) args.get("monitorId"), (String) args.get("clientId"), (String) args.get("monitorNumber"));
 					break;
 				case "createRunSchema":
-					response.put("runSchemaId", new RunSchemaDatabaseWrapper(db).createRunSchema((String) args.get("name"), (String) args.get("description")));
+					response.put("runSchemaId", factory.getWrapper("runSchema").create(args));
 					break;
 				case "assignRunSchemaToClient":
-					new ClientDatabaseWrapper(db).assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
+					((ClientDatabaseWrapper) factory.getWrapper("client")).assignRunSchemaToClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
 				case "registerMonitor":
 					response.put("monitorId", factory.getWrapper("monitor").create((JSONObject)args.get("person")));
 					break;
 				case "assignRunToRunSchema":
-					new RunSchemaDatabaseWrapper(db).assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
+					((RunSchemaDatabaseWrapper) factory.getWrapper("runSchema")).assignRunToRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"), (String) args.get("day"), (String) args.get("time"));
 					break;
 				case "createRun":
-					response.put("runId", new RunDatabaseWrapper(db).createRun((String) args.get("name"), (String) args.get("description"), (String) args.get("distance"), (JSONArray) args.get("route")));
+					response.put("runId", factory.getWrapper("run").create(args));
 					break;
 				case "createEmptyCareProfile":
 					response.put("profileId", factory.getWrapper("careProfile").create((JSONObject) args.get("careProfile")));
@@ -66,25 +66,25 @@ public class WebSocketRequestHandler {
 					response.put("careProfile", ((CareProfileWrapper)factory.getWrapper("careProfile")).getProfileWithProperties(Integer.parseInt(args.get("careProfileId").toString())));
 					break;
 				case "deleteRunFromRunSchema":
-					new RunSchemaDatabaseWrapper(db).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));
+					((RunSchemaDatabaseWrapper) factory.getWrapper("runSchema")).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));
 					break;
 				case "deleteRunSchemaFromClient":
-					new ClientDatabaseWrapper(db).deleteRunSchemaFromClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
+					((ClientDatabaseWrapper) factory.getWrapper("client")).deleteRunSchemaFromClient((String) args.get("clientId"), (String) args.get("runSchemaId"));
 					break;
 				case "getClientsForMonitor":
-					response.put("clients", new MonitorDatabaseWrapper(db).getClientsForMonitor((String) args.get("monitorId")));
+					response.put("clients", ((MonitorDatabaseWrapper)factory.getWrapper("monitor")).getClientsForMonitor((String) args.get("monitorId")));
 					break;
 				case "getAchievementsForClient":
-					response.put("achievements", new ClientDatabaseWrapper(db).getAchievementsForClient((String) args.get("clientId")));
+					response.put("achievements", ((ClientDatabaseWrapper) factory.getWrapper("client")).getAchievementsForClient((String) args.get("clientId")));
 					break;
 				case "getRunSchemasForClient":
-					response.put("runSchemas", new ClientDatabaseWrapper(db).getRunSchemasForClient((String) args.get("clientId")));
+					response.put("runSchemas", ((ClientDatabaseWrapper) factory.getWrapper("client")).getRunSchemasForClient((String) args.get("clientId")));
 					break;
 				case "getAllProfilesWithProperties":
-					response.put("careProfiles",((CareProfileWrapper)factory.getWrapper("careProfile")).getAllProfilesWithProperties());
+					response.put("careProfiles", factory.getWrapper("careProfile").getAll());
 					break;
 				case "getAllCareProperties":
-					response.put("careProperties", ((CarePropertyDatabaseWrapper) factory.getWrapper("careProperty")).getAll());
+					response.put("careProperties", factory.getWrapper("careProperty").getAll());
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
