@@ -8,35 +8,39 @@
  * Controller of yapp
  */
 angular.module('yapp')
-  .controller('LoginCtrl', function($scope, $location) {
+  .controller('LoginCtrl', function($scope, $location, $http) {
     $scope.submit = function() {
 		// Mock data voor test
-		var db = {responseCode : 200, email : 'tom_broenink@hotmail.com', password : 'test'}
+		var db = {responseCode : 200, username : 'tom_broenink@hotmail.com', password : 'test'}
 		
-		var email = $scope.Email;
-		var password = $scope.Password;
+		var username = $scope.username;
+		var password = $scope.password;
 		var userObject = {};
-		if (!email) {
+		if (!username) {
 			return alert('Emailadres is leeg!');
 		}
 		if (!password) {
 			return alert('Password is leeg!');
 		}
-		userObject = {email : email, password : password};
-		
-		// Stuur userObject met AJAX call naar server
-		// Server stuurt een responseCode en eventueel JSON object terug
-		// Lees responseCode uit header uit
-		// Als responseCode 200 is dan stuurt de server een JSON object terug met de gegevens van de gebruiker
-		// Stringify dit object en sla deze string op in localStorage
-		// Elders in de app kan de string uit localStorage gehaald worden en geparsed worden om gebruikt te kunnen worden.
-		
+		userObject = {username : username, password : password};
+/*		$http({
+			method:'post',
+			url:'/localhost:9002/login',
+			data: userObject,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.then(function(response) {
+			console.log(response);
+			//$location.path('/dashboard');
+			//return false;
+		});*/
+
 		if (db.responseCode == 200) {
 			// Sla hier de naam en accesslevel in sessionStorage op
-			if (email === db.email) {
+			if (username === db.username) {
 				if (password === db.password) {
 					alert('Succesvol ingelogd!');
-					localStorage.setItem('username', db.email);
+					localStorage.setItem('username', db.username);
 					localStorage.setItem('accessLevel', 1);
 					$location.path('/dashboard');
 					return false;

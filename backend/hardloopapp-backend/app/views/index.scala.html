@@ -28,7 +28,7 @@
 		<button type="button" onclick="getAllCareProperties()">Get All Care Properties</button>
 		<div id="response"></div>
 		<script>
-			var webSocket = new WebSocket("ws://localhost:9000/ws");
+			var webSocket = new WebSocket("ws://localhost:9002/ws");
 	        webSocket.onmessage = function(event){
 	        	document.getElementById("response").innerHTML = event.data;
 	        };
@@ -85,7 +85,7 @@
 	        }
 	        
 	        function getClientsForMonitor(){
-	        	webSocket.send('{"requestAction": "getClientsForMonitor","monitorId": "10"}');
+	        	webSocket.send('{"requestAction": "getClientsForMonitor","monitorId": "2"}');
 	        }
 	        
 	        function getAchievementsForClient(){

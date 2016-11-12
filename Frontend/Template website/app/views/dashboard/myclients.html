@@ -9,10 +9,32 @@
 	<!--<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Routes</a>-->
 	<h2>Mijn clienten<small></small></h2>
 	<div class="jumbotron">
-		<ul>
-			<li ng-repeat="clients in db">
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Gebruikersnaam</th>
+				<th>Voornaam</th>
+				<th>Achternaam</th>
+				<th>Telefoonnummer</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="clients in data.clients">
+			<td>
 				<a ui-sref="client({client: clients.username})">{{clients.username}}</a>
-			</li>
-		</ul>
+			</td>
+			<td>
+				{{clients.firstName}}
+			</td>
+			<td>
+				{{clients.lastName}}
+			</td>
+			<td>
+				{{clients.phoneNumber}}
+			</td>
+		</tr>
+		</tbody>
+		</table>
+		<button ng-click="init()">Klik</button>
 	</div>
 </div>
