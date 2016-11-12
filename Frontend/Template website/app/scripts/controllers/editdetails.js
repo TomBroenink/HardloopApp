@@ -8,8 +8,7 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('ClientCtrl', function($scope, $stateParams) {
-		var clientId = $stateParams.id;
+	.controller('EditDetailsCtrl', function($scope, $location, $stateParams) {
 		var accessLevel = localStorage.getItem('accessLevel');
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
 		webSocket.onmessage = function(event) {
@@ -17,14 +16,11 @@ angular.module('yapp')
 			$scope.data = response;
 			console.log($scope.data);
 		}
-		$scope.init = function () {
-			// Doe hier de call om de gegevens van de client op te halen
-			// webSocket.send('{"requestAction": "getAllClients"}');
-		}
+/*		$scope.init = function () {
+			webSocket.send('{"requestAction": "getAllClients"}');
+		}*/
 
 		$scope.back = function() {
 			window.history.back();
 		}
-
-		console.log($stateParams);
 	});

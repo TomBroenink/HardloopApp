@@ -51,6 +51,12 @@ angular
 				templateUrl: 'views/dashboard/mydetails.html',
 				controller: 'MyDetailsCtrl'
 			})
+			.state('editdetails', {
+				url: '/editdetails',
+				parent: 'dashboard', 
+				templateUrl: 'views/dashboard/editdetails.html',
+				controller: 'EditDetailsCtrl'
+			})
 			.state('myclients', {
 				url: '/myclients',
 				parent: 'dashboard',
