@@ -22,8 +22,8 @@ angular.module('yapp')
 		if (!password) {
 			return alert('Password is leeg!');
 		}
-		userObject = {username : username, password : password};
-/*		$http({
+		userObject = {"username" : username, "password" : password};
+		$http({
 			method:'post',
 			url:'/localhost:9002/login',
 			data: userObject,
@@ -33,7 +33,7 @@ angular.module('yapp')
 			console.log(response);
 			//$location.path('/dashboard');
 			//return false;
-		});*/
+		});
 
 		if (db.responseCode == 200) {
 			// Sla hier de naam en accesslevel in sessionStorage op

@@ -6,10 +6,11 @@
 
 
 <div>
-	<!--<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Routes</a>-->
+	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
+	</div>
 	<h2>Client<small></small></h2>
 	<div class="jumbotron">
-		Deze pagina geeft de gegevens van de client {{client}} weer.<br/>
+		Deze pagina geeft de gegevens van de client {{id}} weer.<br/>
 		Deze client heeft Access Level {{accessLevel}}
 	</div>
 </div>

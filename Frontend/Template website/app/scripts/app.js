@@ -58,15 +58,16 @@ angular
 				controller: 'MyClientsCtrl'
 			})
 			.state('client', {
-				url: '/clients/:client',
+				url: '/clients/:id',
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/client.html',
 				controller: 'ClientCtrl'
 			})
-			.state('reports', {
-				url: '/reports',
+			.state('routes', {
+				url: '/routes',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/reports.html'
+				templateUrl: 'views/dashboard/routes.html',
+				controller: 'RoutesCtrl'
 			})
 			.state('register', {
 				url: '/register',

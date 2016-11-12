@@ -21,7 +21,7 @@
 		<tbody>
 		<tr ng-repeat="clients in data.clients">
 			<td>
-				<a ui-sref="client({client: clients.username})">{{clients.username}}</a>
+				<a ui-sref="client({id: clients.id})">{{clients.username}}</a>
 			</td>
 			<td>
 				{{clients.firstName}}
