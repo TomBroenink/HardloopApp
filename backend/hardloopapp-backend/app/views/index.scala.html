@@ -49,15 +49,15 @@
 	        }
 	        
 	        function registerClient(){
-	        	webSocket.send('{"requestAction": "registerClient","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomClient","password": "tom", "careProfileId": "1"}');
+	        	webSocket.send('{"requestAction": "registerClient","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomClient","password": "tom", "careProfileId": "2"}');
 	        }
 	        
 	        function removeUser(){
-	        	webSocket.send('{"requestAction": "deleteUser", "personalDataId": "6"}');
+	        	webSocket.send('{"requestAction": "deleteUser", "personalDataId": "18"}');
 	        }
 	        
 	        function assignClientToMonitor(){
-	        	webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "8","clientId": "7", "monitorNumber": "1"}');
+	        	webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "2","clientId": "7", "monitorNumber": "1"}');
 	        }
 	        
 	        function createRunSchema(){
@@ -65,11 +65,11 @@
 	        }
 	        
 	        function assignRunSchemaToClient(){
-	        	webSocket.send('{"requestAction": "assignRunSchemaToClient","clientId": "7","runSchemaId": "15"}');
+	        	webSocket.send('{"requestAction": "assignRunSchemaToClient","clientId": "7","runSchemaId": "2"}');
 	        }
 	        
 	        function assignRunToRunSchema(){
-	        	webSocket.send('{"requestAction": "assignRunToRunSchema","runSchemaId": "15","runId": "1","day": "2","time": "15:00:00"}');
+	        	webSocket.send('{"requestAction": "assignRunToRunSchema","runSchemaId": "2","runId": "1","day": "2","time": "15:00:00"}');
 	        }
 	        
 	        function createRun(){

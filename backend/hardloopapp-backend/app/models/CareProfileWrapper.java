@@ -22,13 +22,13 @@ public class CareProfileWrapper extends DatabaseWrapper{
     @Override
     public int create(JSONObject careProfile) throws Exception{
         final String[] values = {careProfile.get("name").toString()};
-        final String query = addValues("INSERT INTO care_profiles VALUES(0,", values);
-        return executeInsertReturnId(query, "Failed to save CareProfile!");
+        final String query = "INSERT INTO care_profiles VALUES(0,?);";
+        return executeInsertReturnId(query, values, "Failed to save CareProfile!");
     }
 
     @Override
     public void delete(int id) throws Exception{
-        super.executeUpdate("DELETE FROM care_profiles where id = " + id, "Failed to delete profile! It could still be in use.");
+        super.executeUpdate("DELETE FROM care_profiles where id = ?;", new String[]{String.valueOf(id)}, "Failed to delete profile! It could still be in use.");
     }
     
     /**
@@ -43,7 +43,7 @@ public class CareProfileWrapper extends DatabaseWrapper{
 
         final JSONArray returnValue = new JSONArray();
 
-        JSONArray result = super.executeQuery(query, "Something went wrong!");
+        JSONArray result = super.executeQuery(query, null, "Something went wrong!");
 
         for(Object o : result){
             JSONObject pr = (JSONObject) o;
@@ -68,9 +68,9 @@ public class CareProfileWrapper extends DatabaseWrapper{
             if(!this.hasProperty(careProfileId, Integer.parseInt(propertyId))){
 
                 String[] values = {Integer.toString(careProfileId), propertyId, property.get("applies").toString()};
-                String query = addValues("INSERT INTO care_profile_properties VALUES(", values);
+                String query = "INSERT INTO care_profile_properties VALUES(?,?,?);";
 
-                super.executeUpdate(query, "Property with id: " + propertyId + " could not be stored!" );
+                super.executeUpdate(query, values, "Property with id: " + propertyId + " could not be stored!" );
             }else{
                 throw new Exception("Care profile: "+ careProfileId +"  already contains the property with id " + propertyId +"!");
             }
@@ -86,11 +86,11 @@ public class CareProfileWrapper extends DatabaseWrapper{
     public JSONObject getProfileWithProperties(int profileId) throws Exception{
         String query = "SELECT cp.id as cp_id, cp.name as cp_name, prop.id as prop_id, prop.name as prop_name, prop.description as prop_des, cpp.applies  " +
                 "FROM care_profiles cp, care_profile_properties cpp, care_properties prop  " +
-                "WHERE cp.id = "+ profileId + " " +
+                "WHERE cp.id = ? " +
                 "AND cpp.care_profile_id = cp.id " +
                 "AND cpp.care_property_id = prop.id";
 
-        JSONArray result = super.executeQuery(query, "The given CareProfile with id " + profileId + " could not be found!");
+        JSONArray result = super.executeQuery(query, new String[]{String.valueOf(profileId)}, "The given CareProfile with id " + profileId + " could not be found!");
 
         if(result.isEmpty()){
             throw new Exception("CareProfile with id: " + profileId + " does not exist!");
@@ -147,10 +147,10 @@ public class CareProfileWrapper extends DatabaseWrapper{
      */
     private boolean hasProperty(int careProfileId, int carePropertyId) throws Exception{
         String query = "SELECT * FROM care_profile_properties " +
-                "WHERE care_profile_id = " + careProfileId + " " +
-                "AND care_property_id = " + carePropertyId;
+                "WHERE care_profile_id = ? " +
+                "AND care_property_id = ?";
 
-        JSONArray results = super.executeQuery(query, "");
+        JSONArray results = super.executeQuery(query, new String[]{String.valueOf(careProfileId), String.valueOf(carePropertyId)}, "");
 
         if(results.isEmpty()){
             return false;

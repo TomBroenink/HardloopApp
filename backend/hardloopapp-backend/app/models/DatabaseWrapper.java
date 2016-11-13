@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
@@ -23,24 +24,26 @@ abstract class DatabaseWrapper{
     abstract void delete(int id) throws Exception;
     
     abstract JSONArray getAll() throws Exception;
-
-    protected int executeInsertReturnId(String sql, String errorMessage) throws Exception{
-    	return executeInsertReturnId(sql, errorMessage, db.getConnection(), true, true, true);
+    
+    protected int executeInsertReturnId(String sql, String[] values, String errorMessage) throws Exception{
+    	return executeInsertReturnId(sql, values, errorMessage, db.getConnection(), true, true, true);
     }
-
-    protected int executeInsertReturnId(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
-		ResultSet rs = null;
-		Statement statement = null;
+    
+    protected int executeInsertReturnId(String sql, String[] values, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
+    	ResultSet rs = null;
+    	PreparedStatement statement = null;
     	try{
 			conn.setAutoCommit(autoCommit);
-			statement = conn.createStatement();
-			if(statement.executeUpdate(sql) == 0){
+			statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			addValues(statement, values);
+			if(statement.executeUpdate() == 0){
 				throw new Exception("Update count == 0.");
 			}
 			int id = 0;
-			rs = statement.executeQuery("select last_insert_id() as id;");
-			rs.next();
-			id = rs.getInt("id");
+			rs = statement.getGeneratedKeys();
+			if(rs.next()){
+                id = rs.getInt(1);
+            }
 			if(!autoCommit && commit){
 				conn.commit();
 			}
@@ -62,16 +65,17 @@ abstract class DatabaseWrapper{
 		}
 	}
     
-    protected void executeUpdate(String sql, String errorMessage) throws Exception{
-    	executeUpdate(sql, errorMessage, db.getConnection(), true, true, true);
+    protected void executeUpdate(String sql, String[] values, String errorMessage) throws Exception{
+    	executeUpdate(sql, values, errorMessage, db.getConnection(), true, true, true);
     }
     
-    protected void executeUpdate(String sql, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
-    	Statement statement = null;
+    protected void executeUpdate(String sql, String[] values, String errorMessage, Connection conn, boolean autoCommit, boolean closeConnection, boolean commit) throws Exception{
+    	PreparedStatement statement = null;
     	try{
 			conn.setAutoCommit(autoCommit);
-			statement = conn.createStatement();
-		    if(statement.executeUpdate(sql) == 0){
+			statement = conn.prepareStatement(sql);
+			addValues(statement, values);
+		    if(statement.executeUpdate() == 0){
 		    	throw new Exception("Update count == 0.");
 		    }
 		    if(!autoCommit && commit){
@@ -93,14 +97,15 @@ abstract class DatabaseWrapper{
 		}
 	}
 	
-	protected JSONArray executeQuery(String sql, String errorMessage) throws Exception{
+	protected JSONArray executeQuery(String sql, String[] values, String errorMessage) throws Exception{
 		Connection conn = null;
 		ResultSet rs = null;
-		Statement statement = null;
+		PreparedStatement statement = null;
 		try{
 			conn = db.getConnection();
-			statement = conn.createStatement();
-			rs = statement.executeQuery(sql);
+			statement = conn.prepareStatement(sql);
+			addValues(statement, values);
+			rs = statement.executeQuery();
 		    return resultToJSONArray(rs);
 		}
 		catch(Exception e){
@@ -138,39 +143,11 @@ abstract class DatabaseWrapper{
 		return columnNames;
 	}
 	
-	protected String addValues(String sql, String[] args){
-		for(int i = 0; i < args.length; i++){
-			String arg = args[i];
-			if(arg == null || arg.isEmpty()){
-				sql += "null";
+	protected void addValues(PreparedStatement statement, String[] values) throws Exception{
+		if(values != null){
+			for(int i = 0; i < values.length; i++){
+				statement.setString(i + 1, values[i]);
 			}
-			else{
-				sql += "'" + arg + "'"; 
-			}
-			if(i == (args.length - 1)){
-				sql += ")";
-			}
-			else{
-				sql += ",";
-			}
-		}
-		return sql;
-	}
-	
-	protected int[] getInsertIdRange(Connection conn) throws Exception{
-		ResultSet rs = null;
-		Statement statement = null;
-		try{
-			statement = conn.createStatement();
-			rs = statement.executeQuery("select last_insert_id() as startId, row_count() as insertCount;");
-			rs.next();
-			int startId = rs.getInt("startId");
-			int endId = startId + rs.getInt("insertCount") - 1;
-			return new int[]{startId, endId};
-		}
-		finally {
-			closeResultSet(rs);
-    		closeStatement(statement);
 		}
 	}
 	

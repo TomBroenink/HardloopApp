@@ -16,18 +16,18 @@ public class CarePropertyDatabaseWrapper extends DatabaseWrapper{
     @Override
     public int create(JSONObject careProperty) throws Exception{
         final String[] values = {careProperty.get("name").toString(), careProperty.get("description").toString()};
-        final String query = addValues("INSERT INTO care_properties VALUES(0,", values);
-        return super.executeInsertReturnId(query, "Something went wrong while saving care property! Please try again later.");
+        final String query = "INSERT INTO care_properties VALUES(0,?,?);";
+        return super.executeInsertReturnId(query, values, "Something went wrong while saving care property! Please try again later.");
     }
 
     @Override
     public void delete(int id) throws Exception {
-        super.executeUpdate("DELETE FROM care_properties where id = " + id, "Failed to delete property! It could still be in use.");
+        super.executeUpdate("DELETE FROM care_properties where id = ?;", new String[]{String.valueOf(id)}, "Failed to delete property! It could still be in use.");
     }
 
     @Override
     public JSONArray getAll() throws Exception{
         String query = "SELECT * FROM care_properties";
-        return super.executeQuery(query, "Something went wrong!");
+        return super.executeQuery(query, null, "Something went wrong!");
     }
 }

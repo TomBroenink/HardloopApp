@@ -23,7 +23,7 @@ abstract class PersonDatabaseWrapper extends DatabaseWrapper{
     
     @Override
     public void delete(int id) throws Exception {
-        executeUpdate("delete from personaldata where id = '" + id + "'", "Failed to delete user.");
+        executeUpdate("delete from personaldata where id = ?;", new String[]{String.valueOf(id)}, "Failed to delete user.");
     }
     
     @Override

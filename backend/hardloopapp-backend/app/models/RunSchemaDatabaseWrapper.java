@@ -14,8 +14,8 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 	@Override
 	public int create(JSONObject args) throws Exception{
 		String[] values = {(String) args.get("name"), (String) args.get("description")};
-		String sql = super.addValues("insert into runschemas values(0,", values);
-		return super.executeInsertReturnId(sql, "Failed to create run schema.");
+		String sql = "insert into runschemas values(0,?,?);";
+		return super.executeInsertReturnId(sql, values, "Failed to create run schema.");
 	}
 	
 	@Override
@@ -30,11 +30,13 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 	
 	public void assignRunToRunSchema(String runSchemaId, String runId, String day, String time) throws Exception{
 		String[] values = {runSchemaId, runId, day, time};
-		String sql = super.addValues("insert into runschemas_runs values(", values);
-		super.executeUpdate(sql, "Failed to assign run to run schema.");
+		String sql = "insert into runschemas_runs values(?,?,?,?);";
+		super.executeUpdate(sql, values, "Failed to assign run to run schema.");
 	}
 	
 	public void deleteRunFromRunSchema(String runSchemaId, String runId) throws Exception{
-		executeUpdate("delete from runschemas_runs where runSchemas_id = '" + runSchemaId + "' and runs_id = '" + runId + "'", "Failed to delete run from run schema.");
+		String[] values = {runSchemaId, runId};
+		String sql = "delete from runschemas_runs where runSchemas_id = ? and runs_id = ?;";
+		executeUpdate(sql, values, "Failed to delete run from run schema.");
 	}
 }
