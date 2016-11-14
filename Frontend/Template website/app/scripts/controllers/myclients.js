@@ -9,7 +9,6 @@
  */
 angular.module('yapp')
 	.controller('MyClientsCtrl', function($scope, $location) {
-		var response;
 		//var monitorId = localStorage.getItem('monitorId');
 		var monitorId = "2";
 		$scope.data = 'Data wordt opgehaald...'
@@ -18,19 +17,31 @@ angular.module('yapp')
 			webSocket.send('{"requestAction":"getClientsForMonitor","monitorId": "2"}');
 		}
 		webSocket.onmessage = function(event) {
-			response = JSON.parse(event.data);
-			if (response.clients.length == 0) {
-				$scope.noClients = 'Je hebt nog geen clienten!';
-			} else {
-				$scope.data = response;
+			var response = JSON.parse(event.data);
+			if (response.responseAction == 'deleteClientFromMonitor') {
+				apply();
 			}
+			if (response.responseAction == 'getClientsForMonitor') {
+				getClients(response);
+			}
+			function getClients(response) {
+				console.log(response);
+				if (response.clients.length == 0) {
+					$scope.noClients = 'Je hebt nog geen clienten!';
+				} else {
+					$scope.data = response;
+				}
+				apply();
+			}
+		}
+		function apply() {
+			console.log('doe apply');
 			$scope.$apply();
 		}
-		$scope.disconnectClient= function(id, client) {
+		$scope.disconnectClient = function(id, client) {
 			if (confirm('Weet je zeker dat je ' + client + ' wilt ontkoppelen?') === true) {
-				console.log('ja doe maar');
+				webSocket.send('{"requestAction":"deleteClientFromMonitor","monitorId": "2","clientId" : "' + id + '"}');
 			} else {
-				console.log('nee doe maar niet');
 				return;
 			}
 		}

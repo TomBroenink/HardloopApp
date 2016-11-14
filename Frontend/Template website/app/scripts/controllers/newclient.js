@@ -31,9 +31,8 @@ angular.module('yapp')
 		$scope.back = function() {
 			window.history.back();
 		}
-		$scope.connectClient = function(id, name) {
-			var clientId = id.toString();
-			webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "8","clientId": clientId, "monitorNumber": "1"}');
+		$scope.connectClient = function(clientId, name) {
+			webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "2","clientId": "' + clientId + '", "monitorNumber": "1"}');
 			alert('Client ' + name + ' is succesvol gekoppeld!')
 		}
 	});
