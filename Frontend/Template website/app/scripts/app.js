@@ -12,8 +12,11 @@ angular
 	.module('yapp', [
 		'ui.router',
 		'ngAnimate',
+		'ui.map',
 	])
+
 	.config(function($stateProvider, $urlRouterProvider) {
+		var myAppModule = angular.module('app.ui-map', ['ui.map']);
 		var userLoggedIn;
 		if (localStorage.length == 0) {
 			userLoggedIn = false;
@@ -97,5 +100,13 @@ angular
 				url: '/logout',
 				template: '',
 				controller: 'LogoutCtrl'
-			});
-	});
+			})
+			.state('maps', {
+				url: '/maps',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/maps.html',
+				controller: 'MapsCtrl'
+			})	
+			
+	
+});
