@@ -6,7 +6,8 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 #map {
-        height: 400px;
+        height: 600px;
+        width: 1000px;
       }
 body {
   margin: 0;
