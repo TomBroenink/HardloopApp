@@ -10,6 +10,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
+  filters,
   "com.googlecode.json-simple" % "json-simple" % "1.1.1",
   "mysql" % "mysql-connector-java" % "5.1.35",
   "org.jasypt" % "jasypt" % "1.9.2"
