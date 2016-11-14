@@ -44,9 +44,13 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 		return super.executeQuery(sql, null, "Failed to retrieve runs.");
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
     public JSONObject getById(String runId) throws Exception{
-    	throw new Exception("Method not implemented.");
+		String sql = "select * from runs where id = ?;";
+		JSONObject run = (JSONObject) super.executeQuery(sql, new String[]{runId}, "Failed to retrieve run.").get(0);
+		run.put("route", getRouteForRun((String) run.get("routes_id")));
+		return run;
     }
 	
 	public JSONArray getRouteForRun(String routeId) throws Exception{
