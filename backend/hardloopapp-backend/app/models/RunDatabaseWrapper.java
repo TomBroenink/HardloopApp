@@ -40,7 +40,8 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 	
 	@Override
 	public JSONArray getAll() throws Exception{
-		throw new Exception("Method not implemented.");
+		String sql = "select runs.id, name, description, routes_id, distance from runs join routes on runs.routes_id = routes.id;";
+		return super.executeQuery(sql, null, "Failed to retrieve runs.");
 	}
 	
 	private int createRoute(Connection conn, String distance) throws Exception{

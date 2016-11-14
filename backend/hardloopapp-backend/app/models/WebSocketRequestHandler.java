@@ -92,6 +92,12 @@ public class WebSocketRequestHandler {
 				case "getMonitorById":
 					response.put("client", ((MonitorDatabaseWrapper) factory.getWrapper("monitor")).getMonitorById((String) args.get("monitorId")));
 					break;
+				case "getAllRuns":
+					response.put("runs", factory.getWrapper("run").getAll());
+					break;
+				case "deleteClientFromMonitor":
+					((MonitorDatabaseWrapper) factory.getWrapper("monitor")).deleteClientFromMonitor((String) args.get("monitorId"), (String) args.get("clientId"));
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}

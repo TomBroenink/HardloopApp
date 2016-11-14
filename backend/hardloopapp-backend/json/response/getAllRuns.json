@@ -1,0 +1,16 @@
+{
+	"responseAction": "getAllRuns",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"runs":
+	[
+		{
+			"id": "",
+			"name": "",
+			"description":"",
+			"routes_id":"",
+			"distance":""
+		}
+	]
+}
