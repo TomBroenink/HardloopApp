@@ -8,7 +8,7 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('MyClientsCtrl', function($scope, $location) {
+	.controller('MyClientsCtrl', function($scope, $location, $state) {
 		//var monitorId = localStorage.getItem('monitorId');
 		var monitorId = "2";
 		$scope.data = 'Data wordt opgehaald...'
@@ -19,13 +19,12 @@ angular.module('yapp')
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
 			if (response.responseAction == 'deleteClientFromMonitor') {
-				apply();
+				$state.reload();
 			}
 			if (response.responseAction == 'getClientsForMonitor') {
 				getClients(response);
 			}
 			function getClients(response) {
-				console.log(response);
 				if (response.clients.length == 0) {
 					$scope.noClients = 'Je hebt nog geen clienten!';
 				} else {
@@ -35,7 +34,6 @@ angular.module('yapp')
 			}
 		}
 		function apply() {
-			console.log('doe apply');
 			$scope.$apply();
 		}
 		$scope.disconnectClient = function(id, client) {

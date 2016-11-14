@@ -31,12 +31,20 @@ angular.module('yapp')
 			headers: {'Content-Type': 'application/json'}
 		})
 		.then(function(response) {
-			console.log(response);
-			//$location.path('/dashboard');
-			//return false;
+			if (response.status == 200) {
+				var user = response.data;
+				console.log(user);
+				localStorage.setItem('firstName', user.firstName);
+				localStorage.setItem('lastName', user.lastName);
+				localStorage.setItem('accessLevel', user.accessLevel);
+				localStorage.setItem('monitorId', user.id);
+				localStorage.setItem('username', user.username);
+				$location.path('/dashboard');
+				return false;
+			}
 		});
 
-		if (db.responseCode == 200) {
+/*		if (db.responseCode == 200) {
 			// Sla hier de naam en accesslevel in sessionStorage op
 			if (username === db.username) {
 				if (password === db.password) {
@@ -51,6 +59,6 @@ angular.module('yapp')
 			}
 		} else {
 			alert('Fout bij inloggen');
-		}
+		}*/
     }
   });
