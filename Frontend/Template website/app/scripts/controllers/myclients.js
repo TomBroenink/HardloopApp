@@ -9,13 +9,21 @@
  */
 angular.module('yapp')
 	.controller('MyClientsCtrl', function($scope, $location) {
+		var response;
+		//var monitorId = localStorage.getItem('monitorId');
+		var monitorId = "2";
+		$scope.data = 'Data wordt opgehaald...'
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
-		webSocket.onmessage = function(event) {
-			var response = JSON.parse(event.data);
-			$scope.data = response;
-			console.log($scope.data);
+		webSocket.onopen = function(event) {
+			webSocket.send('{"requestAction":"getClientsForMonitor","monitorId": "2"}');
 		}
-		$scope.init = function () {
-			webSocket.send('{"requestAction": "getAllClients"}');
+		webSocket.onmessage = function(event) {
+			response = JSON.parse(event.data);
+			if (response.clients.length == 0) {
+				$scope.noClients = 'Je hebt nog geen clienten!';
+			} else {
+				$scope.data = response;
+			}
+			$scope.$apply();
 		}
 	});

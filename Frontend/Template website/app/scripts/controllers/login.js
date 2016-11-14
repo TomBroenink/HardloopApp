@@ -9,6 +9,7 @@
  */
 angular.module('yapp')
   .controller('LoginCtrl', function($scope, $location, $http) {
+  	console.log($http);
     $scope.submit = function() {
 		// Mock data voor test
 		var db = {responseCode : 200, username : 'tom_broenink@hotmail.com', password : 'test'}
@@ -25,9 +26,9 @@ angular.module('yapp')
 		userObject = {"username" : username, "password" : password};
 		$http({
 			method:'post',
-			url:'/localhost:9002/login',
+			url:'http://localhost:9002/login',
 			data: userObject,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			headers: {'Content-Type': 'application/json'}
 		})
 		.then(function(response) {
 			console.log(response);
