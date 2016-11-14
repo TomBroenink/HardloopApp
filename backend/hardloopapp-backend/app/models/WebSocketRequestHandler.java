@@ -104,6 +104,9 @@ public class WebSocketRequestHandler {
 				case "getRunsForRunSchema":
 					response.put("runs", ((RunSchemaDatabaseWrapper) factory.getWrapper("runSchema")).getRunsForRunSchema((String) args.get("runSchemaId")));
 					break;
+				case "getAllRunSchemas":
+					response.put("runSchemas", factory.getWrapper("runSchema").getAll());
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}

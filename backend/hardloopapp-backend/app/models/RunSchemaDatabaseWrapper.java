@@ -25,7 +25,8 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 	
 	@Override
 	public JSONArray getAll() throws Exception{
-		throw new Exception("Method not implemented.");
+		String sql = "select id, name, description, count(*) as runCount from runschemas join runschemas_runs on runschemas.id = runschemas_runs.runSchemas_id group by id;";
+		return super.executeQuery(sql, null, "Failed to retrieve run schemas.");
 	}
 	
 	public void assignRunToRunSchema(String runSchemaId, String runId, String day, String time) throws Exception{
