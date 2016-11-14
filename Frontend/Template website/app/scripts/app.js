@@ -97,5 +97,11 @@ angular
 				url: '/logout',
 				template: '',
 				controller: 'LogoutCtrl'
+			})
+			.state('maps', {
+				url: '/maps',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/maps.html',
+				controller: 'MapsCtrl'
 			});
 	});
