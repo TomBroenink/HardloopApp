@@ -6,10 +6,11 @@
 
 
 <div>
-	<h2>Mijn clienten<small></small></h2>
+	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
+	</div>
+	<h2>Nieuwe client koppelen<small></small></h2>
 	<div class="jumbotron">
-		<a ui-sref="newclient" class="pull-left btn btn-primary btn-outline btn-rounded">Nieuwe client koppelen</a><br/><br/>
-		<h4><i>{{noClients}}</i></h4>
+		<h4>Hier kun je een nieuwe client koppelen.<br/>Klik op de gebruikersnaam van een client om deze aan jezelf te koppelen.</h4>
 		<table class="table table-hover">
 		<thead>
 			<tr>
@@ -22,7 +23,7 @@
 		<tbody>
 		<tr ng-repeat="clients in data.clients">
 			<td>
-				<a ui-sref="client({id: clients.id})">{{clients.username}}</a>
+				<a ng-click="connectClient(clients.id, clients.username)">{{clients.username}}</a>
 			</td>
 			<td>
 				{{clients.firstName}}
