@@ -98,6 +98,15 @@ public class WebSocketRequestHandler {
 				case "deleteClientFromMonitor":
 					((MonitorDatabaseWrapper) factory.getWrapper("monitor")).deleteClientFromMonitor((String) args.get("monitorId"), (String) args.get("clientId"));
 					break;
+				case "getRouteForRun":
+					response.put("route", ((RunDatabaseWrapper) factory.getWrapper("run")).getRouteForRun((String) args.get("routeId")));
+					break;
+				case "getRunsForRunSchema":
+					response.put("runs", ((RunSchemaDatabaseWrapper) factory.getWrapper("runSchema")).getRunsForRunSchema((String) args.get("runSchemaId")));
+					break;
+				case "getAllRunSchemas":
+					response.put("runSchemas", factory.getWrapper("runSchema").getAll());
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}

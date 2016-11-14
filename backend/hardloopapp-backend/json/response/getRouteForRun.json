@@ -1,0 +1,14 @@
+{
+	"responseAction": "getRouteForRun",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"route":
+	[
+		{
+			"orderNumber": "",
+			"lat": "",
+			"long":""
+		}
+	]
+}

@@ -82,7 +82,7 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper{
      * @throws Exception
      */
     public JSONObject validateLogin(String username, String password) throws Exception{
-        final String query = "SELECT p.id, p.firstName, p.lastName, p.username, p.password, m.accessLevel " +
+        final String query = "SELECT p.id as personId, p.firstName, p.lastName, p.username, p.password, m.id as monitorId, m.accessLevel " +
                         "FROM personaldata p, monitors m " +
                         "WHERE m.personalData_id = p.id " +
                         "AND username = ?;";

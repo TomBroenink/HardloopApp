@@ -25,7 +25,8 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 	
 	@Override
 	public JSONArray getAll() throws Exception{
-		throw new Exception("Method not implemented.");
+		String sql = "select id, name, description, count(*) as runCount from runschemas join runschemas_runs on runschemas.id = runschemas_runs.runSchemas_id group by id;";
+		return super.executeQuery(sql, null, "Failed to retrieve run schemas.");
 	}
 	
 	public void assignRunToRunSchema(String runSchemaId, String runId, String day, String time) throws Exception{
@@ -38,5 +39,10 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 		String[] values = {runSchemaId, runId};
 		String sql = "delete from runschemas_runs where runSchemas_id = ? and runs_id = ?;";
 		executeUpdate(sql, values, "Failed to delete run from run schema.");
+	}
+	
+	public JSONArray getRunsForRunSchema(String runSchemaId) throws Exception{
+		String sql = "select time, day, runs_id, name, description, routes_id, distance from runschemas_runs join runs on runschemas_runs.runs_id = runs.id join routes on runs.routes_id = routes.id where runSchemas_id = ? order by day, time;";
+		return super.executeQuery(sql, new String[]{runSchemaId}, "Failed to retrieve runs for run schema.");
 	}
 }

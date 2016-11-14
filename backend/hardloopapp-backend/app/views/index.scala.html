@@ -30,9 +30,12 @@
 		<button type="button" onclick="getMonitorById()">Get monitor by id</button>
 		<button type="button" onclick="getAllRuns()">Get all runs</button>
 		<button type="button" onclick="deleteClientFromMonitor()">Delete client from monitor</button>
+		<button type="button" onclick="getRouteForRun()">Get route for run</button>
+		<button type="button" onclick="getRunsForRunSchema()">Get runs for run schema</button>
+		<button type="button" onclick="getAllRunSchemas()">Get all run schemas</button>
 		<div id="response"></div>
 		<script>
-			var webSocket = new WebSocket("ws://localhost:9002/ws");
+			var webSocket = new WebSocket("ws://localhost:9000/ws");
 	        webSocket.onmessage = function(event){
 	        	document.getElementById("response").innerHTML = event.data;
 	        };
@@ -113,6 +116,15 @@
 			}
 			function deleteClientFromMonitor(){
 				webSocket.send('{"requestAction": "deleteClientFromMonitor","monitorId": "2","clientId": "9"}');
+			}
+			function getRouteForRun(){
+				webSocket.send('{"requestAction": "getRouteForRun","routeId": "3"}');
+			}
+			function getRunsForRunSchema(){
+				webSocket.send('{"requestAction": "getRunsForRunSchema","runSchemaId": "2"}');
+			}
+			function getAllRunSchemas(){
+				webSocket.send('{"requestAction": "getAllRunSchemas"}');
 			}
 		</script>
 	</body>
