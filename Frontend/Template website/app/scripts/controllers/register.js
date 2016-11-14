@@ -10,6 +10,20 @@
 
 angular.module('yapp')
 	.controller('RegisterCtrl', function($scope) {
+		var response;
+
+		var webSocket = new WebSocket("ws://localhost:9002/ws");
+		webSocket.onopen = function(event) {
+			webSocket.send('{"requestAction": "getAllCareProperties"}');
+		}
+		webSocket.onmessage = function(event) {
+			response = JSON.parse(event.data);
+			console.log(response.careProperties);
+			$scope.data = response.careProperties;
+			$scope.$apply();
+		}
+
+		//$scope.json = jsonFile;
 		$scope.submit = function() {
 			$scope.createJson();
 			console.log(jsonFile);
@@ -25,16 +39,5 @@ angular.module('yapp')
 				"profile" : $scope.profile
 			}
 		}
-		$scope.fillProfile1 = function() {
-			$scope.profile = "Informatie over basis zorgprofiel 1";
-		}
-		$scope.fillProfile2 = function() {
-			$scope.profile = "Informatie over basis zorgprofiel 2";
-		}
-		$scope.fillProfile3 = function() {
-			$scope.profile = "Informatie over basis zorgprofiel 3";
-		}
-		//$scope.json = jsonFile;
-		
 	
 	});
