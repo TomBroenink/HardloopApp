@@ -1,0 +1,5 @@
+{
+  "requestAction": "deleteClientFromMonitor",
+  "monitorId": "",
+  "clientId": ""
+}
