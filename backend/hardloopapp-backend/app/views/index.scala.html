@@ -33,6 +33,7 @@
 		<button type="button" onclick="getRouteForRun()">Get route for run</button>
 		<button type="button" onclick="getRunsForRunSchema()">Get runs for run schema</button>
 		<button type="button" onclick="getAllRunSchemas()">Get all run schemas</button>
+		<button type="button" onclick="getRunSchemaById()">Get run schema by id</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -125,6 +126,9 @@
 			}
 			function getAllRunSchemas(){
 				webSocket.send('{"requestAction": "getAllRunSchemas"}');
+			}
+			function getRunSchemaById(){
+				webSocket.send('{"requestAction": "getRunSchemaById","runSchemaId": "2"}');
 			}
 		</script>
 	</body>
