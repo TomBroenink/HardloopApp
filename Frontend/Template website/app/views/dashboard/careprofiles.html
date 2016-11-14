@@ -1,0 +1,49 @@
+<div>
+	<!--<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Routes</a>-->
+	<h2><small></small></h2>
+	<div class="jumbotron">
+		<h2>Zorgprofielen</h2>
+		<br>
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Naam</th>
+				<th>Beschrijving</th>
+				<th>Verwijderen</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="element in data">
+			<td>
+				{{element.name}}
+			</td>
+			<td>
+				{{element.description}}
+			</td>
+			<td>
+				<!--<button type="button" class="glyphicon glyphicon-remove" ng-click="{deleteProfile({element.id})}"/>-->
+			</td>
+		</tr>
+		</tbody>
+		</table>
+
+		<br>
+
+		<h3>Voeg een zorgprofiel toe:</h3>
+		<br>
+		<form>
+		  	<div class="form-group">
+		    	<label for="name">Naam van het profiel</label>
+		    	<input type="text" class="form-control" ng-model="name" placeholder="Naam">
+		  	</div>
+		  	<div class="form-group">
+			    <label for="description">Beschrijving van het profiel</label>
+			    <input type="text" class="form-control" ng-model="description" placeholder="Beschrijving">
+		  	</div>
+		</form>
+		<br>
+		<button class="btn btn-danger" ng-click="addProfile()">Voeg profiel toe</button>
+
+
+	</div>
+</div>
