@@ -9,17 +9,25 @@
  */
 angular.module('yapp')
 	.controller('EditDetailsCtrl', function($scope, $location, $stateParams) {
-		//var user = localStorage.getItem('user');
-		var data = {"username":"TomBroenink", "firstName":"Tom","lastName":"Broenink","phoneNumber":"0629277096"};
-		$scope.username = data.username;
-		$scope.firstName = data.firstName;
-		$scope.lastName = data.lastName;
-		$scope.phoneNumber = data.phoneNumber;
+		var monitorId = localStorage.getItem('monitorId');
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
+		var accessLevel = localStorage.getItem('accessLevel');
+		if (accessLevel == 1) {
+			$scope.accessLevel = 'Begeleider';
+		} else {
+			$scope.accessLevel = 'Locatiemanager';
+		}
+		webSocket.onopen = function(event) {
+			webSocket.send('{"requestAction": "getMonitorById", "monitorId":"' + monitorId + '"}');
+		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
-			$scope.data = response;
-			console.log($scope.data);
+			var data = response.client;
+			$scope.username = data.username;
+			$scope.firstName = data.firstName;
+			$scope.lastName = data.lastName;
+			$scope.phoneNumber = data.phoneNumber;
+			$scope.$apply();
 		}
 
 		$scope.back = function() {

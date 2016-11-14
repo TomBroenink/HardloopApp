@@ -37,7 +37,8 @@ angular.module('yapp')
 				localStorage.setItem('firstName', user.firstName);
 				localStorage.setItem('lastName', user.lastName);
 				localStorage.setItem('accessLevel', user.accessLevel);
-				localStorage.setItem('monitorId', user.id);
+				localStorage.setItem('monitorId', user.monitorId);
+				localStorage.setItem('personId', user.personId);
 				localStorage.setItem('username', user.username);
 				$location.path('/dashboard');
 				return false;

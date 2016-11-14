@@ -21,5 +21,9 @@
 
 		<b>Telefoonnummer</b><br/>
 		<i>{{data.phoneNumber}}</i><br/><br/>
+		<b>Gekoppelde runschema's</b><br/>
+		Kies een runschema om dit schema te bekijken.<br/>
+		<select class="dropdown" ng-model="selectedSchema" ng-options="x.name for x in schemas" ng-change="dropdownChange()">
+		</select>
 	</div>
 </div>

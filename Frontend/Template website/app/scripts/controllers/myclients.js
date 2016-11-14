@@ -24,18 +24,22 @@ angular.module('yapp')
 			if (response.responseAction == 'getClientsForMonitor') {
 				getClients(response);
 			}
-			function getClients(response) {
-				if (response.clients.length == 0) {
-					$scope.noClients = 'Je hebt nog geen clienten!';
-				} else {
-					$scope.data = response;
-				}
-				apply();
-			}
 		}
+
+		function getClients(response) {
+			if (response.clients.length == 0) {
+				$scope.noClients = 'Je hebt nog geen clienten!';
+			} else {
+				$scope.data = response;
+				console.log(response.clients);
+			}
+			apply();
+		}
+
 		function apply() {
 			$scope.$apply();
 		}
+
 		$scope.disconnectClient = function(id, client) {
 			if (confirm('Weet je zeker dat je ' + client + ' wilt ontkoppelen?') === true) {
 				webSocket.send('{"requestAction":"deleteClientFromMonitor","monitorId": "2","clientId" : "' + id + '"}');

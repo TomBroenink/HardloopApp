@@ -88,6 +88,19 @@ angular
 				controller: 'RegisterCtrl'
 
 			})
+			.state(''schemas'', {
+				url: '/schemas',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/schemas.html',
+				controller: 'SchemasCtrl'
+			})
+			.state('viewschema', {
+				url: '/viewschema/:id',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/viewschema.html',
+				controller: 'ViewSchemaCtrl'
+
+			})
 			.state('404', {
 				url: '/404',
 				parent: 'base',
