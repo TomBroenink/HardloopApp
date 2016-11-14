@@ -29,6 +29,14 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 		return super.executeQuery(sql, null, "Failed to retrieve run schemas.");
 	}
 	
+	@SuppressWarnings("unchecked")
+	public JSONObject getRunSchemaById(String id) throws Exception{
+		String sql = "select * from runschemas where id = ?;";
+		JSONObject runSchema = (JSONObject) super.executeQuery(sql, new String[]{id}, "Failed to retrieve run schema.").get(0);
+		runSchema.put("runs", getRunsForRunSchema(id));
+		return runSchema;
+	}
+	
 	public void assignRunToRunSchema(String runSchemaId, String runId, String day, String time) throws Exception{
 		String[] values = {runSchemaId, runId, day, time};
 		String sql = "insert into runschemas_runs values(?,?,?,?);";

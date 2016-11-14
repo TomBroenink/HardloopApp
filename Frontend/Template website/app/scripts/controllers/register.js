@@ -26,13 +26,13 @@ angular.module('yapp')
 			}
 		}
 		$scope.fillProfile1 = function() {
-			$scope.profile = "profile 1 hallo\ntest";
+			$scope.profile = "Informatie over basis zorgprofiel 1";
 		}
 		$scope.fillProfile2 = function() {
-			$scope.profile = "rlifvngetgbektbhskitehvbtrkvhsbertkl";
+			$scope.profile = "Informatie over basis zorgprofiel 2";
 		}
 		$scope.fillProfile3 = function() {
-			$scope.profile = "nee tom dat hoeft helemaal niet";
+			$scope.profile = "Informatie over basis zorgprofiel 3";
 		}
 		//$scope.json = jsonFile;
 		
