@@ -1,0 +1,20 @@
+{
+	"responseAction": "getRunById",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"run":{
+		"id": "",
+		"name": "",
+		"description": "",
+		"routes_id": "",
+		"route":
+		[
+			{
+				"orderNumber": "",
+				"lat": "",
+				"long":""
+			}
+		]
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"responseAction": "getAllCareProperties",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"careProperties":
+	[
+		{
+			"id": "",
+			"name": "",
+			"description": ""
+		}
+	]
+}
