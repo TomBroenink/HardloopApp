@@ -7,6 +7,18 @@
 	<br>
 	{{lat}}  ,  {{lng}}
 	<br>
+	<form>
+		<div class="form-group">
+			<label for="firstname">Naam van de route</label>
+			<input type="text" class="form-control" ng-model="runName" placeholder="Naam">
+		</div>
+		{{runName}}
+		<div class="form-group">
+			<label for="lastname">Beschrijving van de route</label>
+			<input type="text" class="form-control" ng-model="runDescription" placeholder="Beschrijving">
+		</div>
+		{{runDescription}}
+	</form>
 	<button type="button" class="btn btn-primary" ng-click="createJson()">OK</button>
 </div>
 

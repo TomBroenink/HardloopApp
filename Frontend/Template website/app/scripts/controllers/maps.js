@@ -53,8 +53,8 @@ angular.module('yapp')
       		$scope.createJson = function() {
       			var coordsJson = {
       				"requestAction": "createRun",
-					"name": "",
-					"description": "",
+					"name": $scope.runName,
+					"description": $scope.runDescription,
 					"distance": "",
 					"route": $scope.coords
       			}
