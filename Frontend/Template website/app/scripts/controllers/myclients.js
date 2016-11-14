@@ -26,4 +26,12 @@ angular.module('yapp')
 			}
 			$scope.$apply();
 		}
+		$scope.disconnectClient= function(id, client) {
+			if (confirm('Weet je zeker dat je ' + client + ' wilt ontkoppelen?') === true) {
+				console.log('ja doe maar');
+			} else {
+				console.log('nee doe maar niet');
+				return;
+			}
+		}
 	});
