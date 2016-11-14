@@ -25,7 +25,7 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 	
 	@Override
 	public JSONArray getAll() throws Exception{
-		String sql = "select id, name, description, count(*) as runCount from runschemas join runschemas_runs on runschemas.id = runschemas_runs.runSchemas_id group by id;";
+		String sql = "select * from runSchemas;";
 		return super.executeQuery(sql, null, "Failed to retrieve run schemas.");
 	}
 	
