@@ -1,0 +1,18 @@
+{
+	"responseAction": "getRunsForRunSchema",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"runs":
+	[
+		{
+			"time": "",
+			"day": "",
+			"runs_id": "",
+			"name": "",
+			"description":"",
+			"routes_id":"",
+			"distance":""
+		}
+	]
+}

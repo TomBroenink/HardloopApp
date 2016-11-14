@@ -25,12 +25,12 @@ public class ClientDatabaseWrapper extends PersonDatabaseWrapper{
 	
 	@Override
 	public JSONArray getAll() throws Exception{
-    	String sql = "select clients.id, personalData_id, firstName, lastName, phoneNumber, username from clients join personaldata on clients.personalData_id = personaldata.id";
+    	String sql = "select clients.id, personalData_id, care_profile_id, firstName, lastName, phoneNumber, username from clients join personaldata on clients.personalData_id = personaldata.id";
 		return super.executeQuery(sql, null, "Failed to retrieve clients.");
 	}
 	
 	public JSONObject getClientById(String id) throws Exception{
-		String sql = "select clients.id, personalData_id, firstName, lastName, phoneNumber, username from clients join personaldata on clients.personalData_id = personaldata.id where clients.id = ?;";
+		String sql = "select clients.id, personalData_id, care_profile_id, firstName, lastName, phoneNumber, username from clients join personaldata on clients.personalData_id = personaldata.id where clients.id = ?;";
 		return (JSONObject) super.executeQuery(sql, new String[]{id}, "Failed to retrieve client.").get(0);
 	}
 	
