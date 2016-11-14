@@ -86,6 +86,12 @@ public class WebSocketRequestHandler {
 				case "getAllCareProperties":
 					response.put("careProperties", factory.getWrapper("careProperty").getAll());
 					break;
+				case "getClientById":
+					response.put("client", ((ClientDatabaseWrapper) factory.getWrapper("client")).getClientById((String) args.get("clientId")));
+					break;
+				case "getMonitorById":
+					response.put("client", ((MonitorDatabaseWrapper) factory.getWrapper("monitor")).getMonitorById((String) args.get("monitorId")));
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}

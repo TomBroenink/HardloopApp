@@ -146,7 +146,13 @@ abstract class DatabaseWrapper{
 	protected void addValues(PreparedStatement statement, String[] values) throws Exception{
 		if(values != null){
 			for(int i = 0; i < values.length; i++){
-				statement.setString(i + 1, values[i]);
+				String value = values[i];
+				if(value == null || value.isEmpty()){
+					statement.setString(i + 1, null);
+				}
+				else{
+					statement.setString(i + 1, value);
+				}
 			}
 		}
 	}

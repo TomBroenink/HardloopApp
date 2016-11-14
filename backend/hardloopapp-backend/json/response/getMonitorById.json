@@ -1,0 +1,15 @@
+{
+	"responseAction": "getClientById",
+	"responseStatusCode":"<1 || 0>",
+	"responseStatusDescription":"<Succes || Failure>",
+	"errorDescription":"<Exception message>",
+	"monitor":{
+		"id": "",
+		"personalData_id": "",
+		"accessLevel": "",
+		"firstName":"",
+		"lastName":"",
+		"phoneNumber":"",
+		"username":""
+	}
+}

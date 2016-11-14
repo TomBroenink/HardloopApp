@@ -26,6 +26,8 @@
 		<button type="button" onclick="getProfileWithProperties()">Get Profile with Properties</button>
 		<button type="button" onclick="getAllProfilesWithProperties()">Get All Profiles with Properties</button>
 		<button type="button" onclick="getAllCareProperties()">Get All Care Properties</button>
+		<button type="button" onclick="getClientById()">Get client by id</button>
+		<button type="button" onclick="getMonitorById()">Get monitor by id</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -35,67 +37,51 @@
 	        webSocket.onopen = function(event){
 	        	
 	        };
-	        
 	        function getAllMonitors(){
 	        	webSocket.send('{"requestAction": "getAllMonitors"}');
 	        }
-	        
 	        function getAllClients(){
 	        	webSocket.send('{"requestAction": "getAllClients"}');
 	        }
-	        
 	        function registerMonitor(){
 	        	webSocket.send('{"requestAction": "registerMonitor","person": {"firstName": "Henderikus","lastName": "Harms","phoneNumber": "0636437443","username": "HarmsH","password": "secret","accessLevel": "1"}}');
 	        }
-	        
 	        function registerClient(){
 	        	webSocket.send('{"requestAction": "registerClient","firstName": "Tom","lastName": "Meijer","phoneNumber": "0636437443","username": "tomClient","password": "tom", "careProfileId": "2"}');
 	        }
-	        
 	        function removeUser(){
 	        	webSocket.send('{"requestAction": "deleteUser", "personalDataId": "18"}');
 	        }
-	        
 	        function assignClientToMonitor(){
 	        	webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "2","clientId": "7", "monitorNumber": "1"}');
 	        }
-	        
 	        function createRunSchema(){
 	        	webSocket.send('{"requestAction": "createRunSchema","name": "runschema1","description": "run for your life"}');
 	        }
-	        
 	        function assignRunSchemaToClient(){
 	        	webSocket.send('{"requestAction": "assignRunSchemaToClient","clientId": "7","runSchemaId": "2"}');
 	        }
-	        
 	        function assignRunToRunSchema(){
 	        	webSocket.send('{"requestAction": "assignRunToRunSchema","runSchemaId": "2","runId": "1","day": "2","time": "15:00:00"}');
 	        }
-	        
 	        function createRun(){
 	        	webSocket.send('{"requestAction": "createRun","name": "run1","description": "run run run","route": [["12", "13"],["11", "15"],["3", "17"]]}');
 	        }
-	        
 	        function deleteRunFromRunSchema(){
 	        	webSocket.send('{"requestAction": "deleteRunFromRunSchema",	"runSchemaId": "15","runId": "1"}');
 	        }
-	        
 	        function deleteRunSchemaFromClient(){
 	        	webSocket.send('{"requestAction": "deleteRunSchemaFromClient","runSchemaId": "15","clientId": "7"}');
 	        }
-	        
 	        function getClientsForMonitor(){
 	        	webSocket.send('{"requestAction": "getClientsForMonitor","monitorId": "10"}');
 	        }
-	        
 	        function getAchievementsForClient(){
 	        	webSocket.send('{"requestAction": "getAchievementsForClient","clientId": "7"}');
 	        }
-	        
 	        function getRunSchemasForClient(){
 	        	webSocket.send('{"requestAction": "getRunSchemasForClient","clientId": "7"}');
 	        }
-	        
 	        function createProfile(){
 	        	webSocket.send('{"requestAction": "createEmptyCareProfile", "careProfile": {"name": "profile1"}}');
 			}
@@ -113,6 +99,12 @@
 			}
 			function getAllCareProperties(){
 				webSocket.send('{"requestAction": "getAllCareProperties"}');
+			}
+			function getClientById(){
+				webSocket.send('{"requestAction": "getClientById","clientId": "9"}');
+			}
+			function getMonitorById(){
+				webSocket.send('{"requestAction": "getMonitorById","monitorId": "2"}');
 			}
 		</script>
 	</body>
