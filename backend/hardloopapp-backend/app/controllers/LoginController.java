@@ -29,12 +29,14 @@ public class LoginController extends Controller {
         final JsonNode json = request().body().asJson();
         Result result;
 
+        System.out.println("request login");
         final MonitorDatabaseWrapper wrapper = new MonitorDatabaseWrapper(db);
 
         try{
-            JSONObject user = wrapper.validateLogin(json.get("username").toString(), json.get("password").asText());
+            JSONObject user = wrapper.validateLogin(json.get("username").asText(), json.get("password").asText());
             result = ok(user.toJSONString());
         }catch(Exception e){
+            e.printStackTrace();
             result = badRequest(e.getMessage());
         }
 
