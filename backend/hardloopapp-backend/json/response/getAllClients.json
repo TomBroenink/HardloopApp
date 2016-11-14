@@ -8,6 +8,7 @@
 		{
 			"id": "",
 			"personalData_id": "",
+			"care_profile_id": "",
 			"firstName":"",
 			"lastName":"",
 			"phoneNumber":"",

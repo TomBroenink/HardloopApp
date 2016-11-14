@@ -39,4 +39,9 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 		String sql = "delete from runschemas_runs where runSchemas_id = ? and runs_id = ?;";
 		executeUpdate(sql, values, "Failed to delete run from run schema.");
 	}
+	
+	public JSONArray getRunsForRunSchema(String runSchemaId) throws Exception{
+		String sql = "select time, day, runs_id, name, description, routes_id, distance from runschemas_runs join runs on runschemas_runs.runs_id = runs.id join routes on runs.routes_id = routes.id where runSchemas_id = ? order by day, time;";
+		return super.executeQuery(sql, new String[]{runSchemaId}, "Failed to retrieve runs for run schema.");
+	}
 }
