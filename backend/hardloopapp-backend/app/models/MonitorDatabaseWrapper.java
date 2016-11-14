@@ -62,6 +62,12 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper{
 		super.executeUpdate(sql, values, "Failed to assign client to monitor.");
 	}
     
+    public void deleteClientFromMonitor(String monitorId, String clientId) throws Exception{
+		String[] values = {monitorId, clientId};
+		String sql = "delete from monitors_clients where monitors_id = ? and clients_id = ?;";
+		super.executeUpdate(sql, values, "Failed to delete client from monitor.");
+	}
+    
     public JSONArray getClientsForMonitor(String monitorId) throws Exception{
     	String sql = "select clients.id, personalData_id, firstName, lastName, phoneNumber, username from monitors_clients join clients on monitors_clients.clients_id = clients.id join personaldata on clients.personalData_id = personaldata.id where monitors_id = ?;";
 		return super.executeQuery(sql, new String[]{monitorId}, "Failed to retrieve clients for monitor.");

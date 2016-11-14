@@ -11,7 +11,7 @@
 angular
 	.module('yapp', [
 		'ui.router',
-		'ngAnimate'
+		'ngAnimate',
 	])
 	.config(function($stateProvider, $urlRouterProvider) {
 		var userLoggedIn;
@@ -51,22 +51,35 @@ angular
 				templateUrl: 'views/dashboard/mydetails.html',
 				controller: 'MyDetailsCtrl'
 			})
+			.state('editdetails', {
+				url: '/editdetails',
+				parent: 'dashboard', 
+				templateUrl: 'views/dashboard/editdetails.html',
+				controller: 'EditDetailsCtrl'
+			})
 			.state('myclients', {
 				url: '/myclients',
-				parent: 'reports',
+				parent: 'dashboard',
 				templateUrl: 'views/dashboard/myclients.html',
-				controller: 'MyDetailsCtrl'
+				controller: 'MyClientsCtrl'
 			})
 			.state('client', {
-				url: '/:client',
-				parent: 'myclients',
+				url: '/clients/:id',
+				parent: 'dashboard',
 				templateUrl: 'views/dashboard/client.html',
 				controller: 'ClientCtrl'
 			})
-			.state('reports', {
-				url: '/reports',
+			.state('newclient', {
+				url: '/newclient',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/reports.html'
+				templateUrl: 'views/dashboard/newclient.html',
+				controller: 'NewClientCtrl'
+			})
+			.state('routes', {
+				url: '/routes',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/routes.html',
+				controller: 'RoutesCtrl'
 			})
 			.state('register', {
 				url: '/register',
