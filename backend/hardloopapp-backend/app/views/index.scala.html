@@ -28,6 +28,8 @@
 		<button type="button" onclick="getAllCareProperties()">Get All Care Properties</button>
 		<button type="button" onclick="getClientById()">Get client by id</button>
 		<button type="button" onclick="getMonitorById()">Get monitor by id</button>
+		<button type="button" onclick="getAllRuns()">Get all runs</button>
+		<button type="button" onclick="deleteClientFromMonitor()">Delete client from monitor</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9002/ws");
@@ -105,6 +107,12 @@
 			}
 			function getMonitorById(){
 				webSocket.send('{"requestAction": "getMonitorById","monitorId": "2"}');
+			}
+			function getAllRuns(){
+				webSocket.send('{"requestAction": "getAllRuns"}');
+			}
+			function deleteClientFromMonitor(){
+				webSocket.send('{"requestAction": "deleteClientFromMonitor","monitorId": "2","clientId": "9"}');
 			}
 		</script>
 	</body>
