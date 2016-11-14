@@ -43,7 +43,10 @@ angular
 			.state('overview', {
 				url: '/overview',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/overview.html'
+				templateUrl: 'views/dashboard/overview.html',
+				controller: function($scope) {
+					$scope.name = localStorage.getItem('firstName');
+				}
 			})
 			.state('mydetails', {
 				url: '/mydetails',
@@ -88,7 +91,7 @@ angular
 				controller: 'RegisterCtrl'
 
 			})
-			.state(''schemas'', {
+			.state('schemas', {
 				url: '/schemas',
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/schemas.html',
@@ -99,7 +102,6 @@ angular
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/viewschema.html',
 				controller: 'ViewSchemaCtrl'
-
 			})
 			.state('404', {
 				url: '/404',

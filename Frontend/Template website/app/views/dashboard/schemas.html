@@ -8,6 +8,23 @@
 <div>
 	<h2>Schema's<small></small></h2>
 	<div class="jumbotron">
-
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Schemanaam</th>
+				<th>Beschrijving</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="schemas in data">
+			<td>
+				<a ui-sref="schema({id: schemas.id})">{{schema.name}}</a>
+			</td>
+			<td>
+				{{clients.firstName}}
+			</td>
+		</tr>
+		</tbody>
+		</table>
 	</div>
 </div>
