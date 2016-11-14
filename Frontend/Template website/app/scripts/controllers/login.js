@@ -10,9 +10,6 @@
 angular.module('yapp')
   .controller('LoginCtrl', function($scope, $location, $http) {
     $scope.submit = function() {
-		// Mock data voor test
-		var db = {responseCode : 200, username : 'tom_broenink@hotmail.com', password : 'test'}
-		
 		var username = $scope.username;
 		var password = $scope.password;
 		var userObject = {};
@@ -30,7 +27,6 @@ angular.module('yapp')
 			headers: {'Content-Type': 'application/json'}
 		})
 		.then(function(response) {
-			console.log(response);
 			if (response.status == 200) {
 				var user = response.data;
 				localStorage.setItem('firstName', user.firstName);
@@ -43,22 +39,5 @@ angular.module('yapp')
 				return false;
 			}
 		});
-
-/*		if (db.responseCode == 200) {
-			// Sla hier de naam en accesslevel in sessionStorage op
-			if (username === db.username) {
-				if (password === db.password) {
-					alert('Succesvol ingelogd!');
-					localStorage.setItem('username', db.username);
-					localStorage.setItem('accessLevel', 1);
-					$location.path('/dashboard');
-					return false;
-				}
-			} else {
-				alert('Verkeerde emailadres');
-			}
-		} else {
-			alert('Fout bij inloggen');
-		}*/
-    }
+	}
   });
