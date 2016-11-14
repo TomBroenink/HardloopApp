@@ -31,12 +31,11 @@ angular.module('yapp')
 			headers: {'Content-Type': 'application/json'}
 		})
 		.then(function(response) {
-			console.log(response);
-			//$location.path('/dashboard');
-			//return false;
+			$location.path('/dashboard');
+			return false;
 		});
 
-		if (db.responseCode == 200) {
+/*		if (db.responseCode == 200) {
 			// Sla hier de naam en accesslevel in sessionStorage op
 			if (username === db.username) {
 				if (password === db.password) {
@@ -51,6 +50,6 @@ angular.module('yapp')
 			}
 		} else {
 			alert('Fout bij inloggen');
-		}
+		}*/
     }
   });

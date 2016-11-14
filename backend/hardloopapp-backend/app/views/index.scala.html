@@ -35,7 +35,7 @@
 		<button type="button" onclick="getAllRunSchemas()">Get all run schemas</button>
 		<div id="response"></div>
 		<script>
-			var webSocket = new WebSocket("ws://localhost:9000/ws");
+			var webSocket = new WebSocket("ws://localhost:9002/ws");
 	        webSocket.onmessage = function(event){
 	        	document.getElementById("response").innerHTML = event.data;
 	        };

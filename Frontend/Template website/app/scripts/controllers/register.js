@@ -10,20 +10,25 @@
 
 angular.module('yapp')
 	.controller('RegisterCtrl', function($scope) {
+
+		var registerJson;
+
 		$scope.submit = function() {
-			$scope.createJson();
+			createJson();
 			console.log(jsonFile);
 		}
+
 		var jsonFile;
-		$scope.createJson = function() {
-			jsonFile = {
+		function createJson() {
+			registerJson = {
 				"firstName" : $scope.firstName,
 				"lastName" : $scope.lastName,
 				"phoneNumber" : $scope.phoneNumber,
-				"username" : $scope.userName,
-				"password" : $scope.passWord,
+				"username" : $scope.username,
+				"password" : $scope.password,
 				"profile" : $scope.profile
 			}
+			console.log(registerJson);
 		}
 		$scope.fillProfile1 = function() {
 			$scope.profile = "Informatie over basis zorgprofiel 1";
