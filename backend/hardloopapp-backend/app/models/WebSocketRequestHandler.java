@@ -63,7 +63,7 @@ public class WebSocketRequestHandler {
 					((CareProfileWrapper)factory.getWrapper("careProfile")).addPropertiesToProfile(Integer.parseInt(args.get("careProfileId").toString()), (JSONArray) args.get("careProperties"));
                     break;
 				case "getCareProfileWithProperties":
-					response.put("careProfile", ((CareProfileWrapper)factory.getWrapper("careProfile")).getProfileWithProperties(Integer.parseInt(args.get("careProfileId").toString())));
+					response.put("careProfile", factory.getWrapper("careProfile").getById(args.get("careProfileId").toString()));
 					break;
 				case "deleteRunFromRunSchema":
 					((RunSchemaDatabaseWrapper) factory.getWrapper("runSchema")).deleteRunFromRunSchema((String) args.get("runSchemaId"), (String) args.get("runId"));
@@ -87,10 +87,10 @@ public class WebSocketRequestHandler {
 					response.put("careProperties", factory.getWrapper("careProperty").getAll());
 					break;
 				case "getClientById":
-					response.put("client", ((ClientDatabaseWrapper) factory.getWrapper("client")).getClientById((String) args.get("clientId")));
+					response.put("client", factory.getWrapper("client").getById((String) args.get("clientId")));
 					break;
 				case "getMonitorById":
-					response.put("client", ((MonitorDatabaseWrapper) factory.getWrapper("monitor")).getMonitorById((String) args.get("monitorId")));
+					response.put("client", factory.getWrapper("monitor").getById((String) args.get("monitorId")));
 					break;
 				case "getAllRuns":
 					response.put("runs", factory.getWrapper("run").getAll());
@@ -108,7 +108,7 @@ public class WebSocketRequestHandler {
 					response.put("runSchemas", factory.getWrapper("runSchema").getAll());
 					break;
 				case "getRunSchemaById":
-					response.put("runSchema", ((RunSchemaDatabaseWrapper) factory.getWrapper("runSchema")).getRunSchemaById((String) args.get("runSchemaId")));
+					response.put("runSchema", factory.getWrapper("runSchema").getById((String) args.get("runSchemaId")));
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

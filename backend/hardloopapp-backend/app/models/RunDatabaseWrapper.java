@@ -44,6 +44,11 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 		return super.executeQuery(sql, null, "Failed to retrieve runs.");
 	}
 	
+	@Override
+    public JSONObject getById(String runId) throws Exception{
+    	throw new Exception("Method not implemented.");
+    }
+	
 	public JSONArray getRouteForRun(String routeId) throws Exception{
 		String sql = "select orderNumber, lat, `long` from routes_coordinates join coordinates on routes_coordinates.coordinates_id = coordinates.id where routes_id = ? order by orderNumber;";
 		return super.executeQuery(sql, new String[]{routeId}, "Failed to retrieve route for run.");

@@ -51,7 +51,8 @@ public class MonitorDatabaseWrapper extends PersonDatabaseWrapper{
 		return super.executeQuery(sql, null, "Failed to retrieve monitors.");
 	}
     
-    public JSONObject getMonitorById(String id) throws Exception{
+    @Override
+    public JSONObject getById(String id) throws Exception{
 		String sql = "select monitors.id, personalData_id, accessLevel, firstName, lastName, phoneNumber, username from monitors join personaldata on monitors.personalData_id = personaldata.id where monitors.id = ?;";
 		return (JSONObject) super.executeQuery(sql, new String[]{id}, "Failed to retrieve monitor.").get(0);
 	}
