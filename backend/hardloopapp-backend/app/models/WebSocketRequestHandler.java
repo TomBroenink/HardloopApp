@@ -113,6 +113,9 @@ public class WebSocketRequestHandler {
 				case "getRunById":
 					response.put("run", factory.getWrapper("run").getById((String) args.get("runId")));
 					break;
+				case "deleteCareProfile":
+					factory.getWrapper("careProfile").delete(Integer.parseInt((String) args.get("careProfileId")));
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}
