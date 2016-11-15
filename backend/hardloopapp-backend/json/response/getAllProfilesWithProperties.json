@@ -1,0 +1,96 @@
+{
+    "careProfiles": [{
+    "profileName": "Profiel1",
+    "profileDescription": null,
+    "profileId": "1",
+    "properties": [{
+      "applies": "Y",
+      "name": "Analfabeet",
+      "description": "De client kan lezen",
+      "id": "3"
+    }, {
+      "applies": "N",
+      "name": "Zelfstandig naar stardpunt",
+      "description": "De client kan zelfstandig naar het startpunt",
+      "id": "4"
+    }, {
+      "applies": "Y",
+      "name": "Herinnen sportkleding",
+      "description": "De client moet een herinnering krijgen voor h",
+      "id": "5"
+    }, {
+      "applies": "Y",
+      "name": "Met begeleider",
+      "description": "De begeleider rent mee",
+      "id": "6"
+    }, {
+      "applies": "N",
+      "name": "Uitgebreide statistieken",
+      "description": "Uitgebreide statistieken moeten aan de client",
+      "id": "7"
+    }]
+  }, {
+    "profileName": "Profiel2",
+    "profileDescription": null,
+    "profileId": "2",
+    "properties": [{
+      "applies": "N",
+      "name": "Analfabeet",
+      "description": "De client kan lezen",
+      "id": "3"
+    }, {
+      "applies": "N",
+      "name": "Zelfstandig naar stardpunt",
+      "description": "De client kan zelfstandig naar het startpunt",
+      "id": "4"
+    }, {
+      "applies": "Y",
+      "name": "Herinnen sportkleding",
+      "description": "De client moet een herinnering krijgen voor h",
+      "id": "5"
+    }, {
+      "applies": "N",
+      "name": "Met begeleider",
+      "description": "De begeleider rent mee",
+      "id": "6"
+    }, {
+      "applies": "N",
+      "name": "Uitgebreide statistieken",
+      "description": "Uitgebreide statistieken moeten aan de client",
+      "id": "7"
+    }]
+  }, {
+    "profileName": "Profiel3",
+    "profileDescription": null,
+    "profileId": "3",
+    "properties": [{
+      "applies": "N",
+      "name": "Analfabeet",
+      "description": "De client kan lezen",
+      "id": "3"
+    }, {
+      "applies": "Y",
+      "name": "Zelfstandig naar stardpunt",
+      "description": "De client kan zelfstandig naar het startpunt",
+      "id": "4"
+    }, {
+      "applies": "N",
+      "name": "Herinnen sportkleding",
+      "description": "De client moet een herinnering krijgen voor h",
+      "id": "5"
+    }, {
+      "applies": "N",
+      "name": "Met begeleider",
+      "description": "De begeleider rent mee",
+      "id": "6"
+    }, {
+      "applies": "Y",
+      "name": "Uitgebreide statistieken",
+      "description": "Uitgebreide statistieken moeten aan de client",
+      "id": "7"
+    }]
+  }],
+  "responseStatusCode": "1",
+  "responseStatusDescription": "Succes",
+  "responseAction": "getAllProfilesWithProperties"
+}

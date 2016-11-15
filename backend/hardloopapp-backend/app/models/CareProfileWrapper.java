@@ -21,8 +21,8 @@ public class CareProfileWrapper extends DatabaseWrapper{
      */
     @Override
     public int create(JSONObject careProfile) throws Exception{
-        final String[] values = {careProfile.get("name").toString()};
-        final String query = "INSERT INTO care_profiles VALUES(0,?);";
+        final String[] values = {careProfile.get("name").toString(), careProfile.get("description").toString()};
+        final String query = "INSERT INTO care_profiles VALUES(0,?, ?);";
         return executeInsertReturnId(query, values, "Failed to save CareProfile!");
     }
 
@@ -85,7 +85,7 @@ public class CareProfileWrapper extends DatabaseWrapper{
      */
     @Override
     public JSONObject getById(String profileId) throws Exception{
-        String query = "SELECT cp.id as cp_id, cp.name as cp_name, prop.id as prop_id, prop.name as prop_name, prop.description as prop_des, cpp.applies  " +
+        String query = "SELECT cp.id as cp_id, cp.name as cp_name, cp.description as cp_description, prop.id as prop_id, prop.name as prop_name, prop.description as prop_des, cpp.applies  " +
                 "FROM care_profiles cp, care_profile_properties cpp, care_properties prop  " +
                 "WHERE cp.id = ? " +
                 "AND cpp.care_profile_id = cp.id " +
@@ -123,6 +123,7 @@ public class CareProfileWrapper extends DatabaseWrapper{
             }else{
                 result.put("profileId", prop.get("cp_id").toString());
                 result.put("profileName", prop.get("cp_name").toString());
+                result.put("profileDescription", prop.get("cd_description"));
             }
 
             property.put("id", prop.get("prop_id").toString());
