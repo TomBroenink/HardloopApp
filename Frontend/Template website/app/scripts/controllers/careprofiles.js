@@ -23,7 +23,7 @@ angular.module('yapp')
 		}
 
 		$scope.deleteProfile = function($profileId) {
-			webSocket.send('{"requestAction": "deleteCareProfile", "careProfileId": "$profileId"}');
+			webSocket.send('{"requestAction": "deleteCareProfile", "careProfileId": "' + $profileId + '"}');
 		}
 		$scope.addProfile = function() {
 			webSocket.send('{"requestAction": "createCareProperty","careProperty": {"name": "' + $scope.name + '","description": "' + $scope.description + '"}}');
