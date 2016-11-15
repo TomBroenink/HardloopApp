@@ -5,10 +5,6 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-#map {
-        height: 400px;
-        width: 100%;
-      }
 body {
   margin: 0;
 }
@@ -6461,6 +6457,17 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+.ui-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.user-avatar {
+  width: 125px;
+  height: 125px;
 }
 .login-page {
   position: absolute;
