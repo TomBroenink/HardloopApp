@@ -6,17 +6,16 @@
 
 <div>
 	<!--<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Routes</a>-->
-	<h2>[Registreer patient-knop] [Registreer begeleider-knop] [Registreer locatiemanager-knop]<small></small></h2>
+	<h2><small></small></h2>
 	<div class="jumbotron">
 		
-				<h2>Patientgegevens</h2>
+		<h2>Patientgegevens</h2>
 
-		<input value="Profiel 1" type="button"class="pull-left btn btn-primary btn-outline btn-rounded" name="profiel1" id="profiel2" ng-click="fillProfile1()">
-		<input value="Profiel 2" type="button"class="pull-left btn btn-primary btn-outline btn-rounded" name="profiel2" id="profiel2" ng-click="fillProfile2()">
-		<input value="Profiel 3" type="button"class="pull-left btn btn-primary btn-outline btn-rounded" name="profiel3" id="profiel2" ng-click="fillProfile3()">
+		<button ng-repeat="element in data" type="button" class="btn btn-info">{{element.name}}</button>
 
-		<br>
-		<br>
+		<ul>
+        	<li ng-repeat="name in profiles"><a href="#">{{console.log(name)}}</a></li>
+    	</ul>
 		
 		  	<div class="maxwidthcontainer">
 				<form>

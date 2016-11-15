@@ -30,7 +30,8 @@ public class RunSchemaDatabaseWrapper extends DatabaseWrapper{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject getRunSchemaById(String id) throws Exception{
+	@Override
+	public JSONObject getById(String id) throws Exception{
 		String sql = "select * from runschemas where id = ?;";
 		JSONObject runSchema = (JSONObject) super.executeQuery(sql, new String[]{id}, "Failed to retrieve run schema.").get(0);
 		runSchema.put("runs", getRunsForRunSchema(id));

@@ -1,6 +1,5 @@
 package models;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import play.db.Database;
 
@@ -19,15 +18,9 @@ abstract class PersonDatabaseWrapper extends DatabaseWrapper{
     }
     
     @Override
-    abstract int create(JSONObject args) throws Exception;
-    
-    @Override
     public void delete(int id) throws Exception {
         executeUpdate("delete from personaldata where id = ?;", new String[]{String.valueOf(id)}, "Failed to delete user.");
     }
-    
-    @Override
-    abstract JSONArray getAll() throws Exception;
 
     /**
      * insert personal data using prepared statement

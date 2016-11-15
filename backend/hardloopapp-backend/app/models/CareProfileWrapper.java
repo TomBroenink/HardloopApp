@@ -47,7 +47,7 @@ public class CareProfileWrapper extends DatabaseWrapper{
 
         for(Object o : result){
             JSONObject pr = (JSONObject) o;
-            returnValue.add(this.getProfileWithProperties(Integer.parseInt(pr.get("id").toString())));
+            returnValue.add(this.getById(pr.get("id").toString()));
         }
 
         return returnValue;
@@ -83,14 +83,15 @@ public class CareProfileWrapper extends DatabaseWrapper{
      * @return JSONObject CareProfile
      * @throws Exception
      */
-    public JSONObject getProfileWithProperties(int profileId) throws Exception{
+    @Override
+    public JSONObject getById(String profileId) throws Exception{
         String query = "SELECT cp.id as cp_id, cp.name as cp_name, prop.id as prop_id, prop.name as prop_name, prop.description as prop_des, cpp.applies  " +
                 "FROM care_profiles cp, care_profile_properties cpp, care_properties prop  " +
                 "WHERE cp.id = ? " +
                 "AND cpp.care_profile_id = cp.id " +
                 "AND cpp.care_property_id = prop.id";
 
-        JSONArray result = super.executeQuery(query, new String[]{String.valueOf(profileId)}, "The given CareProfile with id " + profileId + " could not be found!");
+        JSONArray result = super.executeQuery(query, new String[]{profileId}, "The given CareProfile with id " + profileId + " could not be found!");
 
         if(result.isEmpty()){
             throw new Exception("CareProfile with id: " + profileId + " does not exist!");
