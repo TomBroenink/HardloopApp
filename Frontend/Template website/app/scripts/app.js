@@ -43,7 +43,10 @@ angular
 			.state('overview', {
 				url: '/overview',
 				parent: 'dashboard',
-				templateUrl: 'views/dashboard/overview.html'
+				templateUrl: 'views/dashboard/overview.html',
+				controller: function($scope) {
+					$scope.name = localStorage.getItem('firstName');
+				}
 			})
 			.state('mydetails', {
 				url: '/mydetails',
@@ -75,6 +78,12 @@ angular
 				templateUrl: 'views/dashboard/newclient.html',
 				controller: 'NewClientCtrl'
 			})
+			.state('editclient', {
+				url: '/clients/:id/edit',
+				parent: 'dashboard', 
+				templateUrl: 'views/dashboard/editclient.html',
+				controller: 'EditClientCtrl'
+			})
 			.state('routes', {
 				url: '/routes',
 				parent: 'dashboard',
@@ -87,6 +96,42 @@ angular
 				templateUrl: 'views/dashboard/register.html',
 				controller: 'RegisterCtrl'
 
+			})
+			.state('schemas', {
+				url: '/schemas',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/schemas.html',
+				controller: 'SchemasCtrl'
+			})
+			.state('viewschema', {
+				url: '/viewschema/:id',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/viewschema.html',
+				controller: 'ViewSchemaCtrl'
+			})
+			.state('newschema', {
+				url: '/newschema',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/newschema.html',
+				controller: 'NewSchemaCtrl'
+			})
+			.state('connectschema', {
+				url: '/:id/connectschema',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/connectschema.html',
+				controller: 'ConnectSchemaCtrl'
+			})
+			.state('connectruns', {
+				url: '/:id/connectruns',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/connectruns.html',
+				controller: 'ConnectRunsCtrl'
+			})
+			.state('viewrun', {
+				url: '/viewrun/:id',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/viewrun.html',
+				controller: 'ViewRunCtrl'
 			})
 			.state('404', {
 				url: '/404',

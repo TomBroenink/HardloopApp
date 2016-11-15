@@ -9,19 +9,15 @@
  */
 angular.module('yapp')
   .controller('LoginCtrl', function($scope, $location, $http) {
-  	console.log($http);
     $scope.submit = function() {
-		// Mock data voor test
-		var db = {responseCode : 200, username : 'tom_broenink@hotmail.com', password : 'test'}
-		
 		var username = $scope.username;
 		var password = $scope.password;
 		var userObject = {};
 		if (!username) {
-			return alert('Emailadres is leeg!');
+			return alert('Gebruikersnaam is leeg!');
 		}
 		if (!password) {
-			return alert('Password is leeg!');
+			return alert('Wachtwoord is leeg!');
 		}
 		userObject = {"username" : username, "password" : password};
 		$http({
@@ -31,26 +27,17 @@ angular.module('yapp')
 			headers: {'Content-Type': 'application/json'}
 		})
 		.then(function(response) {
-			console.log(response);
-			//$location.path('/dashboard');
-			//return false;
-		});
-
-		if (db.responseCode == 200) {
-			// Sla hier de naam en accesslevel in sessionStorage op
-			if (username === db.username) {
-				if (password === db.password) {
-					alert('Succesvol ingelogd!');
-					localStorage.setItem('username', db.username);
-					localStorage.setItem('accessLevel', 1);
-					$location.path('/dashboard');
-					return false;
-				}
-			} else {
-				alert('Verkeerde emailadres');
+			if (response.status == 200) {
+				var user = response.data;
+				localStorage.setItem('firstName', user.firstName);
+				localStorage.setItem('lastName', user.lastName);
+				localStorage.setItem('accessLevel', user.accessLevel);
+				localStorage.setItem('monitorId', user.monitorId);
+				localStorage.setItem('personId', user.personId);
+				localStorage.setItem('username', user.username);
+				$location.path('/dashboard');
+				return false;
 			}
-		} else {
-			alert('Fout bij inloggen');
-		}
-    }
+		});
+	}
   });

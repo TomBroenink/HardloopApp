@@ -5,6 +5,10 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+#map {
+	height: 400px;
+	width: 100%;
+}
 body {
   margin: 0;
 }

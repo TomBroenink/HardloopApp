@@ -20,20 +20,24 @@ angular.module('yapp')
 		}
 		webSocket.onmessage = function(event) {
 			response = JSON.parse(event.data);
-			console.log(response);
+			if(response.responseAction == 'assignClientToMonitor') {
+				if (response.responseStatusCode == 0) {
+					alert('Je kunt deze client niet koppelen!');
+				} else {
+					alert('Client is succesvol gekoppeld!');
+					$scope.back();
+				}
+			}
 			if (response.responseAction == 'getAllClients') {
 				$scope.data = response;
 				$scope.$apply();
-			} else {
-
 			}
 		}
 		$scope.back = function() {
 			window.history.back();
 		}
-		$scope.connectClient = function(id, name) {
-			var clientId = id.toString();
-			webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "8","clientId": clientId, "monitorNumber": "1"}');
-			alert('Client ' + name + ' is succesvol gekoppeld!')
+		$scope.connectClient = function(clientId, name) {
+			webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "2","clientId": "' + clientId + '", "monitorNumber": "1"}');
+
 		}
 	});

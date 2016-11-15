@@ -7,7 +7,7 @@
 
 <div>
 	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
-	<h2>Mijn gegevens aanpassen<small></small></h2>
+	<h2>Client aanpassen<small></small></h2>
 	<div class="jumbotron">
 		<b>Gebruikersnaam</b><br/>
 		<input class="form-control" type="text" ng-model="username"><br/>
@@ -17,13 +17,10 @@
 
 		<b>Achternaam</b><br/>
 		<input class="form-control" type="text" ng-model="lastName"><br/>
-
-		<b>Functie</b><br/>
-		<i>{{accessLevel}}</i><br/><br/>
-
+		
 		<b>Telefoonnummer</b><br/>
 		<input class="form-control" type="text" ng-model="phoneNumber"><br/>
 
-		<a ng-click="editDetails()" class="pull-left btn btn-primary btn-outline btn-rounded">Gegevens aanpassen</a>
+		<a ng-click="editClient()" class="pull-left btn btn-primary btn-outline btn-rounded">Gegevens aanpassen</a>
 	</div>
 </div>

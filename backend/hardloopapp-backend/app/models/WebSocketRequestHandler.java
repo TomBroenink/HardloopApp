@@ -115,6 +115,8 @@ public class WebSocketRequestHandler {
 					break;
 				case "deleteCareProfile":
 					factory.getWrapper("careProfile").delete(Integer.parseInt((String) args.get("careProfileId")));
+				case "updateUser":
+					((MonitorDatabaseWrapper) factory.getWrapper("monitor")).updateUser(args);
 					break;
 				default:
 					throw new Exception("Invalid RequestAction.");

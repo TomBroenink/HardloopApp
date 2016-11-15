@@ -1,0 +1,23 @@
+<style>
+	.maxwidthcontainer {
+		max-width: 600px;
+	}
+</style>
+
+
+<div>
+	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
+	<h2>Bekijk run<small></small></h2>
+	<div class="jumbotron">
+		<b>Naam</b><br/>
+		{{data.name}}<br/><br/>
+
+		<b>Beschrijving</b><br/>
+		{{data.description}}<br/><br/>
+
+		<b>Bekijk route op de kaart</b><br/>
+
+		<div id="map"></div>
+		// Hier moet een kleine Map komen waarop de route te zien is
+	</div>
+</div>

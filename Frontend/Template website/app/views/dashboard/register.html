@@ -10,7 +10,7 @@
 		
 		<h2>Registreer een nieuwe client</h2>
 
-		<button ng-repeat="element in data" type="button" class="btn btn-info">{{element.name}}</button>
+		<button ng-repeat="element in data" type="button" class="btn btn-info" ng-click="selectProfile(element.name, element.description, element.id)">{{element.name}}</button>
 
 		<ul>
         	<li ng-repeat="name in profiles"><a href="#">{{console.log(name)}}</a></li>
@@ -32,21 +32,26 @@
 				  	</div>
 				  	<div class="form-group">
 					    <label for="username">Username</label>
-					    <input type="text" class="form-control" ng-model="userName" placeholder="Username">
+					    <input type="text" class="form-control" ng-model="username" placeholder="Username">
 				  	</div>
 				  	<div class="form-group">
 					    <label for="password">Wachtwoord</label>
-					    <input type="text" class="form-control" ng-model="passWord" placeholder="Wachtwoord">
+					    <input type="text" class="form-control" ng-model="password" placeholder="Wachtwoord">
 				  	</div>
 				  	<div class="form-group">
-					    <label for="profile">Profiel</label>
-					    <input type="textarea" class="form-control" ng-model="profile" value="hallo">
+					    <label for="profile">Naam profiel</label>
+					    <input type="textarea" class="form-control" ng-model="name">
+				  	</div>
+				  	<div class="form-group">
+					    <label for="profile">Beschrijving profiel</label>
+					    <input type="textarea" class="form-control" ng-model="desc">
 				  	</div>
 				  	<br>
 				  	<button class="btn btn-danger" ng-click="submit()">Toevoegen</button>
 				</form>
 			</div>
-		
+		<br>
+		{{message}}
 	</div>
 </div>
 

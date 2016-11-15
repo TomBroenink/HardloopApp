@@ -1,0 +1,9 @@
+{
+	"requestAction": "updateUser",
+	"firstName": "",
+	"lastName": "",
+	"phoneNumber": "",
+	"username": "",
+	"password": "",
+	"personalDataId": ""
+}
