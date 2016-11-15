@@ -27,9 +27,9 @@ angular.module('yapp')
 				var groningen = {lat: 53.2216999, lng: 6.5649233};
 				var jsonFile;
 				$scope.coords = [];
-
+				var center = {lat: Number(run.route[0].lat), lng: Number(run.route[0].long)};
 			    map = new google.maps.Map(document.getElementById('map'), {
-			      	center: groningen,
+			      	center: center,
 			      	zoom: 13
 			    });
 			    for (var i = 0; i < run.route.length; i++) {
