@@ -9,20 +9,8 @@
  */
 
 angular.module('yapp')
-	.controller('RegisterCtrl', function($scope) {
-		var response;
-
-		var webSocket = new WebSocket("ws://localhost:9002/ws");
-		webSocket.onopen = function(event) {
-			webSocket.send('{"requestAction": "getAllCareProperties"}');
-		}
-		webSocket.onmessage = function(event) {
-			response = JSON.parse(event.data);
-			console.log(response.careProperties);
-			$scope.data = response.careProperties;
-			$scope.$apply();
-		}
-
+	.controller('RegisterMonitorCtrl', function($scope) {
+		
 		$scope.submit = function() {
 			$scope.createJson();
 			console.log(jsonFile);
@@ -38,5 +26,4 @@ angular.module('yapp')
 				"profile" : $scope.profile
 			}
 		}
-	
-	});
+});

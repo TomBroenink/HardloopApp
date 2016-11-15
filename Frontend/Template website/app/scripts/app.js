@@ -109,5 +109,11 @@ angular
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/careprofiles.html',
 				controller: 'CareProfilesCtrl'
+			})
+			.state('registermonitor', {
+				url: '/registermonitor',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/registermonitor.html',
+				controller: 'RegisterMonitorCtrl'
 			});
 	});
