@@ -11,7 +11,7 @@ angular.module('yapp')
 	.controller('NewClientCtrl', function($scope, $location) {
 		var response;
 		var clientId;
-		var monitorId = "2";
+		var monitorId = localStorage.getItem('monitorId');;
 		var i = 1;
 		$scope.data = 'Data wordt opgehaald...'
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
@@ -20,6 +20,7 @@ angular.module('yapp')
 		}
 		webSocket.onmessage = function(event) {
 			response = JSON.parse(event.data);
+			console.log(response);
 			if(response.responseAction == 'assignClientToMonitor') {
 				if (response.responseStatusCode == 0) {
 					alert('Je kunt deze client niet koppelen!');
@@ -37,7 +38,6 @@ angular.module('yapp')
 			window.history.back();
 		}
 		$scope.connectClient = function(clientId, name) {
-			webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "2","clientId": "' + clientId + '", "monitorNumber": "1"}');
-
+			webSocket.send('{"requestAction": "assignClientToMonitor","monitorId": "' + monitorId + '","clientId": "' + clientId + '", "monitorNumber": "1"}');
 		}
 	});

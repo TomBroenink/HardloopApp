@@ -9,12 +9,11 @@
  */
 angular.module('yapp')
 	.controller('MyClientsCtrl', function($scope, $location, $state) {
-		//var monitorId = localStorage.getItem('monitorId');
-		var monitorId = "2";
+		var monitorId = localStorage.getItem('monitorId');
 		$scope.data = 'Data wordt opgehaald...'
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
 		webSocket.onopen = function(event) {
-			webSocket.send('{"requestAction":"getClientsForMonitor","monitorId": "2"}');
+			webSocket.send('{"requestAction":"getClientsForMonitor","monitorId": "' + monitorId + '"}');
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
@@ -42,7 +41,7 @@ angular.module('yapp')
 
 		$scope.disconnectClient = function(id, client) {
 			if (confirm('Weet je zeker dat je ' + client + ' wilt ontkoppelen?') === true) {
-				webSocket.send('{"requestAction":"deleteClientFromMonitor","monitorId": "2","clientId" : "' + id + '"}');
+				webSocket.send('{"requestAction":"deleteClientFromMonitor","monitorId": "' + monitorId + '","clientId" : "' + id + '"}');
 			} else {
 				return;
 			}

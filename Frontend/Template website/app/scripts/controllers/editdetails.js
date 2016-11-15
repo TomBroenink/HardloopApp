@@ -22,11 +22,19 @@ angular.module('yapp')
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
-			var data = response.client;
-			$scope.username = data.username;
-			$scope.firstName = data.firstName;
-			$scope.lastName = data.lastName;
-			$scope.phoneNumber = data.phoneNumber;
+			if (response.responseAction == 'updateUser') {
+				alert('Gegevens gewijzigd!');
+				$scope.back();
+			}
+			if (response.responseAction == 'getMonitorById') {
+				var data = response.client;
+				console.log(data);
+				$scope.username = data.username;
+				$scope.firstName = data.firstName;
+				$scope.lastName = data.lastName;
+				$scope.phoneNumber = data.phoneNumber;
+				$scope.pId = data.personalData_id;
+			}
 			$scope.$apply();
 		}
 
@@ -34,7 +42,8 @@ angular.module('yapp')
 			window.history.back();
 		}
 		$scope.editDetails = function() {
-			var data = {"username": $scope.username, "firstName": $scope.firstName, "lastName": $scope.lastName, "phoneNumber": $scope.phoneNumber}
+			var data = {"requestAction" : "updateUser", "personalDataId" : $scope.pId, "username": $scope.username, "firstName": $scope.firstName, "lastName": $scope.lastName, "phoneNumber": $scope.phoneNumber}
+			webSocket.send(JSON.stringify(data));
 			// websocket send edit monitor details
 		}
 	});

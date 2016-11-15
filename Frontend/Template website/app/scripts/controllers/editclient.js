@@ -17,24 +17,27 @@ angular.module('yapp')
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
+			console.log(response);
 			if (response.responseAction == 'getClientById') {
 				var data = response.client;
 				$scope.username = data.username;
 				$scope.firstName = data.firstName;
 				$scope.lastName = data.lastName;
 				$scope.phoneNumber = data.phoneNumber;
-				$scope.$apply();
+				$scope.pId = data.personalData_id;
 			}
-			/*if (response.responseAction == 'updateClientById') {
-
-			}*/
+			if (response.responseAction == 'updateUser') {
+				alert('Gegevens gewijzigd!');
+				$scope.back();
+			}
+			$scope.$apply();
 		}
 		$scope.back = function() {
 			window.history.back();
 		}
 		$scope.editClient = function() {
-			var data = {"username": $scope.username, "firstName": $scope.firstName, "lastName": $scope.lastName, "phoneNumber": $scope.phoneNumber}
-			console.log(data);
+			var data = {"requestAction" : "updateUser", "personalDataId" : $scope.pId, "username": $scope.username, "firstName": $scope.firstName, "lastName": $scope.lastName, "phoneNumber": $scope.phoneNumber}
+			webSocket.send(JSON.stringify(data));
 			// websocket send edit monitor details
 		}
 	});
