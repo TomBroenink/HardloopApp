@@ -78,6 +78,12 @@ angular
 				templateUrl: 'views/dashboard/newclient.html',
 				controller: 'NewClientCtrl'
 			})
+			.state('editclient', {
+				url: '/clients/:id/edit',
+				parent: 'dashboard', 
+				templateUrl: 'views/dashboard/editclient.html',
+				controller: 'EditClientCtrl'
+			})
 			.state('routes', {
 				url: '/routes',
 				parent: 'dashboard',

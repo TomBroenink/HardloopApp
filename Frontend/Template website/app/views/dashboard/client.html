@@ -25,6 +25,7 @@
 		Kies een runschema om dit schema te bekijken.<br/>
 		<select class="dropdown" ng-model="selectedSchema" ng-options="x.name for x in schemas" ng-change="dropdownChange()">
 		</select><br/><br/>
-		<a class="pull-left btn btn-primary btn-outline btn-rounded" ui-sref="connectschema({id: data.id})">Koppel nieuw schema</a>
+		<a class="pull-left btn btn-primary btn-outline btn-rounded" ui-sref="connectschema({id: data.id})">Koppel nieuw schema</a><br/><br/>
+		<a ui-sref="client({id: data.id})" class="pull-left btn btn-primary btn-outline btn-rounded">Gegevens aanpassen</a>
 	</div>
 </div>

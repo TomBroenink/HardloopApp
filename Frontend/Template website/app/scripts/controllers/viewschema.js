@@ -21,4 +21,7 @@ angular.module('yapp')
 			$scope.description = data.description;
 			$scope.$apply();
 		}
+		$scope.back = function() {
+			window.history.back();
+		}
 	});

@@ -24,6 +24,9 @@ angular.module('yapp')
 			}
 			$scope.$apply();
 		}
+		$scope.back = function() {
+			window.history.back();
+		}
 		$scope.connectSchema = function(runSchemaId) {
 			console.log(runSchemaId);
 			console.log(clientId);
