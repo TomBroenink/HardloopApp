@@ -16,6 +16,7 @@ angular.module('yapp')
 			$scope.data = response;
 			console.log($scope.data);
 		}
+		we
 /*		$scope.init = function () {
 			webSocket.send('{"requestAction": "getAllClients"}');
 		}*/
