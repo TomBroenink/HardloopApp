@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * Created by Henderikus on 2-11-2016.
@@ -20,6 +21,29 @@ abstract class PersonDatabaseWrapper extends DatabaseWrapper{
     @Override
     public void delete(int id) throws Exception {
         executeUpdate("delete from personaldata where id = ?;", new String[]{String.valueOf(id)}, "Failed to delete user.");
+    }
+    
+    protected void updateUser(JSONObject args) throws Exception{
+    	String id = (String) args.get("personalDataId");
+    	if(id != null && !id.isEmpty()){
+	    	String sql = "update personalData set ";
+	    	ArrayList<String> values = new ArrayList<String>();
+	    	String[] keys = new String[]{"firstName", "lastName", "phoneNumber", "username", "password"};
+	    	for(int i = 0; i < keys.length; i++){
+				String key = keys[i];
+				String value = (String) args.get(key);
+				if(value != null && !value.isEmpty()){
+					sql += key + " = ?,";
+					values.add(value);
+				}
+			}
+	    	sql = sql.substring(0, sql.length() - 1) + " where id = ?;";
+	    	values.add(id);
+	    	super.executeUpdate(sql, values.toArray(new String[values.size()]), "Failed to update user.");
+    	}
+    	else{
+    		throw new Exception("No personalDataId supplied.");
+    	}
     }
 
     /**
