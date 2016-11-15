@@ -113,6 +113,9 @@ public class WebSocketRequestHandler {
 				case "getRunById":
 					response.put("run", factory.getWrapper("run").getById((String) args.get("runId")));
 					break;
+				case "updateUser":
+					((MonitorDatabaseWrapper) factory.getWrapper("monitor")).updateUser(args);
+					break;
 				default:
 					throw new Exception("Invalid RequestAction.");
 			}

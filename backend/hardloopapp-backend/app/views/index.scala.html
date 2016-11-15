@@ -35,6 +35,7 @@
 		<button type="button" onclick="getAllRunSchemas()">Get all run schemas</button>
 		<button type="button" onclick="getRunSchemaById()">Get run schema by id</button>
 		<button type="button" onclick="getRunById()">Get run by id</button>
+		<button type="button" onclick="updateUser()">Update user</button>
 		<div id="response"></div>
 		<script>
 			var webSocket = new WebSocket("ws://localhost:9000/ws");
@@ -133,6 +134,9 @@
 			}
 			function getRunById(){
 				webSocket.send('{"requestAction": "getRunById","runId": "2"}');
+			}
+			function updateUser(){
+				webSocket.send('{"requestAction": "updateUser","firstName": "Tom","lastName": "Meijer","personalDataId": "21"}');
 			}
 		</script>
 	</body>
