@@ -25,7 +25,7 @@ angular.module('yapp')
 
 		$scope.deleteProfile = function(profileId) {
 			console.log(profileId);
-			var temp = '{"requestAction": "deleteCareProfile", "careProfileId": ' + profileId + '}';
+			var temp = '{"requestAction": "deleteCareProfile", "careProfileId": "' + profileId + '"}';
 			console.log(temp);
 			webSocket.send(temp);
 		}
