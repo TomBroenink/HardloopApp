@@ -1,0 +1,23 @@
+<style>
+	.maxwidthcontainer {
+		max-width: 600px;
+	}
+</style>
+
+
+<div>
+	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
+	</div>
+	<h2>Nieuw schema aanmaken<small></small></h2>
+	<div class="jumbotron">
+		<h4>Op deze pagina kun je een nieuw schema aanmaken.</h4><br/><br/>
+
+		<b>Naam</b><br/>
+		<input class="form-control" type="text" ng-model="name"><br/>
+
+		<b>Beschrijving</b><br/>
+		<input class="form-control" type="text" ng-model="description"><br/>
+
+		<a ng-click="saveSchema()" class="pull-left btn btn-primary btn-outline btn-rounded">Opslaan</a>
+	</div>
+</div>

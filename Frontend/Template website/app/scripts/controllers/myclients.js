@@ -31,7 +31,7 @@ angular.module('yapp')
 				$scope.noClients = 'Je hebt nog geen clienten!';
 			} else {
 				$scope.data = response;
-				console.log(response.clients);
+				console.log($scope.data);
 			}
 			apply();
 		}

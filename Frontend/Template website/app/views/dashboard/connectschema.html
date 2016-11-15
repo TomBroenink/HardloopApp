@@ -1,0 +1,37 @@
+<style>
+	.maxwidthcontainer {
+		max-width: 600px;
+	}
+</style>
+
+
+<div>
+	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
+	</div>
+	<h2>Schema aan client koppelen<small></small></h2>
+	<div class="jumbotron">
+		<h4>Op deze pagina kun je de beschikbare schema's bekijken en aan deze client koppelen.</h4>
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Naam</th>
+				<th>Beschrijving</th>
+				<th>Koppelen</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="schemas in data.runSchemas">
+			<td>
+				{{schemas.name}}
+			</td>
+			<td>
+				{{schemas.description}}
+			</td>
+			<td>
+				<a ng-click="connectSchema(schemas.id)"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Koppelen</a>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+</div>

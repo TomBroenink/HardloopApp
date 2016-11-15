@@ -36,7 +36,7 @@
 		<button type="button" onclick="getRunSchemaById()">Get run schema by id</button>
 		<div id="response"></div>
 		<script>
-			var webSocket = new WebSocket("ws://localhost:9000/ws");
+			var webSocket = new WebSocket("ws://localhost:9002/ws");
 	        webSocket.onmessage = function(event){
 	        	document.getElementById("response").innerHTML = event.data;
 	        };

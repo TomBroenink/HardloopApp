@@ -103,6 +103,18 @@ angular
 				templateUrl: 'views/dashboard/viewschema.html',
 				controller: 'ViewSchemaCtrl'
 			})
+			.state('newschema', {
+				url: '/newschema',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/newschema.html',
+				controller: 'NewSchemaCtrl'
+			})
+			.state('connectschema', {
+				url: '/:id/connectschema',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/connectschema.html',
+				controller: 'ConnectSchemaCtrl'
+			})
 			.state('404', {
 				url: '/404',
 				parent: 'base',

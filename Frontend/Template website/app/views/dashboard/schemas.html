@@ -8,6 +8,7 @@
 <div>
 	<h2>Schema's<small></small></h2>
 	<div class="jumbotron">
+		<a ui-sref="newschema" class="pull-left btn btn-primary btn-outline btn-rounded">Nieuw schema aanmaken</a><br/><br/>
 		<table class="table table-hover">
 		<thead>
 			<tr>
@@ -16,12 +17,12 @@
 			</tr>
 		</thead>
 		<tbody>
-		<tr ng-repeat="schemas in data">
+		<tr ng-repeat="schemas in data.runSchemas">
 			<td>
-				<a ui-sref="schema({id: schemas.id})">{{schema.name}}</a>
+				<a ui-sref="viewschema({id: schemas.id})">{{schemas.name}}</a>
 			</td>
 			<td>
-				{{clients.firstName}}
+				{{schemas.description}}
 			</td>
 		</tr>
 		</tbody>

@@ -14,7 +14,8 @@ angular.module('yapp')
 			webSocket.send('{"requestAction":"getAllRunSchemas"}');
 		}
 		webSocket.onmessage = function(event) {
-			$scope.data = event.data;
-			console.log($scope.data);
+			var response = JSON.parse(event.data);
+			$scope.data = response;
+			$scope.$apply();
 		}
 	});
