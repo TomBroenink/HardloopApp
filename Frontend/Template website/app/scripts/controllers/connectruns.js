@@ -27,6 +27,7 @@ angular.module('yapp')
 					alert('Kan run niet koppelen aan schema!');
 				} else {
 					alert('Run gekoppeld aan schema!');
+					$scope.back();
 				}
 				//console.log(response);
 			}

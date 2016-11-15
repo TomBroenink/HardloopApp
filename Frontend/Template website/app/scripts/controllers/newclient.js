@@ -25,6 +25,7 @@ angular.module('yapp')
 					alert('Je kunt deze client niet koppelen!');
 				} else {
 					alert('Client is succesvol gekoppeld!');
+					$scope.back();
 				}
 			}
 			if (response.responseAction == 'getAllClients') {

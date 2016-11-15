@@ -22,6 +22,7 @@ angular.module('yapp')
 			}
 			if (response.responseAction == 'assignRunSchemaToClient') {
 				alert('Schema aan client gekoppeld!');
+				$scope.back();
 			}
 			$scope.$apply();
 		}

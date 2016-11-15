@@ -8,11 +8,16 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('MapsCtrl', function($scope) {
+	.controller('MapsCtrl', function($scope, $location) {
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
 			console.log(response);
+			if (response.responseStatusCode == '1') {
+				alert('Run succesvol toegevoegd!');
+			} else {
+				alert('Run toevoegen mislukt!');
+			}
 		}
         var map;
 		var groningen = {lat: 53.2216999, lng: 6.5649233};
