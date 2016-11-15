@@ -44,6 +44,15 @@ public class RunDatabaseWrapper extends DatabaseWrapper{
 		return super.executeQuery(sql, null, "Failed to retrieve runs.");
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+    public JSONObject getById(String runId) throws Exception{
+		String sql = "select * from runs where id = ?;";
+		JSONObject run = (JSONObject) super.executeQuery(sql, new String[]{runId}, "Failed to retrieve run.").get(0);
+		run.put("route", getRouteForRun((String) run.get("routes_id")));
+		return run;
+    }
+	
 	public JSONArray getRouteForRun(String routeId) throws Exception{
 		String sql = "select orderNumber, lat, `long` from routes_coordinates join coordinates on routes_coordinates.coordinates_id = coordinates.id where routes_id = ? order by orderNumber;";
 		return super.executeQuery(sql, new String[]{routeId}, "Failed to retrieve route for run.");

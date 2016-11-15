@@ -130,5 +130,11 @@ angular
 				parent: 'dashboard',
 				templateUrl: 'views/dashboard/maps.html',
 				controller: 'MapsCtrl'
+			})
+			.state('careprofiles', {
+				url: '/careprofiles',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/careprofiles.html',
+				controller: 'CareProfilesCtrl'
 			});
 	});

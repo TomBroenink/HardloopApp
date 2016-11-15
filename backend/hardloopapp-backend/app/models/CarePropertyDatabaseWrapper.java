@@ -30,4 +30,9 @@ public class CarePropertyDatabaseWrapper extends DatabaseWrapper{
         String query = "SELECT * FROM care_properties";
         return super.executeQuery(query, null, "Something went wrong!");
     }
+    
+    @Override
+    public JSONObject getById(String carePropertyId) throws Exception{
+    	throw new Exception("Method not implemented.");
+    }
 }

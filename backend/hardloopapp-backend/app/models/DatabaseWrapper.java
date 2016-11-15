@@ -25,6 +25,8 @@ abstract class DatabaseWrapper{
     
     abstract JSONArray getAll() throws Exception;
     
+    abstract JSONObject getById(String id) throws Exception;
+    
     protected int executeInsertReturnId(String sql, String[] values, String errorMessage) throws Exception{
     	return executeInsertReturnId(sql, values, errorMessage, db.getConnection(), true, true, true);
     }
