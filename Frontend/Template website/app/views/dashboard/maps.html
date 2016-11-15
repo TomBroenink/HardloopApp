@@ -1,24 +1,19 @@
-
-
-<div class="jumbotron"> 
 <h2>Maps</h2>
+<div class="jumbotron"> 
 <br>
 	<div id="map"></div>
 	<br>
-	{{lat}}  ,  {{lng}}
 	<br>
 	<form>
 		<div class="form-group">
-			<label for="firstname">Naam van de route</label>
+			<label for="firstname">Naam van de run</label>
 			<input type="text" class="form-control" ng-model="runName" placeholder="Naam">
 		</div>
-		{{runName}}
 		<div class="form-group">
-			<label for="lastname">Beschrijving van de route</label>
+			<label for="lastname">Beschrijving van de run</label>
 			<input type="text" class="form-control" ng-model="runDescription" placeholder="Beschrijving">
 		</div>
-		{{runDescription}}
 	</form>
-	<button type="button" class="btn btn-danger" ng-click="createJson()">Route toevoegen</button>
+	<button type="button" class="btn btn-danger" ng-click="createJson()">Run toevoegen</button>
 </div>
 

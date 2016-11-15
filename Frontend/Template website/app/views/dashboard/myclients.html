@@ -17,6 +17,7 @@
 				<th>Voornaam</th>
 				<th>Achternaam</th>
 				<th>Telefoonnummer</th>
+				<th>Ontkoppelen</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,6 +33,9 @@
 			</td>
 			<td>
 				{{clients.phoneNumber}}
+			</td>
+			<td>
+				<a ng-click="disconnectClient(clients.id, clients.username)"><span class="glyphicon glyphicon-remove" aria-hidden="true"</a>
 			</td>
 		</tr>
 		</tbody>

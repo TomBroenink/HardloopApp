@@ -8,15 +8,14 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('RoutesCtrl', function($scope, $location) {
+	.controller('SchemasCtrl', function($scope, $location) {
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
 		webSocket.onopen = function(event) {
-			webSocket.send('{"requestAction":"getAllRuns"}');
+			webSocket.send('{"requestAction":"getAllRunSchemas"}');
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
-			$scope.data = response.runs;
-			console.log($scope.data);
+			$scope.data = response;
 			$scope.$apply();
 		}
 	});

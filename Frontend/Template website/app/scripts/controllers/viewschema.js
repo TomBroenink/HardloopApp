@@ -8,15 +8,19 @@
  * Controller of yapp
  */
 angular.module('yapp')
-	.controller('RoutesCtrl', function($scope, $location) {
+	.controller('ViewSchemaCtrl', function($scope, $location, $stateParams) {
+		var schemaId = $stateParams.id;
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
 		webSocket.onopen = function(event) {
-			webSocket.send('{"requestAction":"getAllRuns"}');
+			webSocket.send('{"requestAction": "getRunSchemaById", "runSchemaId": "'+ schemaId + '"}');
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
-			$scope.data = response.runs;
+			$scope.data = response.runSchema;
 			console.log($scope.data);
 			$scope.$apply();
+		}
+		$scope.back = function() {
+			window.history.back();
 		}
 	});
