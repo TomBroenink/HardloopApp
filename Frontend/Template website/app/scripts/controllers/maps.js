@@ -9,63 +9,63 @@
  */
 angular.module('yapp')
 	.controller('MapsCtrl', function($scope) {
-		console.log($scope);
+		var webSocket = new WebSocket("ws://localhost:9002/ws");
+		webSocket.onmessage = function(event) {
+			var response = JSON.parse(event.data);
+			console.log(response);
+		}
+        var map;
+		var groningen = {lat: 53.2216999, lng: 6.5649233};
+		var jsonFile;
+		$scope.coords = [];
 
-			
-	        var map;
+		//["lat", "long"],
+		//["lat", "long"],
+		//["lat", "long"]
 
-			var groningen = {lat: 53.2216999, lng: 6.5649233};
+	    map = new google.maps.Map(document.getElementById('map'), {
+	      	center: groningen,
+	      	zoom: 13
+	    });
 
-			$scope.coords = [];
+        var marker = new google.maps.Marker({
+          	position: groningen,
+          	map: map,
+          	title: 'Test'
+        });
 
-			//["lat", "long"],
-			//["lat", "long"],
-			//["lat", "long"]
+        google.maps.event.addListener(map, 'click', function(event) {
+		    placeMarker(event.latLng);
+		});
 
-		    map = new google.maps.Map(document.getElementById('map'), {
-		      	center: groningen,
-		      	zoom: 13
+        function placeMarker(location) {
+		    var marker = new google.maps.Marker({
+		        position: location, 
+		        map: map
 		    });
+		    $scope.lat = '' + marker.getPosition().lat();
+		    $scope.lng = '' + marker.getPosition().lng();
+		    var location = [$scope.lat, $scope.lng];
+		    $scope.coords.push(location);
+		    $scope.$apply();
+		    console.log($scope.coords);
+		}
 
-	        var marker = new google.maps.Marker({
-	          	position: groningen,
-	          	map: map,
-	          	title: 'Test'
-	        });
+  		$scope.createJson = function() {
+  			jsonFile = {
+  				"requestAction": "createRun",
+				"name": $scope.runName,
+				"description": $scope.runDescription,
+				"distance": "",
+				"route": $scope.coords
+  			}
+  			send();
+  		}
 
-	        google.maps.event.addListener(map, 'click', function(event) {
-			    placeMarker(event.latLng);
-			});
-
-	        function placeMarker(location) {
-			    var marker = new google.maps.Marker({
-			        position: location, 
-			        map: map
-			    });
-			    $scope.lat = '' + marker.getPosition().lat();
-			    $scope.lng = '' + marker.getPosition().lng();
-			    var location = [$scope.lat, $scope.lng];
-			    $scope.coords.push(location);
-			    $scope.$apply();
-			    console.log($scope.coords);
-			}
-
-      		$scope.createJson = function() {
-      			var coordsJson = {
-      				"requestAction": "createRun",
-					"name": $scope.runName,
-					"description": $scope.runDescription,
-					"distance": "",
-					"route": $scope.coords
-      			}
-      			console.log(coordsJson);
-      			send();
-      		}
-
-      		function send() {
-      			
-      		}
-
+  		function send() {
+  			console.log(jsonFile);
+  			webSocket.send(JSON.stringify(jsonFile));
+  		}
 
 	    // functie die coords ophaalt na klik
 	    // $scope.coord1 = response.lat
