@@ -121,6 +121,18 @@ angular
 				templateUrl: 'views/dashboard/connectschema.html',
 				controller: 'ConnectSchemaCtrl'
 			})
+			.state('connectruns', {
+				url: '/:id/connectruns',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/connectruns.html',
+				controller: 'ConnectRunsCtrl'
+			})
+			.state('viewrun', {
+				url: '/viewrun/:id',
+				parent: 'dashboard',
+				templateUrl: 'views/dashboard/viewrun.html',
+				controller: 'ViewRunCtrl'
+			})
 			.state('404', {
 				url: '/404',
 				parent: 'base',

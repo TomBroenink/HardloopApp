@@ -11,14 +11,20 @@ angular.module('yapp')
 	.controller('NewSchemaCtrl', function($scope, $location, $window) {
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
 		webSocket.onopen = function(event) {
-			//webSocket.send('{"requestAction": "createRunSchema"}');
+			webSocket.send('{"requestAction": "getAllRuns"}');
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
-			console.log(response);
-			if (response.responseStatusDescription == 'Succes') {
-				alert('Schema toegevoegd!');
-				$scope.back();
+			if (response.responseAction == 'createRunSchema') {
+				if (response.responseStatusDescription == 'Succes') {
+					alert('Schema toegevoegd!');
+					$scope.back();
+				}
+			}
+			if (response.responseAction == 'getAllRuns') {
+				console.log(response);
+				$scope.runs = response.runs;
+				$scope.$apply();
 			}
 		}
 		$scope.back = function() {

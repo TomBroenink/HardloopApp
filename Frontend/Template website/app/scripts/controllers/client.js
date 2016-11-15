@@ -18,6 +18,7 @@ angular.module('yapp')
 		}
 		webSocket.onmessage = function(event) {
 			var response = JSON.parse(event.data);
+			console.log(response);
 			if (response.responseAction == 'getRunSchemasForClient') {
 				$scope.schemas = response.runSchemas;
 				console.log($scope.schemas);

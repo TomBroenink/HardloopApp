@@ -7,7 +7,7 @@
 
 <div>
 	<a ng-click="back()" class="pull-right btn btn-primary btn-outline btn-rounded"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Ga terug</a>
-	<h2>Bekijk schema<small></small></h2>
+	<h2>Bekijk run<small></small></h2>
 	<div class="jumbotron">
 		<b>Naam</b><br/>
 		{{data.name}}<br/><br/>
@@ -15,10 +15,7 @@
 		<b>Beschrijving</b><br/>
 		{{data.description}}<br/><br/>
 
-		<b>Gekoppelde runs</b><br/>
-		<ul>
-		<li ng-repeat='run in data.runs'><a ui-sref="viewrun({id: run.runs_id})">{{run.name}}</a></li>
-		</ul><br/>
-		<a ui-sref="connectruns({id: data.id})" class="pull-left btn btn-primary btn-outline btn-rounded">Koppel runs aan dit schema</a>
+		<b>Bekijk route op de kaart</b><br/>
+		// Hier moet een kleine Map komen waarop de route te zien is
 	</div>
 </div>
