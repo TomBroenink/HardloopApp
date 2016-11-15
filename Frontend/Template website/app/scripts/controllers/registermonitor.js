@@ -22,6 +22,7 @@ angular.module('yapp')
 		}
 		webSocket.onmessage = function(event) {
 			response = JSON.parse(event.data);
+			console.log(response);
 			if (response.responseAction == "registerMonitor") {
 				$scope.message = "Register complete!";
 			}
