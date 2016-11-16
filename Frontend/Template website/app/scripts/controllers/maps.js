@@ -33,11 +33,11 @@ angular.module('yapp')
 	      	zoom: 13
 	    });
 
-        var marker = new google.maps.Marker({
+/*        var marker = new google.maps.Marker({
           	position: groningen,
           	map: map,
           	title: 'Test'
-        });
+        });*/
 
         google.maps.event.addListener(map, 'click', function(event) {
 		    placeMarker(event.latLng);
