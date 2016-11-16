@@ -14,7 +14,6 @@ angular.module('yapp')
 		var jsonFile;
 
 		var webSocket = new WebSocket("ws://localhost:9002/ws");
-		$scope.message = "hoi";
 
 		$scope.submit = function() {
 			$scope.createJson();
