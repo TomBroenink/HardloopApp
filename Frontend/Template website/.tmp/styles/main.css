@@ -6562,7 +6562,7 @@ button.close {
     overflow-x: hidden;
     overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
-    background-color: #3ca2e0;
+    background-image: url("outside1.jpg");
     border-right: 1px solid #eee;
   }
 }
